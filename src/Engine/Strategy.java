@@ -5,7 +5,7 @@ public class Strategy {
     double[] hotnessMap, bettingFunction;
 
     // bettingFunction is an array of length 5; 
-    public Strategy(double[] hotnessMap, int[] bettingFunction) {
+    public Strategy(double[] hotnessMap, double[] bettingFunction) {
       this.hotnessMap = hotnessMap;
       this.bettingFunction = bettingFunction;
     }
