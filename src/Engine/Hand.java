@@ -68,7 +68,7 @@ public class Hand {
 
     // returns true if hand is A, 10/J/Q/K
     public boolean blackjack() {
-    	int[] blackjack = new int[] { 11, 10 };
+    	int[] blackjack = new int[] { 10, 11 };
         return Arrays.equals( getValues(), blackjack );
     }
 
