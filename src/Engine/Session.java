@@ -3,7 +3,7 @@ package Engine;
 public class Session {
 
     Casino casino;
-    Player player;
+    Strategy strategy;
     Shoe shoe;
     Game[] games;
     final int numberOfGames = 5000;
@@ -17,7 +17,7 @@ public class Session {
     int numberOfWonGame;
 
 
-    public Session(Casino casino, Straegy strategy, Shoe shoe) {
+    public Session(Casino casino, Strategy strategy, Shoe shoe) {
         this.casino = casino;
         this.strategy = strategy;
         this.shoe = shoe;
@@ -35,7 +35,7 @@ public class Session {
 
     public void playGames() {
         for (int i = 0; i < numberOfGames; i++) {
-            games[i] = new Game(casino, strategy, shoe);
+            games[i] = new Game(strategy, casino, shoe);
             games[i].play();
         }
     }
@@ -44,8 +44,8 @@ public class Session {
         return casino;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Strategy getStrategy() {
+        return strategy;
     }
 
     public Shoe getShoe() {
@@ -56,8 +56,8 @@ public class Session {
         this.casino = casino;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
     }
 
     public void setShoe(Shoe shoe) {
@@ -65,12 +65,12 @@ public class Session {
     }
 
     private void solve() {
-        for (int i = 0; i < numberOfGames; i++) {
-            finalPnl += games[i].getPnl(); //???
-            totalProfit += games[i].getProfit(); //??
-            totalWage += games[i].getWager();  //???
-            numberOfWonGame += totalProfit > 0 ? 1 : 0;
-        }
+//        for (int i = 0; i < numberOfGames; i++) {
+//            finalPnl += games[i].getPnl(); //???
+//            totalProfit += games[i].getProfit(); //??
+//            totalWage += games[i].getWager();  //???
+//            numberOfWonGame += totalProfit > 0 ? 1 : 0;
+//        }
     }
 
     public double getAverageProfit() {
