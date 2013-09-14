@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class BasicStrategy {
 
-  public static Move nextMove(Hand playerHand, Card dealerCard) {
+  public static String nextMove(Hand playerHand, Card dealerCard) {
     int playerIndex = BasicStrategy.getPlayerIndex(playerHand);
     int dealerIndex = BasicStrategy.getDealerIndex(dealerCard);
     return BasicStrategy.moveInTable(playerIndex, dealerIndex);
