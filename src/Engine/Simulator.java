@@ -26,9 +26,10 @@ public class Simulator {
         if (ui != null)
             ui.simulateSession(session);
         else {
-            System.out.println("Total Profit: " + session.getTotalProfit());
-            System.out.println("Total Wage:" + session.getTotalWage());
-            System.out.println("Percent Won:" + session.getGameWonPercentage());
+            System.out.println("Total Profit: $" + session.getTotalProfit());
+            System.out.println("Total Wage: $" + session.getTotalWage());
+            System.out.println("Percent Won: " + session.getGameWonPercentage() + "%");
+            System.out.println("Number of Games: " + session.getCasino().getNumberOfGames());
         }
     }
 }
