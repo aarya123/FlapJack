@@ -58,7 +58,6 @@ public class Hand {
         }
     }
 
-<<<<<<< HEAD
     // returns true if hand is soft 17
     public boolean softSeventeen() {
     	int[] softSeventeen = new int[] { 7, 17 };
@@ -73,17 +72,10 @@ public class Hand {
 
    public Hand[] split(Shoe shoe) {
         // Can split only if hand has 2 cards
-        if(cards.size() != 2) {
-=======
-    // TODO
-    /*public Hand split() {
-        if (cards.size() != 2) {
->>>>>>> master
+        if(cards.size() != 2)
             return null;
-        }
 
         Hand[] newHands = new Hand[2];
-<<<<<<< HEAD
         newHands[0] = new Hand(new ArrayList<Card>());
         newHands[1] = new Hand(new ArrayList<Card>());
 
@@ -97,11 +89,4 @@ public class Hand {
 
         return newHands;
    }
-=======
-        ArrayList<Card> cardForHand0 = new ArrayList<Card>();
-        ArrayList<Card> cardForHand1 = new ArrayList<Card>();
-
-
-    }*/
->>>>>>> master
 }
