@@ -25,24 +25,28 @@ public class Hand {
         boolean hasAce = false;
         int[] cardValue;
 
-        // If Ace
-        if(cardValue.length == 2) {
-            // If Ace already exists in hand, just add 1
-            if(hasAce) {
-                val0 += cardValue[0]; // 1
-                val1 += cardValue[0]; // 1
-            }
-            else {
-                val0 += cardValue[0]; // 1
-                val1 += cardValue[1]; // 11
-                hasAce = true;
-            }
-        }
+        for(int i=0; i<cards.size(); i++) {
+            cardValue = cards.get(i).getValues();
 
-        // Otherwise single-value cards (2-10, J, Q, K)
-        else {
-            val0 += cardValue[0];
-            val1 += cardValue[0];
+            // If Ace
+            if(cardValue.length == 2) {
+                // If Ace already exists in hand, just add 1
+                if(hasAce) {
+                    val0 += cardValue[0]; // 1
+                    val1 += cardValue[0]; // 1
+                }
+                else {
+                    val0 += cardValue[0]; // 1
+                    val1 += cardValue[1]; // 11
+                    hasAce = true;
+                }
+            }
+
+            // Otherwise single-value cards (2-10, J, Q, K)
+            else {
+                val0 += cardValue[0];
+                val1 += cardValue[0];
+            }
         }
 
         if(val0 == val1) {
@@ -51,6 +55,11 @@ public class Hand {
         else {
             return new int[] {val0, val1};
         }
+    }
+
+    // returns true if hand is soft 17
+    public boolean softSeventeen() {
+
     }
 
    public Hand split(Shoe shoe) {
