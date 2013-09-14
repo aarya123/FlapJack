@@ -141,31 +141,40 @@ public class Game {
     	}
     	return count;
     }
+    private void stand(Hand hand) {
+    	hand.freeze();
+    }
     
     // returns a hand if it splits, returns null otherwise
     public Hand playHand(Hand playerHand, Hand dealerHand) {
     	Hand newHand = null;
     	Move move;
     	while (true) {
-        	if (reachedN(playerHand, 22)) {
+    		if (playerHand.busted()) {
         		break;
         	}
             move = strategy.getNextMove();
             if (move == Move.STAND) {
-                break;
+            	stand(playerHand);
+            	//playerHand.freeze();
             } else if (move == Move.DOUBLE) {
-            	setActualAmountWagered(actualAmountWagered*2);
+            	setActualAmountWagered(getActualAmountWagered() * 2);
             	hit(playerHand);
             	playerHand.freeze();
-            	continue;
             } else if (move == Move.SPLIT) {
             	Hand[] splitHands = playerHand.split();
-            	playerHand = splitHands[0];
-            	newHand = splitHands[1];
-            	hit(newHand);
-            	setActualAmountWagered(getActualAmountWagered() + getInitialAmountWagered());
+            	if (splitHands != null) {
+            		playerHand = splitHands[0];
+            		newHand = splitHands[1];
+            		hit(newHand);
+            		setActualAmountWagered(getActualAmountWagered() + newHand.getAmountWagered());
+            		hit(playerHand);
+            	} else {
+            		stand(playerHand); //If can't split then stand.
+            	}
+            } else {
+            	hit(playerHand); //move was HIT
             }
-            hit(playerHand);
         }
     	return newHand;
     }

@@ -16,6 +16,10 @@ public class Hand {
         this.frozen = false;
     }
 
+    double getAmountWagered() {
+    	return this.amountWagered;
+    }
+    
     // Called when player wants to hit
     public void addCard(Card card) {
         cards.add(card);
@@ -68,13 +72,14 @@ public class Hand {
     }
     
     public boolean busted() {
+    	boolean busted = true;
     	int[] values = getValues();
     	for (int i : values) {
-    		if (values[i] < 22) {
-    			return false;
+    		if (i < 22) {
+    			busted = false;
     		}
     	}
-    	return true;
+    	return busted;
     }
     
     public boolean frozen() {
