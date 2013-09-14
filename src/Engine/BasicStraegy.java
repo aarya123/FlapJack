@@ -7,12 +7,18 @@ import java.util.ArrayList;
 public class BasicStrategy {
 
   public static Move nextMove(Hand playerHand, Card dealerCard) {
-    int playerIndex = BasicStrategy.getPlayerIndex(playerCard);
+    int playerIndex = BasicStrategy.getPlayerIndex(playerHand);
     int dealerIndex = BasicStrategy.getDealerIndex(dealerCard);
-    return BasicStrategy.moveInTable(playerIndex, dealerIndex);
+    return BasicStrategy.moveInTable(playerHand, dealerIndex);
   }
 
-  public 
+  public int getPlayerIndex(Hand playerHand) {
+
+  }
+
+  public int getDealerIndex(Card dealerCard) {
+    
+  }
 
   public static String moveInTable(playerIndex, dealerIndex) {
     Move[][] table =
