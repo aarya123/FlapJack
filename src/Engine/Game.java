@@ -154,33 +154,28 @@ public class Game {
     public Hand playHand(Hand playerHand, Hand dealerHand) {
     	Hand newHand = null;
     	Move move;
-    	while (true) {
-    		if (playerHand.isBusted()) {
-        		break;
-        	}
-            move = strategy.getNextMove();
-            if (move == Move.STAND) {
-            	stand(playerHand);
-            	//playerHand.freeze();
-            } else if (move == Move.DOUBLE) {
-            	setActualAmountWagered(getActualAmountWagered() * 2);
-            	hit(playerHand);
-            	playerHand.freeze();
-            } else if (move == Move.SPLIT) {
-            	Hand[] splitHands = playerHand.split();
-            	if (splitHands != null) {
-            		playerHand = splitHands[0];
-            		newHand = splitHands[1];
-            		hit(newHand);
-            		setActualAmountWagered(getActualAmountWagered() + newHand.getAmountWagered());
-            		hit(playerHand);
-            	} else {
-            		stand(playerHand); //If can't split then stand.
-            	}
-            } else {
-            	hit(playerHand); //move was HIT
-            }
-        }
+    	if (playerHand.isBusted()) {
+    	}
+    	move = strategy.getNextMove();
+    	if (move == Move.STAND) {
+    		stand(playerHand);
+    		//playerHand.freeze();
+    	} else if (move == Move.DOUBLE) {
+    		setActualAmountWagered(getActualAmountWagered() * 2);
+    		hit(playerHand);
+    		playerHand.freeze();
+    	} else if (move == Move.SPLIT) {
+    		Hand[] splitHands = playerHand.split();
+    		if (splitHands != null) {
+    			playerHand = splitHands[0];
+    			newHand = splitHands[1];
+    			hit(newHand);
+    			setActualAmountWagered(getActualAmountWagered() + newHand.getAmountWagered());
+    		}
+    		hit(playerHand); //If can't split then hit.
+    	} else {
+    		hit(playerHand); //move was HIT
+    	}
     	return newHand;
     }
 

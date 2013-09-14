@@ -77,24 +77,14 @@ public class Hand {
     public void freeze() {
     	this.frozen = true;
     }
-    
-    public boolean busted() {
-    	boolean busted = true;
-    	int[] values = getValues();
-    	for (int i : values) {
-    		if (i < 22) {
-    			busted = false;
-    		}
-    	}
-    	return busted;
-    }
+
     
     public boolean frozen() {
     	return this.frozen;
     }
     
     public boolean active() {
-    	return (!this.frozen && !this.busted());
+    	return (!this.frozen && !this.isBusted());
     }
 
     // returns true if hand is soft 17

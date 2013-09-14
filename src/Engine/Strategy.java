@@ -9,6 +9,7 @@ public class Strategy {
 		Random r = new Random();
 		int move = r.nextInt(Move.values().length);
 		return Move.values()[move];
+		// return Move.SPLIT;
 	}
 
     int getHottnessForCard(Card card) {
