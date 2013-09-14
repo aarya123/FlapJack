@@ -13,12 +13,14 @@ public class Strategy {
     	this.hotnessMap = hotnessMap;
     	this.bettingMap = bettingMap;
       }
-    
+
     public Strategy(String strategy_type) {
 
         System.out.println(strategy_type);
 
         hotnessMap = new HashMap<String, Double>();
+
+
         hotnessMap.put("A", -1.387353121876059);
         hotnessMap.put("2", 1.3991418283387418);
         hotnessMap.put("3", 1.4419554967488624);
@@ -33,7 +35,45 @@ public class Strategy {
         hotnessMap.put("Q", -1.80255657253995);
         hotnessMap.put("K", -0.6468274622179151);
 
-    	//hotnessMap = null;
+        /*
+        for (int i = 1; i < 14; i++) {
+            if (i == 1)
+                hotnessMap.put("A", -1.0);
+            else if (i == 2)
+                hotnessMap.put(i + "", 0.5);
+            else if (i == 3)
+                hotnessMap.put(i + "", 1.0);
+            else if (i == 4)
+                hotnessMap.put(i + "", 1.0);
+            else if (i == 5)
+                hotnessMap.put(i + "", 1.5);
+            else if (i == 6)
+                hotnessMap.put(i + "", 1.0);
+            else if (i == 7)
+                hotnessMap.put(i + "", 0.5);
+            else if (i == 8)
+                hotnessMap.put(i + "", 0.0);
+            else if (i == 9)
+                hotnessMap.put(i + "", -0.5);
+            else if (i == 10)
+                hotnessMap.put("10", -1.0);
+            else if (i == 11)
+                hotnessMap.put("J", -1.0);
+            else if (i == 12)
+                hotnessMap.put("Q", -1.0);
+            else
+                hotnessMap.put("K", -1.0);
+        }
+*/
+
+        TestResult best = StrategyTester.bestStrategy(-1, hotnessMap, 1);
+
+        //choose best strategy
+        System.out.println(best.advantage);
+        hotnessMap = best.hotnessMap;
+
+
+        //hotnessMap = null;
     	bettingMap = null;
     }
 

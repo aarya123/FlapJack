@@ -85,7 +85,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         eightValue.setText("8: "+s.getHottnessForCard(new Card("8")));
         nineValue.setText("9: "+s.getHottnessForCard(new Card("9")));
         faceValue.setText("F: "+s.getHottnessForCard(new Card("J")));
-        System.out.println(session.getExpectedValue());
+        //System.out.println(session.getExpectedValue());
         frame.pack();
     }
 
