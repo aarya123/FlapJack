@@ -9,36 +9,28 @@ public class Card {
     private String rank;
 
     public Card(String rank) {
-    	this.rank = rank;
+        this.rank = rank;
     }
 
     public int[] getValues() {
-    	switch (rank) {
-    		case "A":
-    			return new int[] { 1, 11 };
-    		case "J":
-    			return new int[] { 10 };
-    		case "Q":
-    			return new int[] { 10 };
-    		case "K":
-    			return new int[] { 10 };
-    		default:
-    			return new int[] { Integer.parseInt(rank) };
-    	}
+        if (rank.equals("A"))
+            return new int[]{1, 11};
+        else if (rank.equals("J") || rank.equals("Q") || rank.equals("K"))
+            return new int[]{10};
+        else
+            return new int[]{Integer.parseInt(rank)};
     }
 
     public String toString() {
-        switch (rank) {
-            case "A":
-                return "Ace";
-            case "J":
-                return "Jack";
-            case "Q":
-                return "Queen";
-            case "K":
-                return "King";
-            default:
-            	return rank;
-        }
+        if (rank.equals("A"))
+            return "Ace";
+        else if (rank.equals("J"))
+            return "Jack";
+        else if (rank.equals("Q"))
+            return "Queen";
+        else if (rank.equals("K"))
+            return "King";
+        else
+            return rank;
     }
 }
