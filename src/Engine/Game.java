@@ -64,7 +64,9 @@ public class Game {
 		else
 			return "tie";
 	}
-    private void calculateProfit(String won, Hand playerHand) {
+   
+
+  private void calculateProfit(String won, Hand playerHand) {
 		double blackjackMultiplier = casino.getBlackjackMultiplier();
 		if (won.equals("true")) {
 			if (playerHand.blackjack()) {
