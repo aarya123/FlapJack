@@ -82,7 +82,7 @@ public class BasicStrategy {
   }
 
   public static int getDealerIndex(Card dealerCard) {
-    if(dealerCard.getRank() == "A")
+    if(dealerCard.getRank().equals("A"))
       return 9;
     else
       return dealerCard.getValues()[0] - 2;

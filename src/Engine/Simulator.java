@@ -30,7 +30,6 @@ public class Simulator {
 //            System.out.println("Total Wage: $" + session.getTotalWage());
 //            System.out.println("Percent Won: " + session.getGameWonPercentage() + "%");
 //            System.out.println("Number of Games: " + session.getCasino().getNumberOfGames());
-        		System.out.println("EV: " + session.getEv());
         }
     }
 }
