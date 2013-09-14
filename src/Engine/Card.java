@@ -37,4 +37,8 @@ public class Card {
         else
             return rank;
     }
+
+    public boolean equals(Object obj) {
+        return getRank().equals(((Card) obj).getRank());
+    }
 }

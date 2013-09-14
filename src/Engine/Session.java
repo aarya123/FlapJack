@@ -15,7 +15,7 @@ public class Session {
 
     public Session(Casino casino, Strategy strategy) {
         this.casino = casino;
-        this.strategy = strategy;
+        this.strategy = new Strategy();
         this.shoe = new Shoe(casino.getNumberOfDecks(), strategy);
 
         totalProfit = 0.0;
@@ -29,12 +29,12 @@ public class Session {
 
     public void playGames() {
         int shoeMax = shoe.size(); // full shoe size
-        int standardBet = 10;
+        double standardBet = 10;
 
         for (int i = 0; i < casino.getNumberOfGames(); i++) {
             double betMultiplier = strategy.getBetMultiplier(shoe.getHotness());
-            int bet = bet * betMultiplier;
-            
+            double bet = standardBet * betMultiplier;
+
             games[i] = new Game(strategy, casino, shoe, bet);
             games[i].play();
 
