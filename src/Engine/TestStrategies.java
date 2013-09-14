@@ -40,10 +40,10 @@ public class TestStrategies {
 		// need to map strategy -> expected value
 		
 		// calculate strategies index -> expected value percent map with firstEntry = max
-		TreeMap<Double, Integer> indexToExpectedValue = getExpectedValues(profitResults, wageResults, size);
+		TreeMap<Double, Integer> expectedValueToIndex = getExpectedValues(profitResults, wageResults, size);
 		
 		for ( int i=0; i<n; i++ ) {
-			best[i] = strategies[indexToExpectedValue.pollLastEntry().getValue()];
+			best[i] = strategies[expectedValueToIndex.pollLastEntry().getValue()];
 		}
 		
 		return best;
