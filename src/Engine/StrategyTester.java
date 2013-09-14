@@ -43,7 +43,7 @@ public class StrategyTester {
                 hotnessMap.put("K", -1.0);
         }
                 
-        TestResult best = bestStrategy(-1, hotnessMap, 50);
+        TestResult best = bestStrategy(-1, hotnessMap, 5);
 
         //choose best strategy
         System.out.println(best.advantage);
