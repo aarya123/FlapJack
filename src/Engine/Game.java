@@ -8,16 +8,18 @@ public class Game {
     Strategy strategy;
     Casino casino;
     Shoe shoe;
-    double amountWagered, profit;
+    double initialAmountWagered, actualAmountWagered, profit;
 
-    Game(Strategy strategy, Casino casino, Shoe shoe) {
+    Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
         this.strategy = strategy;
         this.casino = casino;
         this.shoe = shoe;
+        this.initialAmountWagered = initialAmountWagered;
+        this.actualAmountWagered = initialAmountWagered;
     }
 
-    double getAmountWagered() {
-        return amountWagered;
+    double getActualAmountWagered() {
+        return actualAmountWagered;
     }
 
     double getProfit() {
@@ -72,13 +74,13 @@ public class Game {
         double blackjackMultiplier = casino.getBlackjackMultiplier();
         if (won.equals("true")) {
             if (playerHand.blackjack()) {
-                profit = amountWagered * blackjackMultiplier;
+                profit = actualAmountWagered * blackjackMultiplier;
             } else {
-                profit = amountWagered;
+                profit = actualAmountWagered;
             }
         } else {
             //tie or loss
-            profit = (-1) * amountWagered;
+            profit = (-1) * actualAmountWagered;
         }
     }
 
