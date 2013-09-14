@@ -12,17 +12,22 @@ public class TestStrategies {
 	
 	public TestStrategies() {
 		casino = new Casino("Bellagio", 1.5, 6, true, true, true);
-        casino.setNumberOfGames(1000);
+        casino.setNumberOfGames(100);
     }
 	
-	public void test( Strategy[] strategies ) {
-//		StrategyEvPair[] best100pairs = testNTimes(strategies, 2);
-//		Strategy[] best100strategies = new Strategy[100];
-//		for(int i=0; i<100; i++) {
-//			best100strategies[i] = best100pairs[i].strategy;
-//		}
+	public void test() {
+		int start = 3000;
+		Strategy[] strategies = new Strategy[start];		
 		
-		StrategyEvPair[] best10pairs = testNTimes(strategies, 5);
+		for(int i=0; i<start; i++)
+			strategies[i] = new Strategy();
+	
+		TreeMap<Double, Integer> results = runSimulation(strategies);
+		
+		Strategy[] top100Strategies = getBestNStrategies(results, strategies, 100);	
+		
+		StrategyEvPair[] best10pairs = testNTimes(top100Strategies, 3);
+		
 		for(int i=0; i<10; i++) {
 			System.out.println("EV: " + best10pairs[i].ev);
 		}

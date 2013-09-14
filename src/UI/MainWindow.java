@@ -23,8 +23,9 @@ import java.util.ArrayList;
  * Time: 3:05 PM
  */
 public class MainWindow implements ItemListener, ActionListener, ChangeListener {
-    static Boolean dev = true;
+    static boolean moo = true;
     static Boolean geneticTest = true;
+    static Boolean dev = true;
     JFrame frame;
     ArrayList<Casino> casinos;
     private JPanel mainWindow;
@@ -53,18 +54,23 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
 
     public static void main(String[] args) {
 
-    	if (geneticTest) {
-    		Strategy[] strategies = new Strategy[100];
-    		for ( int i=0; i<strategies.length; i++ ) {
-    			strategies[i] = new Strategy();
-    		}
+    	if (moo) {
+   		//double[] heatmap = new double[] {1, -0.1, 0.2, -1.4, -0.4, -1.6, 1.518518613097199, -1.9, 0.2, -1};
+//    		double[] heatmap = new double[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+ //   		double[] heatmap = new double[] {-1.2881094374190005, 0.162172601632273, -1.614138127560407, -0.7661004466682921, -0.4318724568369196, -4.961397802588075, 0.367080856398845, -0.6491184164196876, -1.6192482216585984, -2.6031034758127065};
+    		double [] heatmap = new double[] {-0.0026796595899303832, 1.9615927020141337, 0.7108625127192184, 1.4613978953176354, 0.09439203962328646, 2.6418293615381216, 0.7137243936718929, 4.699783746842147, 0.5613397132434919, 3.3452397610800704};
+   			Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
+            casino.setNumberOfGames(10000);
+    		new Simulator(casino, new Strategy(heatmap));
+    	}
+    	else if (geneticTest) {    		
     		TestStrategies test = new TestStrategies();
     		System.out.println("Testing...");
-    		test.test(strategies);
+    		test.test();
 		} else if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
            // casino.setNumberOfGames((int) (Math.random() * 100000));
-            casino.setNumberOfGames(1000);
+            casino.setNumberOfGames(100);
             new Simulator(casino);
         } else {
             new MainWindow();

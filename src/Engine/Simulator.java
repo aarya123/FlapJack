@@ -15,6 +15,11 @@ public class Simulator {
         this.casino = casino;
         new Session(casino, new Strategy()).playGames();
     }
+    
+    public Simulator(Casino casino, Strategy strategy) {
+        this.casino = casino;
+        new Session(casino, strategy).playGames();
+    }
 
     public Simulator(Casino casino, MainWindow ui) {
         this.casino = casino;
@@ -26,11 +31,11 @@ public class Simulator {
         if (ui != null)
             ui.simulateSession(session);
         else {
-//            System.out.println("Total Profit: $" + session.getTotalProfit());
-//            System.out.println("Total Wage: $" + session.getTotalWage());
-//            System.out.println("Percent Won: " + session.getGameWonPercentage() + "%");
-//            System.out.println("Number of Games: " + session.getCasino().getNumberOfGames());
-        		System.out.println("EV: " + session.getEv());
+            System.out.println("Total Profit: $" + session.getTotalProfit());
+            System.out.println("Total Wage: $" + session.getTotalWage());
+            System.out.println("Percent Won: " + session.getGameWonPercentage() + "%");
+            System.out.println("Number of Games: " + session.getCasino().getNumberOfGames());
+        	System.out.println("EV: " + session.getEv());
         }
     }
 }

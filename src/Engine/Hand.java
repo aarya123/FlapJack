@@ -27,6 +27,11 @@ public class Hand {
     double getAmountWagered() {
     	return this.amountWagered;
     }
+
+    double doubleAmountWagered() {
+        this.amountWagered *= 2;
+    }
+
     // Called when player wants to hit
     public void addCard(Card card) {
         cards.add(card);

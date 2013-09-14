@@ -75,6 +75,11 @@ public class Session {
         for (int i = 0; i < casino.getNumberOfGames(); i++) {
             totalProfit += games[i].getProfit();
             totalWage += games[i].getActualAmountWagered();
+            
+            // DEBUG
+            if(games[i].getActualAmountWagered() < 0)
+            	System.out.println("actual Amt wagered is NEGATIVE!!");
+            
             cumProfit[i] = totalProfit;
             numberOfWonGame += ((games[i].getProfit() > 0) ? 1 : 0);
         }

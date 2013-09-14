@@ -21,14 +21,14 @@ public class BasicStrategy {
 	List<Card> cards = playerHand.getCards();
 	
 	// DEBUG DEBUG DEBUG
-	//System.out.println("");
-	//String str = "Cards: ";
-	//for(int i=0; i< cards.size(); i++){
-	//	str += cards.get(i).getRank() + ",";
-	//}
-	//System.out.println(str);
-	//System.out.println("Hand value: " + Arrays.toString(playerHand.getValues()));
-	
+//	System.out.println("");
+//	String str = "Cards: ";
+//	for(int i=0; i< cards.size(); i++){
+//		str += cards.get(i).getRank() + ",";
+//	}
+//	System.out.println(str);
+//	System.out.println("Hand value: " + Arrays.toString(playerHand.getValues()));
+//	
 
     if(cards.size() == 2 && cards.get(0).getRank().equals("A") && cards.get(1).getRank().equals("A")) {
       return 30;
