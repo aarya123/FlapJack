@@ -49,14 +49,14 @@ public class GameTest {
 	public void testPlay() {
 		
 		int [] tgcCards1 = {1, 10, 10, 1};
-		int [] tgcCards2 = {2, 4, 2, 6, 10, 10, 2, 8, 10, 5};
+		//int [] tgcCards2 = {2, 4, 2, 6, 10, 10, 2, 8, 10, 5};
 		int [] tgcCards3 = {2, 3, 2, 4, 10, 10, 2, 9, 8, 2};
 		int [] tgcCards4 = {10, 3, 5, 2, 5, 2, 10};
 		int [] tgcCards5 = {10, 3, 5, 2, 7, 10, 10 , 10};
 		int [] tgcCards6 = {10, 2, 10, 2, 2, 2, 8, 7, 2, 3, 9};
 		int [] tgcCards7 = {1, 2, 1, 3, 12, 12, 10, 10, 10};
 		TestGameCase tgc1 = new TestGameCase(tgcCards1, "", 10, -10);
-		TestGameCase tgc2 = new TestGameCase(tgcCards2, "PHHS", 10,  10);
+		//TestGameCase tgc2 = new TestGameCase(tgcCards2, "PHHS", 10,  10);
 		TestGameCase tgc3 = new TestGameCase(tgcCards3, "PHHS", 10,  20);
 		TestGameCase tgc4 = new TestGameCase(tgcCards4, "D", 10,  20);
 		TestGameCase tgc5 = new TestGameCase(tgcCards5, "D", 10, -20);

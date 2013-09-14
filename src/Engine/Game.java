@@ -50,7 +50,7 @@ public class Game {
     Card hit(Hand hand) {
         Card card = shoe.removeTopCard();
         hand.addCard(card);
-        System.out.println(card.getRank());
+        //System.out.println(card.getRank());
         return card;
     }
 
@@ -160,8 +160,8 @@ public class Game {
     	String move;
     	//if (playerHand.isBusted()) {
     	//}
-    	//move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
-    	move = this.strategy.nextMove();
+    	move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
+    	//move = this.strategy.nextMove();
     	if (move.equals("S")) {
     		stand(playerHand);
     		//playerHand.freeze();
