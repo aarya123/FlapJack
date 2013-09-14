@@ -46,7 +46,7 @@ public class StrategyTester {
         TestResult best = bestStrategy(-1, hotnessMap, 50);
 
         //choose best strategy
-        //System.out.println(best.advantage);
+        System.out.println(best.advantage);
         printHotnessMap(best.hotnessMap);
       
 	}
@@ -108,7 +108,7 @@ public class StrategyTester {
         s.playGames();
         double advantage = s.getExpectedValue();
 
-        //System.out.println(advantage);
+        System.out.println(advantage);
           
         //record as bestHotnessMap if it has bestAdvantage
         if (advantage > bestAdvantage)
