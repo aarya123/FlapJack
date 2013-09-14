@@ -22,6 +22,7 @@ public class Shoe {
 
     public void shuffle() {
         initDeck();
+        //TODO
     }
 
     private void initDeck() {

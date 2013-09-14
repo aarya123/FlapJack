@@ -10,6 +10,6 @@ public class Simulator {
 
     public Simulator(Casino casino) {
         this.casino = casino;
-        //new Session(casino);
+        new Session(casino, new Strategy(), new Shoe(1)).playGames();
     }
 }
