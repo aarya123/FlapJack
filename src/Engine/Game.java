@@ -127,7 +127,7 @@ public class Game {
 
 		dealerHiddenCard = distributeCards(dealerVisibleHand, playerHand);
 		while (playing) {
-			move = getNextMove();
+			move = strategy.getNextMove();
 			if (move == Move.STAND) {
 				break;
 			} 
