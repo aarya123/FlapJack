@@ -13,6 +13,10 @@ public class Hand {
     public void addCard(Card card) {
         cards.add(card);
     }
+    
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 
     // Returns an array of length 1 or 2 containing possible values of the hand
     public int[] getValues() {
