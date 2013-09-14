@@ -7,7 +7,8 @@ public class Strategy {
 
     HashMap<String, Double> hotnessMap;
     // bettingFunction is an array of length 5; 
-    public Strategy() {
+    public Strategy(String strategy_type) {
+        System.out.println(strategy_type);
         hotnessMap = new HashMap<String, Double>();
         for (int i = 1; i < 14; i++) {
             if (i == 1)

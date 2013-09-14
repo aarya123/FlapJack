@@ -10,16 +10,17 @@ import UI.MainWindow;
 public class Simulator {
     static Casino casino;
     static MainWindow ui;
-
-    public Simulator(Casino casino) {
+    String strategy_type;
+    public Simulator(Casino casino, String strategy_type) {
         this.casino = casino;
-        new Session(casino, new Strategy()).playGames();
+       new Session(casino, new Strategy(strategy_type)).playGames();
     }
 
-    public Simulator(Casino casino, MainWindow ui) {
+    public Simulator(Casino casino, MainWindow ui, String strategy_type) {
+        this.strategy_type = strategy_type;
         this.casino = casino;
         this.ui = ui;
-        new Session(casino, new Strategy()).playGames();
+        new Session(casino, new Strategy(strategy_type)).playGames();
     }
 
     public static void finished(Session session) {
