@@ -49,17 +49,19 @@ public class Hand {
         }
     }
 
-    // TODO
-   public Hand split() {
+   public Hand split(Shoe shoe) {
+        // Can split only if hand has 2 cards
         if(cards.size() != 2) {
             return null;
         }
 
         Hand[] newHands = new Hand[2];
-        ArrayList<Card> cardForHand0 = new ArrayList<Card>();
-        ArrayList<Card> cardForHand1 = new ArrayList<Card>();
+        newHands[0] = new Hand(new ArrayList<Card>());
+        newHands[1] = new Hand(new ArrayList<Card>());
 
+        newHands[0].addCard(shoe.removeTopCard());
+        newHands[1].addCard(shoe.removeTopCard());
 
-        newHands[0] = new Hand();
+        return newHands;
    }
 }
