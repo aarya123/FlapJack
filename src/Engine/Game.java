@@ -59,9 +59,9 @@ public class Game {
         else
             dealerValue = dealerValueArray[0];
 
-        if (playerValue > dealerValue)
+        if ((playerValue > dealerValue) || (dealerValue > 21))
             return "true";
-        else if (playerValue < dealerValue)
+        else if ((playerValue < dealerValue) || (playerValue > 21))
             return "false";
         else
             return "tie";
@@ -119,7 +119,6 @@ public class Game {
     }
 
     public void play() {
-        boolean playing = true;
         String won = "false";
         Move move;
         Hand dealerHand = new Hand(new ArrayList<Card>());
@@ -127,7 +126,11 @@ public class Game {
         Card dealerHiddenCard;
 
         dealerHiddenCard = distributeCards(dealerHand, playerHand);
-        while (playing) {
+        
+        while (true) {
+        	if (reachedN(playerHand, 22)) {
+        		break;
+        	}
             move = strategy.getNextMove();
             if (move == Move.STAND) {
                 break;
