@@ -3,11 +3,6 @@ package Engine;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: AnubhawArya
- * Date: 9/13/13
- * Time: 3:00 PM
- */
 public class Hand {
     private List<Card> cards = new ArrayList<Card>();
 
@@ -69,6 +64,10 @@ public class Hand {
         Hand[] newHands = new Hand[2];
         ArrayList<Card> cardForHand0 = new ArrayList<Card>();
         ArrayList<Card> cardForHand1 = new ArrayList<Card>();
+
+
+        newHands[0] = new Hand();
+
         
 
    }
