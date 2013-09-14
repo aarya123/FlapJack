@@ -20,11 +20,11 @@ public class Hand {
 
     // Returns an array of length 1 or 2 containing possible values of the hand
     public array getValues() {
-        int val0 = 0;
-        int val1 = 0;
+        int val0 = 0; // Hand value assuming first ace is valued at 1
+        int val1 = 0; // Hand value assuming first ace is valued at 11
         boolean hasAce = false;
 
-        for(int i=0; i<cards.length; i++) {
+        for(int i=0; i<cards.size(); i++) {
             cardValue = cards[i].getValues();
 
             // If Ace
@@ -56,27 +56,9 @@ public class Hand {
         }
     }
 
-    public String toString() {
-        switch (value) {
-            case 1:
-                return "Ace";
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                return value + "";
-            case 11:
-                return "Jack";
-            case 12:
-                return "Queen";
-            case 13:
-                return "King";
-        }
-        return "";
-    }
+    // TODO
+   public Hand split() {
+        return Null unless cards.size() == 2;
+
+   }
 }
