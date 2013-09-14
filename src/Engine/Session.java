@@ -37,11 +37,9 @@ public class Session {
 
             games[i] = new Game(strategy, casino, shoe, bet);
             games[i].play();
-Strategy.assess(games[i]);
             // shuffle deck when less than 25% remaining
             if ((double) shoe.size() / (double) shoeMax <= .25) {
                 shoe.shuffle();
-                Strategy.shuffled();
             }
         }
         solve();
