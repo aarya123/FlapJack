@@ -22,7 +22,8 @@ public class Shoe {
 
     public void shuffle() {
         initDeck();
-        //TODO
+        long seed = System.nanoTime();
+        deck = Collections.shuffle(deck, new Random(seed));
     }
 
     private void initDeck() {
