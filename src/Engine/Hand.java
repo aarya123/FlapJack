@@ -15,6 +15,10 @@ public class Hand {
     public void addCard(Card card) {
         cards.add(card);
     }
+    
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 
     // Returns an array of length 1 or 2 containing possible values of the hand
     public int[] getValues() {
@@ -23,24 +27,28 @@ public class Hand {
         boolean hasAce = false;
         int[] cardValue;
 
-        // If Ace
-        if(cardValue.length == 2) {
-            // If Ace already exists in hand, just add 1
-            if(hasAce) {
-                val0 += cardValue[0]; // 1
-                val1 += cardValue[0]; // 1
-            }
-            else {
-                val0 += cardValue[0]; // 1
-                val1 += cardValue[1]; // 11
-                hasAce = true;
-            }
-        }
+        for(int i=0; i<cards.size(); i++) {
+            cardValue = cards.get(i).getValues();
 
-        // Otherwise single-value cards (2-10, J, Q, K)
-        else {
-            val0 += cardValue[0];
-            val1 += cardValue[0];
+            // If Ace
+            if(cardValue.length == 2) {
+                // If Ace already exists in hand, just add 1
+                if(hasAce) {
+                    val0 += cardValue[0]; // 1
+                    val1 += cardValue[0]; // 1
+                }
+                else {
+                    val0 += cardValue[0]; // 1
+                    val1 += cardValue[1]; // 11
+                    hasAce = true;
+                }
+            }
+
+            // Otherwise single-value cards (2-10, J, Q, K)
+            else {
+                val0 += cardValue[0];
+                val1 += cardValue[0];
+            }
         }
 
         if(val0 == val1) {
@@ -49,6 +57,11 @@ public class Hand {
         else {
             return new int[] {val0, val1};
         }
+    }
+
+    // returns true if hand is soft 17
+    public boolean softSeventeen() {
+        return getValues == [7, 17]
     }
 
    public Hand split(Shoe shoe) {
@@ -61,6 +74,11 @@ public class Hand {
         newHands[0] = new Hand(new ArrayList<Card>());
         newHands[1] = new Hand(new ArrayList<Card>());
 
+        // Split cards from original hand
+        newHands[0].addCard(cards.shift());
+        newHands[1].addCard(cards.shift());
+
+        // Add new cards from shoe
         newHands[0].addCard(shoe.removeTopCard());
         newHands[1].addCard(shoe.removeTopCard());
 
