@@ -57,7 +57,7 @@ public class TestStrategies {
 		return bestPairs;
 	}
 	
-	private Strategy[] getBestNStrategies( TreeMap<Double, Integer> results, Strategy[] strategies, int n ) {
+	private Strategy[] getBestNStrategies( TreeMap<Double, Integer> results, Strategy[] strategies, int n) {
 		Strategy[] best = new Strategy[n];
 		
 		for ( int j=0; j<n; j++ ) {

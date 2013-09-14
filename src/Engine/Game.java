@@ -161,7 +161,7 @@ public class Game {
     		stand(playerHand);
     		//playerHand.freeze();
     	} else if (move.equals("D")) {
-    		setActualAmountWagered(getActualAmountWagered() * 2);
+    		setActualAmountWagered(getActualAmountWagered() + getInitialAmountWagered());
     		hit(playerHand);
     		playerHand.freeze();
     	} else if (move.equals("P")) {
