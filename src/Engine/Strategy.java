@@ -2,12 +2,13 @@ package Engine;
 
 public class Strategy {
 
-	Hand hand;
-	Move getNextMove() {
-		return Move.STAND;
-	}
+    Hand hand;
 
-  int getHottnessForCard( Card card ) {
-    return 0;
-  }
+    Move getNextMove() {
+        return Move.STAND;
+    }
+
+    int getHottnessForCard(Card card) {
+        return 0;
+    }
 }

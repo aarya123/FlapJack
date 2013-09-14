@@ -59,6 +59,10 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         profit.setText("$" + session.getTotalProfit());
         numWon.setText(session.getGameWonPercentage() + "%");
         totWage.setText("$" + session.getTotalWage());
+        double cacat[] = session.getCumProfit();
+        for (int i = 0; i < cacat.length; i++)
+            System.out.println(cacat[i]);
+        graph.setPoints(session.getCumProfit());
         frame.pack();
     }
 

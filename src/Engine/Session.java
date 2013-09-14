@@ -11,19 +11,19 @@ public class Session {
     double averageProfit;
     double gameWonPercentage;
     int numberOfWonGame;
-
+    double[] cumProfit;
 
     public Session(Casino casino, Strategy strategy) {
         this.casino = casino;
         this.strategy = strategy;
-        this.shoe = new Shoe(7, strategy);
+        this.shoe = new Shoe(casino.getNumberOfDecks(), strategy);
 
         totalProfit = 0.0;
         totalWage = 0.0;
         averageProfit = 0.0;
         gameWonPercentage = 0.0;
         numberOfWonGame = 0;
-
+        cumProfit = new double[casino.getNumberOfGames()];
         games = new Game[casino.getNumberOfGames()];
     }
 
@@ -70,6 +70,7 @@ public class Session {
         for (int i = 0; i < casino.getNumberOfGames(); i++) {
             totalProfit += games[i].getProfit();
             totalWage += games[i].getActualAmountWagered();
+            cumProfit[i] = totalProfit;
             numberOfWonGame += totalProfit > 0 ? 1 : 0;
         }
         Simulator.finished(this);
@@ -77,6 +78,10 @@ public class Session {
 
     public double getTotalWage() {
         return totalWage;
+    }
+
+    public double[] getCumProfit() {
+        return cumProfit;
     }
 
     public double getTotalProfit() {
