@@ -19,7 +19,7 @@ public class Simulator {
     public Simulator(Casino casino, MainWindow ui) {
         this.casino = casino;
         this.ui = ui;
-        new Session(casino, new Strategy(), new Shoe(1)).playGames();
+        new Session(casino, new Strategy()).playGames();
     }
 
     public static void finished(Session session) {

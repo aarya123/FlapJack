@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Time: 3:05 PM
  */
 public class MainWindow implements ItemListener, ActionListener, ChangeListener {
-    static Boolean dev = true;
+    static Boolean dev = false;
     JFrame frame;
     ArrayList<Casino> casinos;
     private JPanel mainWindow;
