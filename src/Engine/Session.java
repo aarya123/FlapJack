@@ -37,6 +37,7 @@ public class Session {
         for (int i = 0; i < numberOfGames; i++) {
             games[i] = new Game(strategy, casino, shoe, 10);
             games[i].play();
+            System.out.println(games[i].getProfit());
         }
     }
 

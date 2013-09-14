@@ -22,22 +22,24 @@ public class Shoe {
 
     public void shuffle() {
         initDeck();
+        long seed = System.nanoTime();
+        deck = Collections.shuffle(deck, new Random(seed));
     }
 
     private void initDeck() {
         deck = new ArrayList<Card>();
         for (int j = 0; j < numberOfDecks * 4; j++)
             for (int i = 1; i < 14; i++) {
-              if ( i == 1 )
-                deck.add( new Card("A") );
-              else if ( i == 11 )
-                deck.add( new Card("J") );
-              else if ( i == 12 )
-                deck.add( new Card("Q") );
-              else if ( i == 13 )
-                deck.add( new Card("K") );
-              else
-                deck.add( new Card(Integer.toString(i)) );
+                if (i == 1)
+                    deck.add(new Card("A"));
+                else if (i == 11)
+                    deck.add(new Card("J"));
+                else if (i == 12)
+                    deck.add(new Card("Q"));
+                else if (i == 13)
+                    deck.add(new Card("K"));
+                else
+                    deck.add(new Card(Integer.toString(i)));
             }
     }
 
@@ -54,8 +56,10 @@ public class Shoe {
             toReturn += card.toString() + ",";
         return toReturn;
     }
-    
+
     public Card removeTopCard() {
-      return deck.remove(deck.size()-1);
+        if (deck.size() == 1)
+            shuffle();
+        return deck.remove(deck.size() - 1);
     }
 }
