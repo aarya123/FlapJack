@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Time: 3:05 PM
  */
 public class MainWindow implements ItemListener, ActionListener, ChangeListener {
-    static Boolean dev = false;
+    static Boolean dev = true;
     JFrame frame;
     ArrayList<Casino> casinos;
     private JPanel mainWindow;
@@ -49,7 +49,8 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     public static void main(String[] args) {
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
-            casino.setNumberOfGames((int) (Math.random() * 1000));
+            //casino.setNumberOfGames((int) (Math.random() * 1000));
+            casino.setNumberOfGames(10); //TODO WHy are 787 games played?
             new Simulator(casino);
         } else {
             new MainWindow();

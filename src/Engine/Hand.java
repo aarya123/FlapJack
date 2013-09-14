@@ -6,10 +6,14 @@ import java.util.List;
 
 public class Hand {
     private List<Card> cards = new ArrayList<Card>();
+    double amountWagered;
+    boolean frozen;
 
     // Constructor
-    public Hand(ArrayList<Card> cards) {
+    public Hand(ArrayList<Card> cards, double amountWagered) {
         this.cards = cards;
+        this.amountWagered = amountWagered;
+        this.frozen = false;
     }
 
     public String toString() {
@@ -20,7 +24,9 @@ public class Hand {
         }
         return buffer.toString().trim();
     }
-
+    double getAmountWagered() {
+    	return this.amountWagered;
+    }
     // Called when player wants to hit
     public void addCard(Card card) {
         cards.add(card);
@@ -29,6 +35,7 @@ public class Hand {
     public List<Card> getCards() {
         return cards;
     }
+    
 
     // Returns an array of length 1 or 2 containing possible values of the hand
     public int[] getValues() {
@@ -66,6 +73,29 @@ public class Hand {
             return new int[]{val0, val1};
         }
     }
+    
+    public void freeze() {
+    	this.frozen = true;
+    }
+    
+    public boolean busted() {
+    	boolean busted = true;
+    	int[] values = getValues();
+    	for (int i : values) {
+    		if (i < 22) {
+    			busted = false;
+    		}
+    	}
+    	return busted;
+    }
+    
+    public boolean frozen() {
+    	return this.frozen;
+    }
+    
+    public boolean active() {
+    	return (!this.frozen && !this.busted());
+    }
 
     // returns true if hand is soft 17
     public boolean softSeventeen() {
@@ -90,22 +120,22 @@ public class Hand {
         return busted;
     }
 
-    public Hand[] split(Shoe shoe) {
+   public Hand[] split() {
         // Can split only if hand has 2 cards
         if (cards.size() != 2)
             return null;
 
         Hand[] newHands = new Hand[2];
-        newHands[0] = new Hand(new ArrayList<Card>());
-        newHands[1] = new Hand(new ArrayList<Card>());
+        newHands[0] = new Hand(new ArrayList<Card>(), this.amountWagered);
+        newHands[1] = new Hand(new ArrayList<Card>(), this.amountWagered);
 
         // Split cards from original hand
         newHands[1].addCard(cards.remove(cards.size() - 1));
         newHands[0].addCard(cards.remove(cards.size() - 1));
 
         // Add new cards from shoe
-        newHands[0].addCard(shoe.removeTopCard());
-        newHands[1].addCard(shoe.removeTopCard());
+        //newHands[0].addCard(shoe.removeTopCard());
+        //newHands[1].addCard(shoe.removeTopCard());
 
         return newHands;
     }
