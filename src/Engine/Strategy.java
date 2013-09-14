@@ -1,18 +1,19 @@
 package Engine;
 import java.util.Random;
 
+import java.util.HashMap;
+
 public class Strategy {
 
-    Hand hand;
+    HashMap<String, Double> hotnessMap;
 
-	Move getNextMove() {
-		Random r = new Random();
-		int move = r.nextInt(Move.values().length);
-		return Move.values()[move];
-		// return Move.SPLIT;
-	}
+    // bettingFunction is an array of length 5; 
+    double getHottnessForCard(Card card) {
+        //return hotnessMap.get(card.getRank());
+    	return 0;
+    }
 
-    int getHottnessForCard(Card card) {
-        return 0;
+    double getBetMultiplier(double hotness) {
+        return 1;
     }
 }

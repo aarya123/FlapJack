@@ -151,20 +151,20 @@ public class Game {
     }
     
     // returns a hand if it splits, returns null otherwise
-    public Hand playHand(Hand playerHand, Hand dealerHand) {
+    public Hand playHand(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
     	Hand newHand = null;
-    	Move move;
+    	String move;
     	if (playerHand.isBusted()) {
     	}
-    	move = strategy.getNextMove();
-    	if (move == Move.STAND) {
+    	move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
+    	if (move.equals("S")) {
     		stand(playerHand);
     		//playerHand.freeze();
-    	} else if (move == Move.DOUBLE) {
+    	} else if (move.equals("D")) {
     		setActualAmountWagered(getActualAmountWagered() * 2);
     		hit(playerHand);
     		playerHand.freeze();
-    	} else if (move == Move.SPLIT) {
+    	} else if (move.equals("P")) {
     		Hand[] splitHands = playerHand.split();
     		if (splitHands != null) {
     			playerHand = splitHands[0];
@@ -185,14 +185,13 @@ public class Game {
         ArrayList<Hand> playerHands;
         playerHands = new ArrayList<Hand>();
         playerHands.add(new Hand(new ArrayList<Card>(), initialAmountWagered));
-        
         Card dealerHiddenCard;
         dealerHiddenCard = distributeCards(dealerHand, playerHands.get(0));
         
         while (numberActiveHands(playerHands) > 0) {
         	for (int i = 0; i < playerHands.size(); i++) {
         		if (playerHands.get(i).active()) {
-        			Hand newHand = playHand(playerHands.get(i), dealerHand);
+        			Hand newHand = playHand(playerHands.get(i), dealerHand, dealerHiddenCard);
         			if (newHand != null) {
         				playerHands.add(i+1, newHand);
         			}

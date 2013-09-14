@@ -12,6 +12,10 @@ public class Card {
         this.rank = rank;
     }
 
+    public String getRank() {
+        return rank;
+    }
+
     public int[] getValues() {
         if (rank.equals("A"))
             return new int[]{1, 11};
@@ -32,5 +36,9 @@ public class Card {
             return "King";
         else
             return rank;
+    }
+
+    public boolean equals(Object obj) {
+        return getRank().equals(((Card) obj).getRank());
     }
 }
