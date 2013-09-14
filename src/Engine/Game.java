@@ -1,3 +1,5 @@
+package Engine;
+
 import java.util.ArrayList;
 
 /* Skeleton code for the Game class*/
@@ -22,13 +24,42 @@ public class Game {
 		return hidden;
 	}
 	
-	void hit(Hand hand) {
+	public void hit(Hand hand) {
 		hand.addCard(shoe.removeTopCard());
 	}
 	
-	boolean won(Hand playerHand, Hand dealerVisibleHand, Card dealerHiddenCard) {
+	public String won(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
 		// call playerHand.getValue(), dealerVisibleHand.getValue()
-		return true;
+		int playerValue;
+		int dealerValue;
+		
+		// set best case player hand
+		int[] playerValueArray = playerHand.getValues();
+		if ( playerValueArray.length == 2 )
+			playerValue = getBetterHand( playerValueArray[0], playerValueArray[1] );
+		else
+			playerValue = playerValueArray[0];
+		
+		// set best case dealer hand
+		int[] dealerValueArray = dealerHand.getValues();
+		if ( dealerValueArray.length == 2 )
+			dealerValue = getBetterHand( playerValueArray[0], playerValueArray[1] );
+		else
+			dealerValue = dealerValueArray[0];
+		
+		if ( playerValue > dealerValue )
+			return "true";
+		else if ( playerValue < dealerValue )
+			return "false";
+		else
+			return "tie";
+	}
+	
+	private int getBetterHand( int hand1, int hand2 ) {
+		if ( hand1 <= 21 && hand2 <= 21 ) 
+			return hand1 > hand2 ? hand1 : hand2;
+		else
+			return hand1 > hand2 ? hand2 : hand1;
 	}
 	
 	//double getAmountWagered()
@@ -41,7 +72,7 @@ public class Game {
 		;
 	}
 	
-	public boolean play() {
+	public String play() {
 		boolean playing = true;
 		boolean won = false;
 		Move move;
@@ -62,5 +93,4 @@ public class Game {
 		won = won(strategy.getHand(), dealerVisibleHand, dealerHiddenCard); //check hand.handValues
 		return won;
 	}
-	
 }
