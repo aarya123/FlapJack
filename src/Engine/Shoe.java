@@ -15,6 +15,7 @@ public class Shoe {
     public Shoe(int numberOfDecks) {
         this.numberOfDecks = numberOfDecks;
         initDeck();
+        shuffle();
     }
     
     public int size() {
@@ -32,7 +33,7 @@ public class Shoe {
 
     private void initDeck() {
         deck = new ArrayList<Card>();
-        for (int j = 0; j < numberOfDecks * 4; j++)
+        for (int j = 0; j < numberOfDecks * 4; j++) {
             for (int i = 1; i < 14; i++) {
                 if (i == 1)
                     deck.add(new Card("A"));
@@ -45,7 +46,7 @@ public class Shoe {
                 else
                     deck.add(new Card(Integer.toString(i)));
             }
-        shuffle();
+        }
     }
 
     public ArrayList<Card> getHand(int size) {

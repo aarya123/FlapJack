@@ -40,8 +40,10 @@ public class Session {
             games[i].play();
             
             // shuffle deck when less than 25% remaining
-            if ( shoe.size() / shoeMax <= .25 )
-            	shoe.shuffle();
+            if ( (double) shoe.size() / (double) shoeMax <= .25 ) {
+            	 shoe.shuffle();
+            }
+            	
             
             System.out.println(games[i].getProfit());
         }
