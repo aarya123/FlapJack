@@ -28,17 +28,16 @@ public class Hand {
         boolean hasAce = false;
         int[] cardValue;
 
-        for(int i=0; i<cards.size(); i++) {
+        for (int i = 0; i < cards.size(); i++) {
             cardValue = cards.get(i).getValues();
 
             // If Ace
-            if(cardValue.length == 2) {
+            if (cardValue.length == 2) {
                 // If Ace already exists in hand, just add 1
-                if(hasAce) {
+                if (hasAce) {
                     val0 += cardValue[0]; // 1
                     val1 += cardValue[0]; // 1
-                }
-                else {
+                } else {
                     val0 += cardValue[0]; // 1
                     val1 += cardValue[1]; // 11
                     hasAce = true;
@@ -52,14 +51,14 @@ public class Hand {
             }
         }
 
-        if(val0 == val1) {
-            return new int[] { val0 };
-        }
-        else {
-            return new int[] {val0, val1};
+        if (val0 == val1) {
+            return new int[]{val0};
+        } else {
+            return new int[]{val0, val1};
         }
     }
 
+<<<<<<< HEAD
     // returns true if hand is soft 17
     public boolean softSeventeen() {
     	int[] softSeventeen = new int[] { 7, 17 };
@@ -75,10 +74,16 @@ public class Hand {
    public Hand[] split(Shoe shoe) {
         // Can split only if hand has 2 cards
         if(cards.size() != 2) {
+=======
+    // TODO
+    /*public Hand split() {
+        if (cards.size() != 2) {
+>>>>>>> master
             return null;
         }
 
         Hand[] newHands = new Hand[2];
+<<<<<<< HEAD
         newHands[0] = new Hand(new ArrayList<Card>());
         newHands[1] = new Hand(new ArrayList<Card>());
 
@@ -92,4 +97,11 @@ public class Hand {
 
         return newHands;
    }
+=======
+        ArrayList<Card> cardForHand0 = new ArrayList<Card>();
+        ArrayList<Card> cardForHand1 = new ArrayList<Card>();
+
+
+    }*/
+>>>>>>> master
 }

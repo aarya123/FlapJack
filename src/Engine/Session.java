@@ -17,7 +17,7 @@ public class Session {
     int numberOfWonGame;
 
 
-    public Session(Casino casino, Straegy strategy, Shoe shoe) {
+    public Session(Casino casino, Strategy strategy, Shoe shoe) {
         this.casino = casino;
         this.strategy = strategy;
         this.shoe = shoe;
