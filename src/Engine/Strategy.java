@@ -2,13 +2,19 @@ package Engine;
 
 public class Strategy {
 
-    Hand hand;
+    double[] hotnessMap, bettingFunction;
 
-    String getNextMove() {
-        return "S";
+    // bettingFunction is an array of length 5; 
+    public Strategy(double[] hotnessMap, int[] bettingFunction) {
+      this.hotnessMap = hotnessMap;
+      this.bettingFunction = bettingFunction;
     }
 
-    int getHottnessForCard(Card card) {
-        return 0;
+    double getHottnessForCard(Card card) {
+      return hotnessMap[card.getValues()[0] - 1];
+    }
+
+    double getBetMultiplier(double hotness) {
+      return 1; // TODO
     }
 }
