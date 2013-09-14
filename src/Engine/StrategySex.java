@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class StrategySex {
 
-  public Strategy StrategySex(Strategy s1, double ev1, Strategy s2, double ev2) {
+  public static Strategy breed(Strategy s1, double ev1, Strategy s2, double ev2) {
     double[] hotnessMap = new double[10];
     Random r = new Random();
     

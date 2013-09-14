@@ -12,56 +12,92 @@ public class TestStrategies {
 	public TestStrategies() {
 		casino = new Casino("Bellagio", 1.5, 6, true, true, true);
         casino.setNumberOfGames(1000);
-        
-        session = new Session(casino, new Strategy());
-	}
+    }
 	
 	public void test( Strategy[] strategies ) {
-		Strategy[] best100 = runSimulation(10000, strategies);
-		Strategy[] best10 = runSimulation(100, best100);
+		Strategy[] best100 = testNTimes(strategies, 10);
+		
+		Strategy[] best10 = testNTimes(best100, 10);
+		
+		
 		// somehow get this down to best 9?
 	}
 	
+	// N times, runs simulation for strategies, gets best sqrt(strategies), crossbreeds them and 
+	// ultimately returns best sqrt(strategies)
+	private Strategy[] testNTimes( Strategy[] strategies, int numTimes ) {
+		int n = (int) Math.sqrt(strategies.length);
+		
+		TreeMap<Double, Integer> results;
+		Strategy[] best = new Strategy[n];
+		double[] evs = new double[n];
+		
+		Map.Entry<Double, Integer> entry;
+		
+		// run X strategies N times
+		for ( int i=0; i<numTimes; i++ ) {
+			results = runSimulation(strategies);
+			// populate best n strategies from results and their corresponding 100 expected values
+			for ( int j=0; j<best.length; j++ ) {
+				entry = results.pollLastEntry();
+				best[j] = strategies[entry.getValue()];
+				evs[j] = entry.getKey();
+			}
+			
+			strategies = crossbreed(best, evs);
+		}
+		return best;
+	}
+	
+	private Strategy[] getBestNStrategies( TreeMap<Double, Integer> results, Strategy[] strategies, int n ) {
+		Strategy[] best = new Strategy[n];
+		
+		for ( int j=0; j<n; j++ ) {
+			best[j] = strategies[results.pollLastEntry().getValue()];
+		}
+		return best;
+	}
 	
 	/*
 	 * Runs simulation for given population size
-	 * returns best sqrt(size) strategies
 	 */
-	private Strategy[] runSimulation( int size, Strategy[] strategies ) {
-		int n = (int) Math.sqrt(size);
+	private TreeMap<Double, Integer> runSimulation(Strategy[] strategies) {
+		int n = (int) Math.sqrt(strategies.length);
 		Strategy[] best = new Strategy[n];
-		
-		double[] profitResults = new double[size];
-		double[] wageResults = new double[size];
+		TreeMap<Double, Integer> evToIndexMap = new TreeMap<Double, Integer>();
 		
 		// run strategies and somehow populate these arrays
 		// indexes for profitResults and wageResults need to correspond to indexes in strategies
 		
-		// need to map strategy -> expected value
+//		// need to map strategy -> expected value
+//		
+//		// calculate strategies index -> expected value percent map with firstEntry = max
+//		TreeMap<Double, Integer> expectedValueToIndex = getExpectedValues(profitResults, wageResults, size);
+//		
+//		for ( int i=0; i<n; i++ ) {
+//			best[i] = strategies[expectedValueToIndex.pollLastEntry().getValue()];
 		
-		// calculate strategies index -> expected value percent map with firstEntry = max
-		TreeMap<Double, Integer> expectedValueToIndex = getExpectedValues(profitResults, wageResults, size);
-		
-		for ( int i=0; i<n; i++ ) {
-			best[i] = strategies[expectedValueToIndex.pollLastEntry().getValue()];
+		Session[] sessions = new Session[strategies.length];
+		for(int i=0; i<sessions.length; i++) {
+			sessions[i] = new Session(casino, strategies[i]);
+			sessions[i].playGames();
+			evToIndexMap.put(sessions[i].getTotalProfit() / sessions[i].getTotalWage(), i); // Save EV
 		}
-		
-		return best;
-		
+	
+		return evToIndexMap;
 	}
 	
-	// maps expectedValue -> strategyIndex
-	private TreeMap<Double, Integer> getExpectedValues( double[] profits, double[] wages, int size ) {
-		// creates a max tree map (firstEntry = max)
-		TreeMap<Double, Integer> map = new TreeMap<Double, Integer>();
+	private Strategy[] crossbreed(Strategy[] strategies, double[] evs) {
+		int n = strategies.length;
+		int n2 = (int) Math.pow(n, 2);
+		Strategy[] children = new Strategy[n2];
 		
-		for ( int i=0; i<size; i++ ) {
-			map.put( expectedValuePercent( profits[i], wages[i]), i );
+		for(int i=0; i<n2; i++){
+			for(int j=0; j<n2; j++) {
+				children[i*n + j] = StrategySex.breed(strategies[i], evs[i], strategies[j], evs[j] );
+			}
 		}
-		return map;
-	}
-	
-	private double expectedValuePercent( double profit, double wage ) {
-		return 100 * ( profit / wage );
+		
+		return children;
 	}
 }
