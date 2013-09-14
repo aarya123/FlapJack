@@ -17,6 +17,10 @@ public class Game {
 		this.actualAmountWagered = initialAmountWagered;
 	}
 	
+	void setActualAmountWagered(double value) {
+		actualAmountWagered = value;
+	}
+	
 	double getInitialAmountWagered() {
 		return initialAmountWagered;
 	}
@@ -134,6 +138,8 @@ public class Game {
             move = strategy.getNextMove();
             if (move == Move.STAND) {
                 break;
+            } else if (move == Move.DOUBLE) {
+            	setActualAmountWagered(actualAmountWagered*2);
             }
             playerHand.addCard(shoe.removeTopCard());
         }
