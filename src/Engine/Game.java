@@ -73,7 +73,7 @@ public class Game {
             return "tie";
     }
 
-    private void calculateProfit(String won, Hand playerHand) {
+    private void calculateProfit(String won, Hand playerHand, Hand dealerHand) {
         double blackjackMultiplier = casino.getBlackjackMultiplier();
         if (won.equals("true")) {
             if (playerHand.blackjack()) {
@@ -81,9 +81,11 @@ public class Game {
             } else {
                 profit = actualAmountWagered;
             }
-        } else {
-            //tie or loss
+        // dealer won or tie but dealer got blackjack
+        } else if (won.equals("false") || dealerHand.blackjack()) {
             profit = (-1) * actualAmountWagered;
+        } else {
+        	profit = 0; // tie with dealer
         }
     }
 
@@ -141,6 +143,6 @@ public class Game {
 
         completeDealerHand(dealerHand, dealerHiddenCard);
         won = won(playerHand, dealerHand);
-        calculateProfit(won, playerHand);
+        calculateProfit(won, playerHand, dealerHand);
     }
 }

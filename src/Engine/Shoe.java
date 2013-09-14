@@ -11,15 +11,21 @@ import java.util.Collections;
 public class Shoe {
     private ArrayList<Card> deck;
     private int numberOfDecks;
+    private int hottness;
+    private Strategy strategy;
 
-    public Shoe(int numberOfDecks) {
+    public Shoe(int numberOfDecks, Strategy strategy) {
         this.numberOfDecks = numberOfDecks;
-        initDeck();
+        this.strategy = strategy;
         shuffle();
     }
 
     public int size() {
         return deck.size();
+    }
+
+    public int getHottness() {
+      return hottness;
     }
 
     public int getNumberOfDecks() {
@@ -29,6 +35,7 @@ public class Shoe {
     public void shuffle() {
         initDeck();
         Collections.shuffle(deck);
+        hottness = 0;
     }
 
     private void initDeck() {
@@ -64,6 +71,10 @@ public class Shoe {
     }
 
     public Card removeTopCard() {
-        return deck.remove(deck.size() - 1);
+        if (deck.size() == 1)
+            shuffle();
+        Card removedCard = deck.remove(deck.size()-1);
+        hottness += strategy.getHottnessForCard(removedCard);
+        return removedCard;
     }
 }
