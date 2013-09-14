@@ -23,7 +23,7 @@ public class Hand {
 
     public boolean containsAce() {
         for(int i=0; i<cards.size(); i++) {
-            if cards.get(i).rank() == "A"
+            if (cards.get(i).getRank().equals("A"))
                 return true;
         }
         return false;
