@@ -3,6 +3,8 @@ package UI;
 import Engine.Casino;
 import Engine.Session;
 import Engine.Simulator;
+import Engine.Strategy;
+import Engine.TestStrategies;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
  */
 public class MainWindow implements ItemListener, ActionListener, ChangeListener {
     static Boolean dev = true;
+    static Boolean geneticTest = true;
     JFrame frame;
     ArrayList<Casino> casinos;
     private JPanel mainWindow;
@@ -47,7 +50,14 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     }
 
     public static void main(String[] args) {
-        if (dev) {
+    	if (geneticTest) {
+    		Strategy[] strategies = new Strategy[100];
+    		for ( int i=0; i<strategies.length; i++ ) {
+    			strategies[i] = new Strategy();
+    		}
+    		TestStrategies test = new TestStrategies();
+    		test.test(strategies);
+		} else if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
            // casino.setNumberOfGames((int) (Math.random() * 100000));
             casino.setNumberOfGames(1000);
