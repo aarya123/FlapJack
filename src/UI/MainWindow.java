@@ -49,7 +49,8 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     public static void main(String[] args) {
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
-            casino.setNumberOfGames((int) (Math.random() * 100000));
+           // casino.setNumberOfGames((int) (Math.random() * 100000));
+            casino.setNumberOfGames(1000);
             new Simulator(casino);
         } else {
             new MainWindow();
