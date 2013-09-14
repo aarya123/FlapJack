@@ -95,4 +95,9 @@ public class Session {
     public double getGameWonPercentage() {
         return numberOfWonGame * 100.0 / casino.getNumberOfGames();
     }
+    
+    public double getEv() {
+    	return getTotalProfit()/getTotalWage();
+    }
+
 }

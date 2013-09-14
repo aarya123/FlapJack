@@ -11,6 +11,7 @@ public class Strategy {
       this.hotnessMap = randomHotnessMap();
     }
 
+
     public Strategy(double[] hotnessMap) {
       this.hotnessMap = hotnessMap;
     }
