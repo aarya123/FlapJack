@@ -6,37 +6,39 @@ package Engine;
  * Time: 3:00 PM
  */
 public class Card {
-    private int value;
+    private String rank;
 
-    public Card(int value) {
-        this.value = value;
+    public Card(String rank) {
+    	this.rank = rank;
     }
 
-    public int getValue() {
-        return value;
+    public int[] getValues() {
+    	switch (rank) {
+    		case "A":
+    			return new int[] { 1, 11 };
+    		case "J":
+    			return new int[] { 10 };
+    		case "Q":
+    			return new int[] { 10 };
+    		case "K":
+    			return new int[] { 10 };
+    		default:
+    			return new int[] { Integer.parseInt(rank) };
+    	}
     }
 
     public String toString() {
-        switch (value) {
-            case 1:
+        switch (rank) {
+            case "A":
                 return "Ace";
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                return value + "";
-            case 11:
+            case "J":
                 return "Jack";
-            case 12:
+            case "Q":
                 return "Queen";
-            case 13:
+            case "K":
                 return "King";
+            default:
+            	return rank;
         }
-        return "";
     }
 }
