@@ -65,7 +65,13 @@ public class Game {
 	//double getAmountWagered()
 	//double getProfit()
 	ArrayList<Card> removeTopNCards(int numberCards) {
-		return new ArrayList<Card>();
+		topCards = new ArrayList<Card>();
+
+		for(i = 0; i < numberCards; i++) {
+			topCards.add(shoe.removeTopCard);
+		}
+
+		return topCards;
 	}
 	
 	void completeDealerHand(Hand dealerVisibleHand, Card dealerHiddenCard) {
