@@ -114,11 +114,11 @@ public class Game {
     boolean reachedN(Hand hand, int n) {
         int[] values = hand.getValues();
         int total = 0;
-        
+
         for (int x : values) {
-        	total += x;
+            total += x;
         }
-        
+
         return total >= n;
     }
 
