@@ -59,6 +59,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     			strategies[i] = new Strategy();
     		}
     		TestStrategies test = new TestStrategies();
+    		System.out.println("Testing...");
     		test.test(strategies);
 		} else if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);

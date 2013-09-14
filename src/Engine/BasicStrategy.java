@@ -57,7 +57,7 @@ public class BasicStrategy {
       return 20;
     
     // Doubles
-  	} else if(cards.size() == 2 && cards.get(0).getRank() == cards.get(1).getRank()) {
+  	} else if(cards.size() == 2 && cards.get(0).getRank().equals(cards.get(1).getRank())) {
       if(Arrays.equals(playerHand.getValues(), new int[] {4}))
         return 21;
       else if(Arrays.equals(playerHand.getValues(), new int[] {6}))
@@ -77,7 +77,7 @@ public class BasicStrategy {
       else
     	return 0;
     } else {
-    	return Math.min(playerHand.getValues()[0], 17) - 5;
+    	return Math.abs(Math.min(playerHand.getValues()[0], 17) - 5);
     }
   }
 
