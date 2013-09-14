@@ -13,11 +13,62 @@ public class BasicStrategy {
   }
 
   public int getPlayerIndex(Hand playerHand) {
+    // A, A
+    if(playerHand.size() == 2 && playerHand.get(0).rank() == "A" && playerHand.get(1).rank() == "A")
+      return 30;
 
+    // T, T
+    else if(Array.equals(playerHand.getValues(), new int[] {20}
+      return 29;
+
+    // A + something
+    else if(Array.equals(playerHand.getValues(), new int[] {3, 13}) // A, 2
+      return 13;    
+    else if(Array.equals(playerHand.getValues(), new int[] {4, 14}) // A, 3
+      return 14;
+    else if(Array.equals(playerHand.getValues(), new int[] {5, 15}) // A, 4
+      return 15;
+    else if(Array.equals(playerHand.getValues(), new int[] {6, 16}) // A, 5
+      return 16;
+    else if(Array.equals(playerHand.getValues(), new int[] {7, 17}) // A, 6
+      return 17;
+    else if(Aray.equals(playerHand.getValues(), new int[] {8, 18}) // A, 7
+      return 18;
+    else if(Array.equals(playerHand.getValues(), new int[] {9, 19}) // A, 8
+      return 19;
+    else if(Array.equals(playerHand.getValues(), new int[] {10, 20)} // A, 9
+      return 20;
+    
+    // Doubles
+    else if(playerHand.size() == 2 && playerHand.get(0).rank() == playerHand.get(1).rank()) {
+      if(Array.equals(playerHand.getValues(), new int[] {4})
+        return 21;
+      else if(Array.equals(playerHand.getValues(), new int[] {6})
+        return 22;
+      else if(Array.equals(playerHand.getValues(), new int[] {8})
+        return 23;
+      else if(Array.equals(playerHand.getValues(), new int[] {10})
+        return 24;
+      else if(Array.equals(playerHand.getValues(), new int[] {12})
+        return 25;
+      else if(Array.equals(playerHand.getValues(), new int[] {14})
+        return 26;
+      else if(Array.equals(playerHand.getValues(), new int[] {16})
+        return 27;
+      else if(Array.equals(playerHand.getValues(), new int[] {18})
+        return 28;
+    }
+
+    else {
+      return Integer.parseInt(playerHand.getValues().get(0)) - 5;
+    }
   }
 
   public int getDealerIndex(Card dealerCard) {
-    
+    if(dealerCard.rank() == "A")
+      return 9;
+    else
+      return Integer.parseInt(dealerCard.rank()) - 2;
   }
 
   public static String moveInTable(playerIndex, dealerIndex) {
