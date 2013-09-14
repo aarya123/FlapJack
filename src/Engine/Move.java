@@ -1,5 +1,5 @@
 package Engine;
 
 public enum Move {
-    STAND, HIT
+    S, P, H, DD
 }
