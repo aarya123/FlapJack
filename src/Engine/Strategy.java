@@ -4,8 +4,8 @@ public class Strategy {
 
     Hand hand;
 
-    Move getNextMove() {
-        return Move.S;
+    String getNextMove() {
+        return "S";
     }
 
     int getHottnessForCard(Card card) {
