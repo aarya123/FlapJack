@@ -25,7 +25,10 @@ public class Strategy {
     }
 
     double getBetMultiplier(double hotness) {
-       return hotness;
+    	if(hotness <= 0) {
+    		return Math.pow(10, hotness);
+    	}
+       return Math.log(hotness);
     }
 
     // Randomizer functions
