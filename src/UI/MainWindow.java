@@ -42,6 +42,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JLabel eightValue;
     private JLabel nineValue;
     private JLabel faceValue;
+    private JLabel profitPerWaged;
 
     MainWindow() {
         frame = new JFrame("FlapJack");
@@ -70,6 +71,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         totWage.setText("$" + session.getTotalWage());
         numGamesCount.setText(String.valueOf(session.getCasino().getNumberOfGames()));
         graph.setPoints(session.getCumProfit());
+        profitPerWaged.setText("$"+String.format("%.2f",session.getTotalProfit()/session.getTotalWage()));
         Strategy s = session.getStrategy();
         aceValue.setText("A: "+s.getHottnessForCard(new Card("A")));
         twoValue.setText("2: "+s.getHottnessForCard(new Card("2")));
