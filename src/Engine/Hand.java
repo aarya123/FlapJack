@@ -68,7 +68,8 @@ public class Hand {
 
     // returns true if hand is A, 10/J/Q/K
     public boolean blackjack() {
-        return getValues == [11, 21]
+    	int[] blackjack = new int[] { 11, 10 };
+        return Arrays.equals( getValues(), blackjack );
     }
 
    public Hand[] split(Shoe shoe) {
