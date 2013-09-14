@@ -151,10 +151,14 @@ public class Game {
                 break;
             } else if (move == "D") {
             	setActualAmountWagered(actualAmountWagered*2);
+            	playerHand.addCard(shoe.removeTopCard());
+            	break;
             } else if (move == "P") {
                 break; // TODO: implement
             } else if (move == "H") {
                 playerHand.addCard(shoe.removeTopCard());
+            } else {
+            	break;
             }
         }
 

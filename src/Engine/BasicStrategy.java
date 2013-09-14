@@ -71,7 +71,7 @@ public class BasicStrategy {
     if(dealerCard.getRank() == "A")
       return 9;
     else
-      return Integer.parseInt(dealerCard.getRank()) - 2;
+      return dealerCard.getValues()[0] - 2;
   }
 
   public static String moveInTable(int playerIndex, int dealerIndex) {
