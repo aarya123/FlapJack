@@ -26,13 +26,13 @@ public class Graph extends JPanel {
 
     private void plot() {
         removeAll();
-        XYSeries series = new XYSeries("Win");
+        XYSeries series = new XYSeries("Profit");
         for (int i = 0; i < points.length; i++) {
-            series.add(1.0 * i, points[i]);
+            series.add(1.0 * (i + 1), points[i]);
         }
 
         XYSeriesCollection dataset = new XYSeriesCollection(series);
-        JFreeChart jFreeChart = ChartFactory.createXYLineChart("Chart", "#Games", "Expected win", dataset);
+        JFreeChart jFreeChart = ChartFactory.createXYLineChart("#Games vs Profit", "#Games", "Profit", dataset);
 
         chartPanel = new ChartPanel(jFreeChart);
         add(chartPanel);

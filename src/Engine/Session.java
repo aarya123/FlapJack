@@ -70,7 +70,7 @@ public class Session {
         for (int i = 0; i < casino.getNumberOfGames(); i++) {
             totalProfit += games[i].getProfit();
             totalWage += games[i].getActualAmountWagered();
-            cumProfit[i] = totalWage;
+            cumProfit[i] = totalProfit;
             numberOfWonGame += totalProfit > 0 ? 1 : 0;
         }
         Simulator.finished(this);
