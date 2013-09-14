@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Time: 3:05 PM
  */
 public class MainWindow implements ItemListener, ActionListener, ChangeListener {
-    static Boolean dev = true;
+    static Boolean dev = false;
     JFrame frame;
     ArrayList<Casino> casinos;
     private JPanel mainWindow;
@@ -87,6 +87,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         nineValue.setText("9: "+s.getHottnessForCard(new Card("9")));
         faceValue.setText("F: "+s.getHottnessForCard(new Card("J")));
         System.out.println(session.getExpectedValue());
+        //System.out.println(session.)
         frame.pack();
     }
 
@@ -99,7 +100,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
 
     private void initCasinos() {
         casinos = new ArrayList<Casino>();
-        casinos.add(new Casino("Bellagio", 1.5, 6, true, true, true));
+        casinos.add(new Casino("Bellagio", 1.0, 6, true, true, true));
         casinos.add(new Casino("Caesar's Palace", 1.5, 2, true, false, false));
         casinos.add(new Casino("MGM Grand", 1, 6, false, true, true));
         for (Casino casino : casinos)

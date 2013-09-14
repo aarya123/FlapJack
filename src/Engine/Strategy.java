@@ -9,6 +9,9 @@ public class Strategy {
 
     // bettingFunction is an array of length 5; 
 
+    public Strategy() {
+    }
+
     public Strategy(HashMap<String, Double> hotnessMap, HashMap<String, Double> bettingMap) {
     	this.hotnessMap = hotnessMap;
     	this.bettingMap = bettingMap;
@@ -17,23 +20,40 @@ public class Strategy {
     public Strategy(String strategy_type) {
 
         System.out.println(strategy_type);
-
         hotnessMap = new HashMap<String, Double>();
 
-
-        hotnessMap.put("A", -1.387353121876059);
-        hotnessMap.put("2", 1.3991418283387418);
-        hotnessMap.put("3", 1.4419554967488624);
-        hotnessMap.put("4", 0.9262547816175997);
-        hotnessMap.put("5", 2.4310899208072367);
-        hotnessMap.put("6", 1.8317592836755148);
-        hotnessMap.put("7", 1.05583117235636);
-        hotnessMap.put("8", -0.8666335213289367);
-        hotnessMap.put("9", -0.2269910738790346);
-        hotnessMap.put("10", -0.2786954112602915);
-        hotnessMap.put("J", -1.670498922712762);
-        hotnessMap.put("Q", -1.80255657253995);
-        hotnessMap.put("K", -0.6468274622179151);
+        if(strategy_type.equalsIgnoreCase("Basic Strategy"))
+            hotnessMap = null;
+        else if(strategy_type.equalsIgnoreCase("Counting Strategy"))
+        {
+            hotnessMap.put("A", -1.0);
+            hotnessMap.put("2", 1.0);
+            hotnessMap.put("3", 1.0);
+            hotnessMap.put("4", 1.0);
+            hotnessMap.put("5", 1.0);
+            hotnessMap.put("6", 1.0);
+            hotnessMap.put("7", 0.0);
+            hotnessMap.put("8", 0.0);
+            hotnessMap.put("9", 0.0);
+            hotnessMap.put("10", -1.0);
+            hotnessMap.put("J", -1.0);
+            hotnessMap.put("Q", -1.0);
+            hotnessMap.put("K", -1.0);
+        } else {
+            hotnessMap.put("A", -0.8862665461377872);
+            hotnessMap.put("2", 0.8754767395547716);
+            hotnessMap.put("3", 1.1280118609466179);
+            hotnessMap.put("4", -0.2748576476997078);
+            hotnessMap.put("5", 0.6847146657102476);
+            hotnessMap.put("6", 2.886921398580731);
+            hotnessMap.put("7", 0.7549035038876444);
+            hotnessMap.put("8", -1.2861682790598536);
+            hotnessMap.put("9", 1.0659929347268373);
+            hotnessMap.put("10", -0.5759288761044206);
+            hotnessMap.put("J", -1.9197111838717347);
+            hotnessMap.put("Q", -1.4491997383971356);
+            hotnessMap.put("K", 1.3426116475470553);
+        }
 
         /*
         for (int i = 1; i < 14; i++) {
@@ -79,17 +99,20 @@ public class Strategy {
 
     public double getHottnessForCard(Card card) {
     	if (hotnessMap == null)
-    		return 1;
+    		return 0;
     	else
     		return hotnessMap.get(card.getRank());
     }
 
     double getBetMultiplier(double hotness) {    	
-      if (hotness < 0)
+      if (hotness <= 0)
         return 1;
       else
       {
-        return hotness;
+          if (hotness != 1)
+              System.out.println("Hotness not 1 bitch " + hotness);
+
+          return hotness;
       }
     }
 }

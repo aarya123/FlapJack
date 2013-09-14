@@ -7,7 +7,7 @@ public class testStrategy extends Strategy {
 	ArrayList<String> moves;
 	Iterator<String> movesIterator;
 	public testStrategy(ArrayList<String> moves) {
-		this.moves = moves;
+        this.moves = moves;
 		movesIterator = this.moves.iterator();
 	}
 	

@@ -82,6 +82,10 @@ public class Game {
             results = "true";
         else if (playerValue < dealerValue)
             results = "false";
+        else if (playerHand.twentyOne() && !playerHand.blackjack() && dealerHand.blackjack())
+            results = "false";
+        else if (dealerHand.twentyOne() && !dealerHand.blackjack() && playerHand.blackjack())
+            results = "true";
 
         return results;
     }
@@ -96,8 +100,10 @@ public class Game {
             } else {
                 profit = playerHand.getAmountWagered();
             }
+        } else if (won.equals("tie")) {
+            return 0;
         } else {
-            //tie or loss
+            //loss
             profit = (-1) * playerHand.getAmountWagered();
         }
         
