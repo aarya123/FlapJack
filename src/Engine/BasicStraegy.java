@@ -92,7 +92,7 @@ public class BasicStrategy {
         {"H", "H", "D", "D", "D", "H", "H", "H", "H", "H"}, // A,4
         {"H", "H", "D", "D", "D", "H", "H", "H", "H", "H"}, // A,5
         {"H", "D", "D", "D", "D", "H", "H", "H", "H", "H"}, // A,6
-        {"S", "DS", "DS", "DS", "DS", "S", "S", "H", "H", "H"}, // A,7
+        {"S", "D", "D", "D", "D", "S", "S", "H", "H", "H"}, // A,7
         {"S", "S", "S", "S", "S", "S", "S", "S", "S", "S"}, // A,8
         {"S", "S", "S", "S", "S", "S", "S", "S", "S", "S"}, // A,9
         {"P", "P", "P", "P", "P", "P", "H", "H", "H", "H"}, // 2,2
@@ -130,7 +130,7 @@ A,3 H H H D D H H H H H
 A,4 H H D D D H H H H H
 A,5 H H D D D H H H H H
 A,6 H D D D D H H H H H
-A,7 S DS  DS  DS  DS  S S H H H
+A,7 S D  D  D  D  S S H H H
 A,8 S S S S S S S S S S
 A,9 S S S S S S S S S S
 2,2 P P P P P P H H H H
