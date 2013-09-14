@@ -26,6 +26,7 @@ public class Strategy {
     }
 
 
+
     double getBetMultiplier(double hotness) {
         return 1;
     }
