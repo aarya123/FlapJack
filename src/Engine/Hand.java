@@ -12,6 +12,15 @@ public class Hand {
         this.cards = cards;
     }
 
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        for (Card card : cards) {
+            buffer.append(card);
+            buffer.append(" ");
+        }
+        return buffer.toString().trim();
+    }
+
     // Called when player wants to hit
     public void addCard(Card card) {
         cards.add(card);
@@ -68,6 +77,17 @@ public class Hand {
     public boolean blackjack() {
         int[] blackjack = new int[]{10, 11};
         return Arrays.equals(getValues(), blackjack);
+    }
+
+    boolean isBusted() {
+        boolean busted = true;
+        int[] values = getValues();
+        for (int x : values) {
+            if (x <= 21) {
+                busted = false;
+            }
+        }
+        return busted;
     }
 
     public Hand[] split(Shoe shoe) {
