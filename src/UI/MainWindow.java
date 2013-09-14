@@ -19,9 +19,8 @@ import java.util.ArrayList;
  * Time: 3:05 PM
  */
 public class MainWindow implements ItemListener, ActionListener, ChangeListener {
-    static Boolean dev = true;
-    static JFrame frame;
-    static MainWindow ui;
+    static Boolean dev = false;
+    JFrame frame;
     ArrayList<Casino> casinos;
     private JPanel mainWindow;
     private JComboBox casinoList;
@@ -34,23 +33,22 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     public static void main(String[] args) {
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
-            casino.setNumberOfGames(1);
+            casino.setNumberOfGames(10);
             new Simulator(casino);
         } else {
-            initUI();
+            new MainWindow();
         }
     }
 
-    public static void initUI() {
+    MainWindow() {
         frame = new JFrame("FlapJack");
-        ui = new MainWindow();
-        frame.setContentPane(ui.mainWindow);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(mainWindow);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        ui.initListeners();
-        ui.initCasinos();
-        ui.numGames.setValue(1);
+        initListeners();
+        initCasinos();
+        numGames.setValue(1);
     }
 
     private void initListeners() {

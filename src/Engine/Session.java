@@ -6,7 +6,6 @@ public class Session {
     Strategy strategy;
     Shoe shoe;
     Game[] games;
-    final int numberOfGames = 5000;
 
     double totalProfit;
     double finalPnl;
@@ -29,12 +28,12 @@ public class Session {
         gameWonPercentage = 0.0;
         numberOfWonGame = 0;
 
-        games = new Game[numberOfGames];
+        games = new Game[casino.getNumberOfGames()];
         solve();
     }
 
     public void playGames() {
-        for (int i = 0; i < numberOfGames; i++) {
+        for (int i = 0; i < casino.getNumberOfGames(); i++) {
             games[i] = new Game(strategy, casino, shoe, 10);
             games[i].play();
             System.out.println(games[i].getProfit());
@@ -92,6 +91,6 @@ public class Session {
 
 
     public double getGameWonPercentage() {
-        return numberOfWonGame * 100.0 / numberOfGames;
+        return numberOfWonGame * 100.0 / casino.getNumberOfGames();
     }
 }

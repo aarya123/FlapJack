@@ -1,6 +1,7 @@
 package Engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * User: AnubhawArya
@@ -22,8 +23,7 @@ public class Shoe {
 
     public void shuffle() {
         initDeck();
-        long seed = System.nanoTime();
-        deck = Collections.shuffle(deck, new Random(seed));
+        Collections.shuffle(deck);
     }
 
     private void initDeck() {
