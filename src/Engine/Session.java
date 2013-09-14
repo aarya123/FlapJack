@@ -35,7 +35,7 @@ public class Session {
 
     public void playGames() {
         for (int i = 0; i < numberOfGames; i++) {
-            games[i] = new Game(strategy, casino, shoe);
+            games[i] = new Game(strategy, casino, shoe, 10);
             games[i].play();
         }
     }
