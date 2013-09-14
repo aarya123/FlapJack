@@ -29,7 +29,21 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JButton goButton;
     private JSpinner numGames;
     private JLabel bjMultiplier;
+    private JLabel numWon;
+    private JLabel totWage;
+    private JLabel profit;
     private Graph graph;
+
+    MainWindow() {
+        frame = new JFrame("FlapJack");
+        frame.setContentPane(mainWindow);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        initListeners();
+        initCasinos();
+        numGames.setValue(1);
+    }
 
     public static void main(String[] args) {
         if (dev) {
@@ -41,15 +55,15 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         }
     }
 
-    MainWindow() {
-        frame = new JFrame("FlapJack");
-        frame.setContentPane(mainWindow);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    public void simulateSession(Session session) {
+        profit.setText("$" + session.getTotalProfit());
+        numWon.setText(session.getGameWonPercentage() + "%");
+        totWage.setText("$" + session.getTotalWage());
+        double cacat[] = session.getCumProfit();
+        for (int i = 0; i < cacat.length; i++)
+            System.out.println(cacat[i]);
+        graph.setPoints(session.getCumProfit());
         frame.pack();
-        frame.setVisible(true);
-        initListeners();
-        initCasinos();
-        numGames.setValue(1);
     }
 
     private void initListeners() {
@@ -92,7 +106,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
             for (Casino casino : casinos)
                 if (casinoList.getSelectedItem().equals(casino.getName())) {
                     casino.setNumberOfGames((Integer) numGames.getValue());
-                    new Simulator(casino);
+                    new Simulator(casino, this);
                 }
     }
 
@@ -102,10 +116,6 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
                 numGames.setValue(1);
         frame.pack();
     }
-
-    public static void simulateSession(Session session) {
-        //TODO: Take session and display crap
-	}
 
     public void createUIComponents() {
         graph = new Graph(new double[0]);

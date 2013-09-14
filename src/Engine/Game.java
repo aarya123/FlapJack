@@ -18,6 +18,10 @@ public class Game {
         this.actualAmountWagered = initialAmountWagered;
     }
 
+    public double getActualAmountWagered() {
+        return actualAmountWagered;
+    }
+
     double getInitialAmountWagered() {
         return initialAmountWagered;
     }

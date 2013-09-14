@@ -19,9 +19,9 @@ public class Shoe {
         this.strategy = strategy;
         shuffle();
     }
-    
+
     public int size() {
-    	return deck.size();
+        return deck.size();
     }
 
     public int getHottness() {
