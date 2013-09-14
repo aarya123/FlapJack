@@ -87,7 +87,7 @@ public class Hand {
         return Arrays.equals(getValues(), blackjack);
     }
 
-    boolean isBusted() {
+    public boolean isBusted() {
         boolean busted = true;
         int[] values = getValues();
         for (int x : values) {

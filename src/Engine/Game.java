@@ -133,7 +133,6 @@ public class Game {
 
     public void play() {
 
-        String won = "false";
         String won;
         String move;
         Hand dealerHand = new Hand(new ArrayList<Card>());
@@ -154,7 +153,7 @@ public class Game {
             	setActualAmountWagered(actualAmountWagered*2);
             } else if (move == "P") {
                 break; // TODO: implement
-            else if (move == "H") {
+            } else if (move == "H") {
                 playerHand.addCard(shoe.removeTopCard());
             }
         }
