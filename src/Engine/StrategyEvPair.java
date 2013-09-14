@@ -6,8 +6,8 @@ public class StrategyEvPair {
 	public double ev;
 
 	public StrategyEvPair(Strategy strategy, double ev){
-		strategy = strategy;
-		ev = ev;
+		this.strategy = strategy;
+		this.ev = ev;
 	}
 
 } 

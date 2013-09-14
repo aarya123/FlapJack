@@ -22,7 +22,7 @@ public class TestStrategies {
 //			best100strategies[i] = best100pairs[i].strategy;
 //		}
 		
-		StrategyEvPair[] best10pairs = testNTimes(strategies, 1);
+		StrategyEvPair[] best10pairs = testNTimes(strategies, 2);
 		for(int i=0; i<10; i++) {
 			System.out.println("EV: " + best10pairs[i].ev);
 		}
@@ -49,6 +49,7 @@ public class TestStrategies {
 				bestStrategies[j] = strategies[entry.getValue()];
 				//System.out.println("Strategy: " + Arrays.toString(bestStrategies[j].getHotnessMap()));
 				bestEvs[j] = entry.getKey();
+				System.out.println("bestEvs[j]: " + bestEvs[j]);
 				bestPairs[j] = new StrategyEvPair(bestStrategies[j], bestEvs[j]);
 			}
 			
