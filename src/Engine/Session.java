@@ -71,7 +71,7 @@ public class Session {
             totalProfit += games[i].getProfit();
             totalWage += games[i].getActualAmountWagered();
             cumProfit[i] = totalProfit;
-            numberOfWonGame += totalProfit > 0 ? 1 : 0;
+            numberOfWonGame += ((games[i].getProfit() > 0) ? 1 : 0);
         }
         Simulator.finished(this);
     }
