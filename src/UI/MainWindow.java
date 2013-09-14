@@ -1,8 +1,6 @@
 package UI;
 
-import Engine.Casino;
-import Engine.Session;
-import Engine.Simulator;
+import Engine.*;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -34,6 +32,16 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JLabel profit;
     private Graph graph;
     private JLabel numGamesCount;
+    private JLabel aceValue;
+    private JLabel twoValue;
+    private JLabel threeValue;
+    private JLabel fourValue;
+    private JLabel fiveValue;
+    private JLabel sixValue;
+    private JLabel sevenValue;
+    private JLabel eightValue;
+    private JLabel nineValue;
+    private JLabel faceValue;
 
     MainWindow() {
         frame = new JFrame("FlapJack");
@@ -49,8 +57,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     public static void main(String[] args) {
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
-            //casino.setNumberOfGames((int) (Math.random() * 1000));
-            casino.setNumberOfGames(1000);
+            casino.setNumberOfGames(1000000);
             new Simulator(casino);
         } else {
             new MainWindow();
@@ -63,6 +70,17 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         totWage.setText("$" + session.getTotalWage());
         numGamesCount.setText(String.valueOf(session.getCasino().getNumberOfGames()));
         graph.setPoints(session.getCumProfit());
+        Strategy s = session.getStrategy();
+        aceValue.setText("A: "+s.getHottnessForCard(new Card("A")));
+        twoValue.setText("2: "+s.getHottnessForCard(new Card("2")));
+        threeValue.setText("3: "+s.getHottnessForCard(new Card("3")));
+        fourValue.setText("4: "+s.getHottnessForCard(new Card("4")));
+        fiveValue.setText("5: "+s.getHottnessForCard(new Card("5")));
+        sixValue.setText("6: "+s.getHottnessForCard(new Card("6")));
+        sevenValue.setText("7: "+s.getHottnessForCard(new Card("7")));
+        eightValue.setText("8: "+s.getHottnessForCard(new Card("8")));
+        nineValue.setText("9: "+s.getHottnessForCard(new Card("9")));
+        faceValue.setText("F: "+s.getHottnessForCard(new Card("J")));
         frame.pack();
     }
 

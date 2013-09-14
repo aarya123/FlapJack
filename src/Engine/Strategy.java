@@ -23,10 +23,9 @@ public class Strategy {
         }
     }
 
-    double getHottnessForCard(Card card) {
-        //return hotnessMap.get(card.getRank());
-    	return 0;
-    }
+    public double getHottnessForCard(Card card) {
+        return hotnessMap.get(card.getRank());
+    	}
 
 
 
