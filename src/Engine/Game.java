@@ -55,7 +55,7 @@ public class Game {
         // set best case dealer hand
         int[] dealerValueArray = dealerHand.getValues();
         if (dealerValueArray.length == 2)
-            dealerValue = getBetterHand(playerValueArray[0], playerValueArray[1]);
+            dealerValue = getBetterHand(dealerValueArray[0], dealerValueArray[1]);
         else
             dealerValue = dealerValueArray[0];
 
