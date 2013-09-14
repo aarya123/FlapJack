@@ -59,7 +59,7 @@ public class Hand {
 
     // returns true if hand is soft 17
     public boolean softSeventeen() {
-
+        return getValues == [7, 17]
     }
 
    public Hand split(Shoe shoe) {
