@@ -13,7 +13,6 @@ public class Casino {
 	public double getBlackjackMultiplier() {
 		return 1.5;
 	}
-}
 
     private int numberOfDecks;
     private boolean hitOnSoft17s, doubleAfterSplit, resplitAfterAce;

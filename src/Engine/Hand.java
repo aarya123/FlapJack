@@ -1,6 +1,7 @@
 package Engine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Hand {
@@ -62,7 +63,7 @@ public class Hand {
     // returns true if hand is soft 17
     public boolean softSeventeen() {
     	int[] softSeventeen = new int[] { 7, 17 };
-        return getValues().equals(softSeventeen);
+    	return Arrays.equals( getValues(), softSeventeen );
     }
 
     // returns true if hand is A, 10/J/Q/K
