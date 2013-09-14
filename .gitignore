@@ -26,4 +26,4 @@ project.properties
 
 #IntelliJ Files
 *.iml
-.project/
+.idea/
