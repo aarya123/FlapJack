@@ -4,5 +4,9 @@ public class Strategy {
 	Move getNextMove() {
 		return Move.STAND;
 	}
+
+  int getHottnessForCard() {
+    return 0;
+  }
 	
 }

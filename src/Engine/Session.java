@@ -19,7 +19,7 @@ public class Session {
     public Session(Casino casino, Strategy strategy, Shoe shoe) {
         this.casino = casino;
         this.strategy = strategy;
-        this.shoe = shoe;
+        this.shoe = shoe(7, strategy);
 
         totalProfit = 0.0;
         finalPnl = 0.0;
