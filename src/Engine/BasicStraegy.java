@@ -20,6 +20,7 @@ public class BasicStrategy {
     // T, T
     else if(Array.equals(playerHand.getValues(), new int[] {20}
       return 29;
+      
 
     // A + something
     else if(Array.equals(playerHand.getValues(), new int[] {3, 13}) // A, 2
