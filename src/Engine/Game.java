@@ -114,6 +114,9 @@ public class Game {
 		return reached;
 	}
 	
+	// TODO: use strategy
+	// TODO: ensure getNextMove() returns basic strategy move
+	// TODO: splitting and double down
 	public void play() {
 		boolean playing = true;
 		String won = "false";
@@ -124,7 +127,7 @@ public class Game {
 
 		dealerHiddenCard = distributeCards(dealerVisibleHand, playerHand);
 		while (playing) {
-			move = strategy.getNextMove();
+			move = getNextMove();
 			if (move == Move.STAND) {
 				break;
 			} 

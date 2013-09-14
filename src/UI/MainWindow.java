@@ -1,9 +1,12 @@
 package UI;
 
 import Engine.Casino;
-import Engine.UIListener;
+import Engine.Session;
+import Engine.Simulator;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -15,15 +18,17 @@ import java.util.ArrayList;
  * Date: 9/13/13
  * Time: 3:05 PM
  */
-public class MainWindow implements ItemListener, ActionListener {
+public class MainWindow implements ItemListener, ActionListener, ChangeListener {
     static JFrame frame;
+    static MainWindow ui;
+    ArrayList<Casino> casinos;
     private JPanel mainWindow;
     private JComboBox casinoList;
     private JLabel numDecks;
     private JCheckBox soft17s, doubleSplitting, resplitAces;
     private JButton goButton;
-    ArrayList<Casino> casinos;
-    static MainWindow ui;
+    private JSpinner numGames;
+    private JLabel bjMultiplier;
 
     public static void main(String[] args) {
         frame = new JFrame("FlapJack");
@@ -38,31 +43,35 @@ public class MainWindow implements ItemListener, ActionListener {
     private void initUI() {
         initListeners();
         initCasinos();
+        numGames.setValue(1);
     }
 
     private void initListeners() {
         goButton.addActionListener(this);
         casinoList.addItemListener(this);
+        numGames.addChangeListener(this);
     }
 
     private void initCasinos() {
         casinos = new ArrayList<Casino>();
-        casinos.add(new Casino("Bellagio", 6, true, true, true));
-        casinos.add(new Casino("Caesar's Palace", 2, true, false, false));
-        casinos.add(new Casino("MGM Grand", 6, false, true, true));
+        casinos.add(new Casino("Bellagio", 1.5, 6, true, true, true));
+        casinos.add(new Casino("Caesar's Palace", 1.5, 2, true, false, false));
+        casinos.add(new Casino("MGM Grand", 1.5, 6, false, true, true));
         for (Casino casino : casinos)
             casinoList.addItem(casino.getName());
         setLabels((String) casinoList.getSelectedItem());
     }
 
     public void itemStateChanged(ItemEvent itemEvent) {
-        setLabels((String) itemEvent.getItem());
+        if (itemEvent.getSource() == casinoList)
+            setLabels((String) casinoList.getSelectedItem());
     }
 
     public void setLabels(String val) {
         for (Casino casino : casinos) {
             if (val.equals(casino.getName())) {
                 numDecks.setText(String.valueOf(casino.getNumberOfDecks()));
+                bjMultiplier.setText(String.valueOf(casino.getBlackjackPayoutMultiple()));
                 soft17s.setSelected(casino.isHitOnSoft17s());
                 doubleSplitting.setSelected(casino.isDoubleAfterSplit());
                 resplitAces.setSelected(casino.isResplitAfterAce());
@@ -75,7 +84,20 @@ public class MainWindow implements ItemListener, ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == goButton)
             for (Casino casino : casinos)
-                if (casinoList.getSelectedItem().equals(casino.getName()))
-                    UIListener.setCasino(casino);
+                if (casinoList.getSelectedItem().equals(casino.getName())) {
+                    casino.setNumberOfGames((Integer) numGames.getValue());
+                    new Simulator(casino);
+                }
+    }
+
+    public void stateChanged(ChangeEvent changeEvent) {
+        if (changeEvent.getSource() == numGames)
+            if ((Integer) numGames.getValue() < 1)
+                numGames.setValue(1);
+        frame.pack();
+    }
+
+    public static void simulateSession(Session session) {
+        //TODO: Take session and display crap
     }
 }
