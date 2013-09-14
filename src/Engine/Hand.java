@@ -123,7 +123,7 @@ public class Hand {
     	for (Card x : cards) {
     		ranks.add(x.getRank());
     	}
-    	return (ranks.contains("A") && containsFace(ranks));
+    	return (ranks.contains("A") && containsFace(ranks) && ranks.size() == 2);
     }
     
     private boolean containsFace(ArrayList<String> ranks) {

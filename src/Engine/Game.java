@@ -106,7 +106,8 @@ public class Game {
             //loss
             profit = (-1) * playerHand.getAmountWagered();
         }
-        
+
+        //System.out.println("Profit = " + profit);
         return profit;
     }
 
@@ -127,6 +128,7 @@ public class Game {
     }
 
     void completeDealerHand(Hand dealerHand, Card dealerHiddenCard) {
+        //System.out.println("Complete dealer hand");
         while (!reachedN(dealerHand, 17)) {
             hit(dealerHand);
         }
@@ -169,6 +171,8 @@ public class Game {
     	//}
     	move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
     	//move = this.strategy.nextMove();
+        //System.out.println("Move = " + move);
+
     	if (move.equals("S")) {
     		stand(playerHand);
     		//playerHand.freeze();
@@ -184,11 +188,13 @@ public class Game {
     			newHand = splitHands[1];
     			hit(newHand);
     			setActualAmountWagered(getActualAmountWagered() + newHand.getAmountWagered());
+                //System.out.println("Amount wagered for hands" + playerHand.amountWagered + " " + newHand.amountWagered);
     		}
     		hit(playerHand); //If can't split then hit.
     	} else {
     		hit(playerHand); //move was HIT
     	}
+
     	return newHand;
     }
 
@@ -216,8 +222,12 @@ public class Game {
         String won;
         for (Hand playerHand : playerHands) {
         	won = won(playerHand, dealerHand);
+            //System.out.println("Won is: " + won);
             totalProfit += calculateProfit(won, playerHand);
         }
+
+        //System.out.println("Total profit = " + totalProfit);
+        //System.out.println("Wager = " + actualAmountWagered);
         
     }
 

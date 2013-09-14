@@ -35,6 +35,8 @@ public class Session {
             double betMultiplier = strategy.getBetMultiplier(shoe.getHotness());
             double bet = standardBet * betMultiplier;
 
+            //System.out.println("Bet = " + bet);
+
             games[i] = new Game(strategy, casino, shoe, bet);
             games[i].play();
 

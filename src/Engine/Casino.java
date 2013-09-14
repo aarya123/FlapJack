@@ -26,7 +26,7 @@ public class Casino {
     }
 
     public double getBlackjackMultiplier() {
-        return 1.5;
+        return blackjackPayoutMultiple;
     }
 
     public int getNumberOfGames() {

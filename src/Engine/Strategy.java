@@ -19,7 +19,7 @@ public class Strategy {
 
     public Strategy(String strategy_type) {
 
-        System.out.println(strategy_type);
+        //System.out.println(strategy_type);
         hotnessMap = new HashMap<String, Double>();
 
         if(strategy_type.equalsIgnoreCase("Basic Strategy"))
@@ -40,19 +40,19 @@ public class Strategy {
             hotnessMap.put("Q", -1.0);
             hotnessMap.put("K", -1.0);
         } else {
-            hotnessMap.put("A", -0.8862665461377872);
-            hotnessMap.put("2", 0.8754767395547716);
-            hotnessMap.put("3", 1.1280118609466179);
-            hotnessMap.put("4", -0.2748576476997078);
-            hotnessMap.put("5", 0.6847146657102476);
-            hotnessMap.put("6", 2.886921398580731);
-            hotnessMap.put("7", 0.7549035038876444);
-            hotnessMap.put("8", -1.2861682790598536);
-            hotnessMap.put("9", 1.0659929347268373);
-            hotnessMap.put("10", -0.5759288761044206);
-            hotnessMap.put("J", -1.9197111838717347);
-            hotnessMap.put("Q", -1.4491997383971356);
-            hotnessMap.put("K", 1.3426116475470553);
+            hotnessMap.put("A", -2.1756303249843305);
+            hotnessMap.put("2", 1.471905289907332);
+            hotnessMap.put("3", 2.493300707741514);
+            hotnessMap.put("4", 1.047077213721035);
+            hotnessMap.put("5", 1.3295495093771246);
+            hotnessMap.put("6", 0.6128952100955669);
+            hotnessMap.put("7", 1.5146489202223947);
+            hotnessMap.put("8", -1.4334882339141861);
+            hotnessMap.put("9", 0.99583494590328);
+            hotnessMap.put("10", -2.8206387996600006);
+            hotnessMap.put("J", -0.20367587058540937);
+            hotnessMap.put("Q", -0.49090966940460135);
+            hotnessMap.put("K", -1.2287144995422192);
         }
 
         /*
@@ -109,8 +109,8 @@ public class Strategy {
         return 1;
       else
       {
-          if (hotness != 1)
-              System.out.println("Hotness not 1 bitch " + hotness);
+          //if (hotness != 1)
+            //  System.out.println("Hotness not 1 bitch " + hotness);
 
           return hotness;
       }
