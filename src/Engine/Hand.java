@@ -16,7 +16,7 @@ public class Hand {
         cards.add(card);
     }
     
-    public ArrayList<Card> getCards() {
+    public List<Card> getCards() {
         return cards;
     }
 
@@ -61,10 +61,11 @@ public class Hand {
 
     // returns true if hand is soft 17
     public boolean softSeventeen() {
-        return getValues == [7, 17]
+    	int[] softSeventeen = new int[] { 7, 17 };
+        return getValues().equals(softSeventeen);
     }
 
-   public Hand split(Shoe shoe) {
+   public Hand[] split(Shoe shoe) {
         // Can split only if hand has 2 cards
         if(cards.size() != 2) {
             return null;
@@ -75,8 +76,8 @@ public class Hand {
         newHands[1] = new Hand(new ArrayList<Card>());
 
         // Split cards from original hand
-        newHands[0].addCard(cards.shift());
-        newHands[1].addCard(cards.shift());
+        newHands[1].addCard(cards.remove(cards.size() - 1));
+        newHands[0].addCard(cards.remove(cards.size() - 1));
 
         // Add new cards from shoe
         newHands[0].addCard(shoe.removeTopCard());
