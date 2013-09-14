@@ -3,24 +3,21 @@ package Engine;
 public class Session {
 
     Casino casino;
-    Player player;
+    Strategy strategy;
     Shoe shoe;
     Game[] games;
-    final int numberOfGames = 5000;
-
     double totalProfit;
     double finalPnl;
     double totalWage;
     double averageProfit;
     double gameWonPercentage;
-
     int numberOfWonGame;
 
 
-    public Session(Casino casino, Player player, Shoe shoe) {
+    public Session(Casino casino, Strategy strategy, Shoe shoe) {
         this.casino = casino;
-        this.player = player;
-        this.shoe = shoe;
+        this.strategy = strategy;
+        this.shoe = shoe(7, strategy);
 
         totalProfit = 0.0;
         finalPnl = 0.0;
@@ -29,35 +26,45 @@ public class Session {
         gameWonPercentage = 0.0;
         numberOfWonGame = 0;
 
-        games = new Game[numberOfGames];
+        games = new Game[casino.getNumberOfGames()];
         solve();
     }
 
-    public Game simulate() {
-        for (int i = 0; i < numberOfGames; i++) {
-            //
+    public void playGames() {
+    	int shoeMax = shoe.size(); // full shoe size
+    	
+        for (int i = 0; i < casino.getNumberOfGames(); i++) {
+            games[i] = new Game(strategy, casino, shoe, 10);
+            games[i].play();
+            
+            // shuffle deck when less than 25% remaining
+            if ( (double) shoe.size() / (double) shoeMax <= .25 ) {
+            	 shoe.shuffle();
+            }
+            	
+            
+            System.out.println(games[i].getProfit());
         }
-        return null;
     }
 
     public Casino getCasino() {
         return casino;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public Shoe getShoe() {
-        return shoe;
-    }
-
     public void setCasino(Casino casino) {
         this.casino = casino;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public Strategy getStrategy() {
+        return strategy;
+    }
+
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public Shoe getShoe() {
+        return shoe;
     }
 
     public void setShoe(Shoe shoe) {
@@ -65,12 +72,12 @@ public class Session {
     }
 
     private void solve() {
-        for (int i = 0; i < numberOfGames; i++) {
-            finalPnl += games[i].getPnl(); //???
-            totalProfit += games[i].getProfit(); //??
-            totalWage += games[i].getWager();  //???
-            numberOfWonGame += totalProfit > 0 ? 1 : 0;
-        }
+//        for (int i = 0; i < numberOfGames; i++) {
+//            finalPnl += games[i].getPnl(); //???
+//            totalProfit += games[i].getProfit(); //??
+//            totalWage += games[i].getWager();  //???
+//            numberOfWonGame += totalProfit > 0 ? 1 : 0;
+//        }
     }
 
     public double getAverageProfit() {
@@ -89,8 +96,7 @@ public class Session {
         return totalProfit;
     }
 
-
     public double getGameWonPercentage() {
-        return numberOfWonGame * 100.0 / numberOfGames;
+        return numberOfWonGame * 100.0 / casino.getNumberOfGames();
     }
 }
