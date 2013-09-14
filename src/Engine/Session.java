@@ -33,7 +33,7 @@ public class Session {
         solve();
     }
 
-    public void simulate() {
+    public void playGames() {
         for (int i = 0; i < numberOfGames; i++) {
             games[i] = new Game(casino, strategy, shoe);
             games[i].play();
