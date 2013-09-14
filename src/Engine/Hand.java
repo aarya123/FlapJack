@@ -13,6 +13,14 @@ public class Hand {
     public void addCard(Card card) {
         cards.add(card);
     }
+    
+    public boolean softSeventeen() {
+    	return false; //TODO merge
+    }
+    public boolean blackjack() {
+    	//TODO
+    	return false;
+    }
 
     // Returns an array of length 1 or 2 containing possible values of the hand
     public int[] getValues() {

@@ -1,3 +1,5 @@
+package Engine;
+
 import java.util.ArrayList;
 
 /* Skeleton code for the Game class*/
@@ -6,47 +8,89 @@ public class Game {
 	Strategy strategy;
 	Casino casino;
 	Shoe shoe;
+	double amountWagered, profit;
 	Game(Strategy strategy, Casino casino, Shoe shoe) {
 		this.strategy = strategy;
 		this.casino = casino;
 		this.shoe = shoe;
 	}
 	
+	double getAmountWagered() {
+		return amountWagered;
+	}
+	double getProfit() {
+		return profit;
+	}
+	
 	/* Returns the dealer's hidden card after the initial deal*/
-	Card distributeCards(Hand dealerVisibleHand, Hand playerHand) {
+	Card distributeCards(Hand dealerHand, Hand playerHand) {
 		Card hidden;
 		hit(playerHand);
-		hidden = shoe.removeTopCard();
+		hidden = hit(dealerHand);
 		hit(playerHand);
-		hit(dealerVisibleHand);
+		hit(dealerHand);
 		return hidden;
 	}
 	
-	void hit(Hand hand) {
-		hand.addCard(shoe.removeTopCard());
+	Card hit(Hand hand) {
+		Card card = shoe.removeTopCard();
+		hand.addCard(card);
+		return card;
 	}
 	
-	boolean won(Hand playerHand, Hand dealerVisibleHand, Card dealerHiddenCard) {
-		// call playerHand.getValue(), dealerVisibleHand.getValue()
-		return true;
+	String won(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
+		//TODO call playerHand.getValue(), dealerVisibleHand.getValue()
+		return "true";
 	}
 	
-	//double getAmountWagered()
-	//double getProfit()
+	private void calculateProfit(String won, Hand playerHand) {
+		double blackjackMultiplier = casino.getBlackjackMultiplier();
+		if (won.equals("true")) {
+			if (playerHand.blackjack()) {
+				profit = amountWagered * blackjackMultiplier;
+			} else {
+				profit = amountWagered;
+			}
+		} else {
+			//tie or loss
+			profit = (-1) * amountWagered;
+		}
+	}
+	
 	ArrayList<Card> removeTopNCards(int numberCards) {
-		return new ArrayList<Card>();
+		ArrayList<Card> cards = new ArrayList<Card>();
+		for (int i=0; i<numberCards; i++) {
+			cards.add(shoe.removeTopCard());
+		}
+		return cards;
 	}
 	
 	void completeDealerHand(Hand dealerVisibleHand, Card dealerHiddenCard) {
-		;
+		dealerVisibleHand.addCard(dealerHiddenCard); // The dealer's hidden card becomes known.
+		while (!reachedN(dealerVisibleHand, 17)) {
+			hit(dealerVisibleHand);
+		}
+		if (dealerVisibleHand.softSeventeen()) {
+			hit(dealerVisibleHand);
+		}
+	}
+	boolean reachedN(Hand hand, int n) {
+		boolean reached  = false;
+		int[] values = hand.getValues();
+		for (int x : values) {
+			if (x >= n) {
+				reached = true;
+			}
+		}
+		return reached;
 	}
 	
-	public boolean play() {
+	public void play(Casino casino) {
 		boolean playing = true;
-		boolean won = false;
+		String won = "false";
 		Move move;
-		Hand dealerVisibleHand = new Hand(new ArrayList<Integer>());
-		Hand playerHand = new Hand(new ArrayList<Integer>());
+		Hand dealerVisibleHand = new Hand(new ArrayList<Card>());
+		Hand playerHand = new Hand(new ArrayList<Card>());
 		Card dealerHiddenCard;
 
 		dealerHiddenCard = distributeCards(dealerVisibleHand, playerHand);
@@ -60,7 +104,7 @@ public class Game {
 		
 		completeDealerHand(dealerVisibleHand, dealerHiddenCard);
 		won = won(strategy.getHand(), dealerVisibleHand, dealerHiddenCard); //check hand.handValues
-		return won;
+		calculateProfit(won, playerHand);
 	}
 	
 }
