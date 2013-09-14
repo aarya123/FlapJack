@@ -7,7 +7,7 @@ package Engine;
  */
 public class Casino {
 
-    private int numberOfDecks;
+    private int numberOfDecks, numberOfGames;
     private boolean hitOnSoft17s, doubleAfterSplit, resplitAfterAce;
     private String name;
 
@@ -17,6 +17,14 @@ public class Casino {
         this.hitOnSoft17s = hitOnSoft17s;
         this.doubleAfterSplit = doubleAfterSplit;
         this.resplitAfterAce = resplitAfterAce;
+    }
+
+    public int getNumberOfGames() {
+        return numberOfGames;
+    }
+
+    public void setNumberOfGames(int numberOfGames) {
+        this.numberOfGames = numberOfGames;
     }
 
     public String getName() {
