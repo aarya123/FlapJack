@@ -5,42 +5,46 @@ import java.util.ArrayList;
 /* Skeleton code for the Game class*/
 
 public class Game {
-	Strategy strategy;
-	Casino casino;
-	Shoe shoe;
-	double initialAmountWagered, actualAmountWagered, profit;
-	Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
-		this.strategy = strategy;
-		this.casino = casino;
-		this.shoe = shoe;
-		this.initialAmountWagered = initialAmountWagered;
-		this.actualAmountWagered = initialAmountWagered;
-	}
-	
-	void setActualAmountWagered(double value) {
-		actualAmountWagered = value;
-	}
-	
-	double getActualAmountWagered() {
-		return actualAmountWagered;
-	}
-	
-	double getInitialAmountWagered() {
-		return initialAmountWagered;
-	}
-	double getProfit() {
-		return profit;
-	}
-	
-	/* Returns the dealer's hidden card after the initial deal*/
-	Card distributeCards(Hand dealerHand, Hand playerHand) {
-		Card hidden;
-		hit(playerHand);
-		hidden = hit(dealerHand);
-		hit(playerHand);
-		hit(dealerHand);
-		return hidden;
-	}
+    Strategy strategy;
+    Casino casino;
+    Hand playerHand;
+    Shoe shoe;
+    Card dealerHiddenCard;
+    double initialAmountWagered, actualAmountWagered, profit;
+
+    Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
+        this.strategy = strategy;
+        this.casino = casino;
+        this.shoe = shoe;
+        this.initialAmountWagered = initialAmountWagered;
+        this.actualAmountWagered = initialAmountWagered;
+    }
+
+    void setActualAmountWagered(double value) {
+        actualAmountWagered = value;
+    }
+
+    double getActualAmountWagered() {
+        return actualAmountWagered;
+    }
+
+    double getInitialAmountWagered() {
+        return initialAmountWagered;
+    }
+
+    double getProfit() {
+        return profit;
+    }
+
+    /* Returns the dealer's hidden card after the initial deal*/
+    Card distributeCards(Hand dealerHand, Hand playerHand) {
+        Card hidden;
+        hit(playerHand);
+        hidden = hit(dealerHand);
+        hit(playerHand);
+        hit(dealerHand);
+        return hidden;
+    }
 
     Card hit(Hand hand) {
         Card card = shoe.removeTopCard();
@@ -136,29 +140,27 @@ public class Game {
         String won;
         String move;
         Hand dealerHand = new Hand(new ArrayList<Card>());
-        Hand playerHand = new Hand(new ArrayList<Card>());
-        Card dealerHiddenCard;
-
+        playerHand = new Hand(new ArrayList<Card>());
         dealerHiddenCard = distributeCards(dealerHand, playerHand);
-        
+
         while (true) {
-        	if (playerHand.isBusted()) {
-        		break;
-        	}
+            if (playerHand.isBusted()) {
+                break;
+            }
 
             move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
             if (move.equals("S")) {
                 break;
             } else if (move == "D") {
-            	setActualAmountWagered(actualAmountWagered*2);
-            	playerHand.addCard(shoe.removeTopCard());
-            	break;
+                setActualAmountWagered(actualAmountWagered * 2);
+                playerHand.addCard(shoe.removeTopCard());
+                break;
             } else if (move == "P") {
                 break; // TODO: implement
             } else if (move == "H") {
                 playerHand.addCard(shoe.removeTopCard());
             } else {
-            	break;
+                break;
             }
         }
 
