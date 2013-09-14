@@ -24,6 +24,9 @@ public class Hand {
         }
         return buffer.toString().trim();
     }
+    void setAmountWagered(double wager) {
+    	this.amountWagered = wager;
+    }
     double getAmountWagered() {
     	return this.amountWagered;
     }
@@ -92,7 +95,7 @@ public class Hand {
     }
     
     public boolean active() {
-    	return (!this.frozen && !this.isBusted());
+    	return (!this.frozen && !this.isBusted() && !this.twentyOne());
     }
 
     // returns true if hand is soft 17
@@ -101,10 +104,42 @@ public class Hand {
         return Arrays.equals(getValues(), softSeventeen);
     }
 
+    public boolean twentyOne() {
+    	boolean twentyOne = false;
+    	int[] values = getValues();
+    	for (int x: values) {
+    		if (x == 21) {
+    			twentyOne = true;
+    		}
+    	}
+    	return twentyOne;
+    }
+    
     // returns true if hand is A, 10/J/Q/K
     public boolean blackjack() {
-        int[] blackjack = new int[]{10, 11};
-        return Arrays.equals(getValues(), blackjack);
+        //int[] blackjack = new int[]{10, 11};
+        //return Arrays.equals(getValues(), blackjack); //TODO fix
+    	ArrayList<String> ranks = new ArrayList<String>();
+    	for (Card x : cards) {
+    		ranks.add(x.getRank());
+    	}
+    	return (ranks.contains("A") && containsFace(ranks));
+    }
+    
+    private boolean containsFace(ArrayList<String> ranks) {
+    	boolean containsFace = false;
+    	for (String r : ranks ) {
+    		if (r.equals("K")) {
+    			containsFace = true;
+    		} else if (r.equals("Q")) {
+    			containsFace = true;
+    		} else if (r.equals("J")) {
+    			containsFace = true;
+    		} else {
+    			// Not a face
+    		}
+    	}
+    	return containsFace;
     }
 
     public boolean isBusted() {
@@ -124,12 +159,13 @@ public class Hand {
             return null;
 
         Hand[] newHands = new Hand[2];
-        newHands[0] = new Hand(new ArrayList<Card>(), this.amountWagered);
+        //newHands[0] = new Hand(new ArrayList<Card>(), this.amountWagered);
         newHands[1] = new Hand(new ArrayList<Card>(), this.amountWagered);
 
         // Split cards from original hand
         newHands[1].addCard(cards.remove(cards.size() - 1));
-        newHands[0].addCard(cards.remove(cards.size() - 1));
+        //newHands[0].addCard(cards.remove(cards.size() - 1));
+        newHands[0] = this;
 
         // Add new cards from shoe
         //newHands[0].addCard(shoe.removeTopCard());

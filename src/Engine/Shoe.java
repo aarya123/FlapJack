@@ -78,8 +78,8 @@ public class Shoe {
     }
 
     public Card removeTopCard() {
-        if (deck.size() == 1)
-            shuffle();
+        //if (deck.size() == 1)
+            //shuffle();
         Card removedCard = deck.remove(deck.size() - 1);
         hotness += strategy.getHottnessForCard(removedCard);
         return removedCard;

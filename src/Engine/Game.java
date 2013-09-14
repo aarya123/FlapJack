@@ -158,15 +158,16 @@ public class Game {
     public Hand playHand(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
     	Hand newHand = null;
     	String move;
-    	if (playerHand.isBusted()) {
-    	}
+    	//if (playerHand.isBusted()) {
+    	//}
     	//move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
     	move = this.strategy.nextMove();
     	if (move.equals("S")) {
     		stand(playerHand);
     		//playerHand.freeze();
     	} else if (move.equals("D")) {
-    		setActualAmountWagered(getActualAmountWagered() * 2);
+    		setActualAmountWagered(getActualAmountWagered() + playerHand.getAmountWagered()); //reflects doubling the amount wagered for the hand.
+    		playerHand.setAmountWagered(playerHand.getAmountWagered() * 2);
     		hit(playerHand);
     		playerHand.freeze();
     	} else if (move.equals("P")) {
@@ -186,7 +187,6 @@ public class Game {
 
     public void play() {
         Hand dealerHand = new Hand(new ArrayList<Card>(), initialAmountWagered);
-        
         ArrayList<Hand> playerHands;
         playerHands = new ArrayList<Hand>();
         playerHands.add(new Hand(new ArrayList<Card>(), initialAmountWagered));
@@ -199,6 +199,7 @@ public class Game {
         			Hand newHand = playHand(playerHands.get(i), dealerHand, dealerHiddenCard);
         			if (newHand != null) {
         				playerHands.add(i+1, newHand);
+        				i++;
         			}
         		}
         	
