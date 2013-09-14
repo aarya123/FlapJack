@@ -5,7 +5,7 @@ public class Strategy {
     Hand hand;
 
     Move getNextMove() {
-        return Move.STAND;
+        return Move.S;
     }
 
     int getHottnessForCard(Card card) {

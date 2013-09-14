@@ -30,6 +30,14 @@ public class Hand {
         return cards;
     }
 
+    public boolean containsAce() {
+        for(int i=0; i<cards.size(); i++) {
+            if (cards.get(i).getRank().equals("A"))
+                return true;
+        }
+        return false;
+    }
+
     // Returns an array of length 1 or 2 containing possible values of the hand
     public int[] getValues() {
         int val0 = 0; // Hand value assuming first ace is valued at 1

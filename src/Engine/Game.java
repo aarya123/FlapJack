@@ -132,13 +132,24 @@ public class Game {
     }
 
     public void play() {
+<<<<<<< HEAD
         String won = "false";
         Move move;
+||||||| merged common ancestors
+        boolean playing = true;
+        String won;
+        Move move;
+=======
+        boolean playing = true;
+        String won;
+        String move;
+>>>>>>> 60c7f67201a0af47eaf6ebf2093f8fcb6a95273f
         Hand dealerHand = new Hand(new ArrayList<Card>());
         Hand playerHand = new Hand(new ArrayList<Card>());
         Card dealerHiddenCard;
 
         dealerHiddenCard = distributeCards(dealerHand, playerHand);
+<<<<<<< HEAD
         
         while (true) {
         	if (playerHand.isBusted()) {
@@ -146,6 +157,15 @@ public class Game {
         	}
             move = strategy.getNextMove();
             if (move == Move.STAND) {
+||||||| merged common ancestors
+        while (playing) {
+            move = strategy.getNextMove();
+            if (move == Move.STAND) {
+=======
+        while (playing) {
+            move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
+            if (move.equals("S")) {
+>>>>>>> 60c7f67201a0af47eaf6ebf2093f8fcb6a95273f
                 break;
             } else if (move == Move.DOUBLE) {
             	setActualAmountWagered(actualAmountWagered*2);
