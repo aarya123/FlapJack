@@ -76,6 +76,7 @@ public class Game {
 			//tie or loss
 			profit = (-1) * amountWagered;
 		}
+    }
 
 	
 	private int getBetterHand( int hand1, int hand2 ) {
@@ -113,7 +114,7 @@ public class Game {
 		return reached;
 	}
 	
-	public String play() {
+	public void play() {
 		boolean playing = true;
 		String won = "false";
 		Move move;

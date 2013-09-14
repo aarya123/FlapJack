@@ -1,4 +1,4 @@
-
+package Engine;
 public class Strategy {
 	Hand hand;
 	Move getNextMove() {
