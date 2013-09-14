@@ -62,8 +62,14 @@ public class Hand {
 
     // TODO
    public Hand split() {
-	   return null;
-       // return Null unless cards.size() == 2;
+        if(cards.size() != 2) {
+            return null;
+        }
+
+        Hand[] newHands = new Hand[2];
+        ArrayList<Card> cardForHand0 = new ArrayList<Card>();
+        ArrayList<Card> cardForHand1 = new ArrayList<Card>();
+        
 
    }
 }
