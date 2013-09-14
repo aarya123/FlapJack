@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class Game {
     Strategy strategy;
-    Casino casino;
-    Hand playerHand;
-    Shoe shoe;
     Card dealerHiddenCard;
-    double initialAmountWagered, actualAmountWagered, profit;
+    ArrayList<Hand> playerHands;
+    Casino casino;
+    Shoe shoe;
+    double initialAmountWagered, actualAmountWagered, totalProfit;
 
     Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
         this.strategy = strategy;
@@ -18,6 +18,7 @@ public class Game {
         this.shoe = shoe;
         this.initialAmountWagered = initialAmountWagered;
         this.actualAmountWagered = initialAmountWagered;
+        this.totalProfit = 0.0;
     }
 
     void setActualAmountWagered(double value) {
@@ -33,7 +34,7 @@ public class Game {
     }
 
     double getProfit() {
-        return profit;
+        return totalProfit;
     }
 
     /* Returns the dealer's hidden card after the initial deal*/
@@ -85,7 +86,8 @@ public class Game {
     }
 
 
-    private void calculateProfit(String won, Hand playerHand) {
+    private double calculateProfit(String won, Hand playerHand) {
+        double profit;
         double blackjackMultiplier = casino.getBlackjackMultiplier();
         if (won.equals("true")) {
             if (playerHand.blackjack()) {
@@ -97,6 +99,8 @@ public class Game {
             //tie or loss
             profit = (-1) * actualAmountWagered;
         }
+
+        return profit;
     }
 
 
@@ -135,37 +139,74 @@ public class Game {
         return reached;
     }
 
-    public void play() {
-
-        String won;
-        String move;
-        Hand dealerHand = new Hand(new ArrayList<Card>());
-        playerHand = new Hand(new ArrayList<Card>());
-        dealerHiddenCard = distributeCards(dealerHand, playerHand);
-
-        while (true) {
-            if (playerHand.isBusted()) {
-                break;
-            }
-
-            move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
-            if (move.equals("S")) {
-                break;
-            } else if (move == "D") {
-                setActualAmountWagered(actualAmountWagered * 2);
-                playerHand.addCard(shoe.removeTopCard());
-                break;
-            } else if (move == "P") {
-                break; // TODO: implement
-            } else if (move == "H") {
-                playerHand.addCard(shoe.removeTopCard());
-            } else {
-                break;
+    // returns the number of hands that are not busted
+    private int numberActiveHands(ArrayList<Hand> playerHands) {
+        int count = 0;
+        for (Hand hand : playerHands) {
+            if (hand.active()) {
+                ++count;
             }
         }
+        return count;
+    }
 
+    private void stand(Hand hand) {
+        hand.freeze();
+    }
+
+    // returns a hand if it splits, returns null otherwise
+    public Hand playHand(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
+        Hand newHand = null;
+        String move;
+        if (playerHand.isBusted()) {
+        }
+        move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
+        if (move.equals("S")) {
+            stand(playerHand);
+            //playerHand.freeze();
+        } else if (move.equals("D")) {
+            setActualAmountWagered(getActualAmountWagered() * 2);
+            hit(playerHand);
+            playerHand.freeze();
+        } else if (move.equals("P")) {
+            Hand[] splitHands = playerHand.split();
+            if (splitHands != null) {
+                playerHand = splitHands[0];
+                newHand = splitHands[1];
+                hit(newHand);
+                setActualAmountWagered(getActualAmountWagered() + newHand.getAmountWagered());
+            }
+            hit(playerHand); //If can't split then hit.
+        } else {
+            hit(playerHand); //move was HIT
+        }
+        return newHand;
+    }
+
+    public void play() {
+        Hand dealerHand = new Hand(new ArrayList<Card>(), initialAmountWagered);
+        playerHands = new ArrayList<Hand>();
+        playerHands.add(new Hand(new ArrayList<Card>(), initialAmountWagered));
+        dealerHiddenCard = distributeCards(dealerHand, playerHands.get(0));
+        while (numberActiveHands(playerHands) > 0) {
+            for (int i = 0; i < playerHands.size(); i++) {
+                if (playerHands.get(i).active()) {
+                    Hand newHand = playHand(playerHands.get(i), dealerHand, dealerHiddenCard);
+                    if (newHand != null) {
+                        playerHands.add(i + 1, newHand);
+                    }
+                }
+
+            }
+        }
         completeDealerHand(dealerHand, dealerHiddenCard);
-        won = won(playerHand, dealerHand);
-        calculateProfit(won, playerHand);
+
+
+        String won;
+        for (Hand playerHand : playerHands) {
+            won = won(playerHand, dealerHand);
+            totalProfit += calculateProfit(won, playerHand);
+        }
+
     }
 }

@@ -7,7 +7,6 @@ public class Strategy {
     static HashMap<String, Double> hotnessMap;
     static int deckHotness = 0;
 
-    // bettingFunction is an array of length 5;
     public Strategy() {
         hotnessMap = new HashMap<String, Double>();
         for (int i = 1; i < 14; i++) {
@@ -31,21 +30,25 @@ public class Strategy {
     }
 
     double getBetMultiplier(double hotness) {
-        if (deckHotness < 20)
+        if (deckHotness < 25)
             return 1;
-        else
+        else if(deckHotness<30)
             return 10;
+        else
+            return 15;
     }
 
     public static void shuffled() {
         deckHotness = 0;
     }
 
+    static int total = 0;
+
     public static void assess(Game game) {
-        for (int i = 0; i < game.playerHand.getCards().size(); i++)
-            deckHotness += hotnessMap.get(game.playerHand.getCards().get(i).getRank());
+        for (int i = 0; i < game.playerHands.size(); i++)
+            for (int j = 0; j < game.playerHands.get(i).getCards().size(); j++)
+                deckHotness += hotnessMap.get(game.playerHands.get(i).getCards().get(j).getRank());
         deckHotness += hotnessMap.get(game.dealerHiddenCard.getRank());
-        if (deckHotness > 20)
-            System.out.println(deckHotness);
+        total += deckHotness;
     }
 }
