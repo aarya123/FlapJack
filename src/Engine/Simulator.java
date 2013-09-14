@@ -13,7 +13,9 @@ public class Simulator {
 
     public Simulator(Casino casino) {
         this.casino = casino;
-        new Session(casino, new Strategy()).playGames();
+        Strategy strat = new Strategy();
+        Session sess = new Session(casino, strat);
+        sess.playGames();
     }
 
     public Simulator(Casino casino, MainWindow ui) {
@@ -30,7 +32,7 @@ public class Simulator {
             System.out.println("Total Wage: $" + session.getTotalWage());
             System.out.println("Percent Won: " + session.getGameWonPercentage() + "%");
             System.out.println("Number of Games: " + session.getCasino().getNumberOfGames());
-            System.out.println("Expected profit: " + session.getTotalProfit()/session.getTotalWage());
+            System.out.println("Expected profit: " + session.getTotalProfit() / session.getTotalWage());
         }
     }
 }

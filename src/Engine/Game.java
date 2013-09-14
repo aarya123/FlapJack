@@ -200,13 +200,10 @@ public class Game {
             }
         }
         completeDealerHand(dealerHand, dealerHiddenCard);
-
-
         String won;
         for (Hand playerHand : playerHands) {
             won = won(playerHand, dealerHand);
             totalProfit += calculateProfit(won, playerHand);
         }
-
     }
 }
