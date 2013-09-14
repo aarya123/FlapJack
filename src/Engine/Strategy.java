@@ -7,7 +7,7 @@ public class Strategy {
 		return Move.STAND;
 	}
 
-  int getHottnessForCard() {
+  int getHottnessForCard( Card card ) {
     return 0;
   }
 }

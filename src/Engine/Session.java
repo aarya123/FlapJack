@@ -13,10 +13,10 @@ public class Session {
     int numberOfWonGame;
 
 
-    public Session(Casino casino, Strategy strategy, Shoe shoe) {
+    public Session(Casino casino, Strategy strategy) {
         this.casino = casino;
         this.strategy = strategy;
-        this.shoe = shoe(7, strategy);
+        this.shoe = new Shoe(7, strategy);
 
         totalProfit = 0.0;
         totalWage = 0.0;
