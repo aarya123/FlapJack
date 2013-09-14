@@ -72,9 +72,11 @@ public class Hand {
         newHands[0] = new Hand(new ArrayList<Card>());
         newHands[1] = new Hand(new ArrayList<Card>());
 
-        // TODO: add cards from original hand
-        
+        // Split cards from original hand
+        newHands[0].addCard(cards.shift());
+        newHands[1].addCard(cards.shift());
 
+        // Add new cards from shoe
         newHands[0].addCard(shoe.removeTopCard());
         newHands[1].addCard(shoe.removeTopCard());
 
