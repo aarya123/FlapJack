@@ -6,6 +6,13 @@ package Engine;
  * Time: 3:21 PM
  */
 public class Casino {
+	boolean hitOnSoftSeventeen;
+	public boolean getHitOnSoftSeventeen() {
+		return hitOnSoftSeventeen;
+	}
+	public double getBlackjackMultiplier() {
+		return 1.5;
+	}
 
     private int numberOfDecks;
     private boolean hitOnSoft17s, doubleAfterSplit, resplitAfterAce;

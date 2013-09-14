@@ -66,6 +66,11 @@ public class Hand {
     	return Arrays.equals( getValues(), softSeventeen );
     }
 
+    // returns true if hand is A, 10/J/Q/K
+    public boolean blackjack() {
+        return getValues == [11, 21]
+    }
+
    public Hand[] split(Shoe shoe) {
         // Can split only if hand has 2 cards
         if(cards.size() != 2) {
