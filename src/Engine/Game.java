@@ -38,7 +38,7 @@ public class Game {
 		return card;
 	}
 	
-	public String won(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
+	public String won(Hand playerHand, Hand dealerHand) {
 		// call playerHand.getValue(), dealerVisibleHand.getValue()
 		int playerValue;
 		int dealerValue;
@@ -120,11 +120,11 @@ public class Game {
 		boolean playing = true;
 		String won = "false";
 		Move move;
-		Hand dealerVisibleHand = new Hand(new ArrayList<Card>());
+		Hand dealerHand = new Hand(new ArrayList<Card>());
 		Hand playerHand = new Hand(new ArrayList<Card>());
 		Card dealerHiddenCard;
 
-		dealerHiddenCard = distributeCards(dealerVisibleHand, playerHand);
+		dealerHiddenCard = distributeCards(dealerHand, playerHand);
 		while (playing) {
 			move = strategy.getNextMove();
 			if (move == Move.STAND) {
@@ -133,8 +133,8 @@ public class Game {
 			playerHand.addCard(shoe.removeTopCard());
 		}
 		
-		completeDealerHand(dealerVisibleHand, dealerHiddenCard);
-		won = won(playerHand, dealerVisibleHand, dealerHiddenCard); //check hand.handValues
+		completeDealerHand(dealerHand, dealerHiddenCard);
+		won = won(playerHand, dealerHand);
 		calculateProfit(won, playerHand);
 	}
 }
