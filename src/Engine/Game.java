@@ -98,13 +98,12 @@ public class Game {
         return cards;
     }
 
-    void completeDealerHand(Hand dealerVisibleHand, Card dealerHiddenCard) {
-        dealerVisibleHand.addCard(dealerHiddenCard); // The dealer's hidden card becomes known.
-        while (!reachedN(dealerVisibleHand, 17)) {
-            hit(dealerVisibleHand);
+    void completeDealerHand(Hand dealerHand, Card dealerHiddenCard) {
+        while (!reachedN(dealerHand, 17)) {
+            hit(dealerHand);
         }
-        if (dealerVisibleHand.softSeventeen()) {
-            hit(dealerVisibleHand);
+        if (dealerHand.softSeventeen()) {
+            hit(dealerHand);
         }
     }
 
