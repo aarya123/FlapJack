@@ -5,13 +5,13 @@ public class Strategy {
     double[] hotnessMap, bettingFunction;
 
     // bettingFunction is an array of length 5; 
-    public Strategy(double[] hotnessMap, int[] bettingFunction) {
+    public Strategy(double[] hotnessMap, double[] bettingFunction) {
       this.hotnessMap = hotnessMap;
       this.bettingFunction = bettingFunction;
     }
 
     double getHottnessForCard(Card card) {
-      return hotnessMap[card.getValues()[0] - 1];
+      return 0;
     }
 
     double getBetMultiplier(double hotness) {
