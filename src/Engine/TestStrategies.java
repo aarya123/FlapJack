@@ -12,56 +12,67 @@ public class TestStrategies {
 	public TestStrategies() {
 		casino = new Casino("Bellagio", 1.5, 6, true, true, true);
         casino.setNumberOfGames(1000);
-        
-        session = new Session(casino, new Strategy());
-	}
+    }
 	
 	public void test( Strategy[] strategies ) {
-		Strategy[] best100 = runSimulation(10000, strategies);
-		Strategy[] best10 = runSimulation(100, best100);
+		TreeMap<Double, Integer> results = runSimulation(strategies);
+		
+		Strategy[] next10000 = crossbreed(best100);
+		
+		
+		Strategy[] best10 = runSimulation(best100);
 		// somehow get this down to best 9?
 	}
 	
 	
 	/*
 	 * Runs simulation for given population size
-	 * returns best sqrt(size) strategies
 	 */
-	private Strategy[] runSimulation( int size, Strategy[] strategies ) {
-		int n = (int) Math.sqrt(size);
+	private TreeMap<Double, Integer> runSimulation(Strategy[] strategies) {
+		int n = (int) Math.sqrt(strategies.length);
 		Strategy[] best = new Strategy[n];
-		
-		double[] profitResults = new double[size];
-		double[] wageResults = new double[size];
+		TreeMap<Double, Integer> evToIndexMap = new TreeMap<Double, Integer>();
 		
 		// run strategies and somehow populate these arrays
 		// indexes for profitResults and wageResults need to correspond to indexes in strategies
-		
-		// need to map strategy -> expected value
-		
-		// calculate strategies index -> expected value percent map with firstEntry = max
-		TreeMap<Double, Integer> indexToExpectedValue = getExpectedValues(profitResults, wageResults, size);
-		
-		for ( int i=0; i<n; i++ ) {
-			best[i] = strategies[indexToExpectedValue.pollLastEntry().getValue()];
+		Session[] sessions = new Session[strategies.length];
+		for(int i=0; i<sessions.length; i++) {
+			sessions[i] = new Session(casino, strategies[i]);
+			sessions[i].playGames();
+			evToIndexMap.put(sessions[i].getTotalProfit() / sessions[i].getTotalWage(), i); // Save EV
 		}
-		
-		return best;
-		
+	
+		return evToIndexMap;
 	}
 	
-	// maps expectedValue -> strategyIndex
-	private TreeMap<Double, Integer> getExpectedValues( double[] profits, double[] wages, int size ) {
-		// creates a max tree map (firstEntry = max)
-		TreeMap<Double, Integer> map = new TreeMap<Double, Integer>();
-		
-		for ( int i=0; i<size; i++ ) {
-			map.put( expectedValuePercent( profits[i], wages[i]), i );
+	private StrategyEvPair[] getTopNStrategyEvPairs(int n, TreeMap<Double, Integer> evToIndexMap) {
+		StrategyEvPair[] strategyEvPairs= new StrategyEvPair[n];
+		for(int i=0; i<n; i++){
+			last = evToIndexMap.pollLastEntry();
+			strategyEvPairs[i] = new StrategyEvPair(strategies[last.getValue()], last.getKey());
 		}
-		return map;
 	}
 	
-	private double expectedValuePercent( double profit, double wage ) {
-		return 100 * ( profit / wage );
+	private Strategy[] crossbreed(Strategy[] strategies, double[] evs) {
+		int n = strategies.length;
+		int n2 = Math.pow(n, 2);
+		Strategy[] children = new Strategy[n2];
+		
+		for(int i=0; i<n2; i++){
+			for(int j=0; j<n2; j++) {
+				children(i*n + j) = StrategySex.breed(strategies[i], strategies[j])
+			}
+		}
 	}
+}
+
+public class StrategyEvPair {
+	public Strategy strategy;
+	public double ev;
+	
+	public StrategyEvPair(strategy, ev){
+		strategy = strategy;
+		ev = ev;
+	}
+
 }

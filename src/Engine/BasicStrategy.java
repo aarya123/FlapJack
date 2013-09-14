@@ -13,9 +13,12 @@ public class BasicStrategy {
     return BasicStrategy.moveInTable(playerIndex, dealerIndex);
   }
 
-  public static int getPlayerIndex(Hand playerHand) {
+  public static int getPlayerIndex(Hand playerHand) {	  
     // A, A
 	List<Card> cards = playerHand.getCards();
+	
+	System.out.println(cards.get(0).getRank() + "," + cards.get(1).getRank());
+	System.out.println(playerHand.getValues()[0]);
     if(cards.size() == 2 && cards.get(0).getRank().equals("A") && cards.get(1).getRank().equals("A")) {
       return 30;
 
@@ -63,7 +66,7 @@ public class BasicStrategy {
       else
     	return 0;
     } else {
-    	return Math.max(playerHand.getValues()[0], 17) - 5;
+    	return Math.min(playerHand.getValues()[0], 17) - 5;
     }
   }
 
