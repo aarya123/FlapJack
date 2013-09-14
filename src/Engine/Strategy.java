@@ -66,11 +66,11 @@ public class Strategy {
         }
 */
 
-        TestResult best = StrategyTester.bestStrategy(-1, hotnessMap, 1);
+        //TestResult best = StrategyTester.bestStrategy(-1, hotnessMap, 1);
 
         //choose best strategy
-        System.out.println(best.advantage);
-        hotnessMap = best.hotnessMap;
+        //System.out.println(best.advantage);
+        //hotnessMap = best.hotnessMap;
 
 
         //hotnessMap = null;

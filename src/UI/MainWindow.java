@@ -5,6 +5,7 @@ import Engine.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -67,7 +68,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         }
     }
 
-    public void simulateSession(Session session) {
+    public void simulateSession(final Session session) {
         profit.setText("$" + session.getTotalProfit());
         numWon.setText(String.format("%.2g%n", session.getGameWonPercentage()) + "%");
         totWage.setText("$" + session.getTotalWage());
@@ -85,7 +86,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         eightValue.setText("8: "+s.getHottnessForCard(new Card("8")));
         nineValue.setText("9: "+s.getHottnessForCard(new Card("9")));
         faceValue.setText("F: "+s.getHottnessForCard(new Card("J")));
-        //System.out.println(session.getExpectedValue());
+        System.out.println(session.getExpectedValue());
         frame.pack();
     }
 
