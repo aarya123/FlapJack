@@ -17,9 +17,9 @@ public class Session {
     int numberOfWonGame;
 
 
-    public Session(Casino casino, Player player, Shoe shoe) {
+    public Session(Casino casino, Straegy strategy, Shoe shoe) {
         this.casino = casino;
-        this.player = player;
+        this.strategy = strategy;
         this.shoe = shoe;
 
         totalProfit = 0.0;
@@ -33,11 +33,11 @@ public class Session {
         solve();
     }
 
-    public Game simulate() {
+    public void simulate() {
         for (int i = 0; i < numberOfGames; i++) {
-            //
+            games[i] = new Game(casino, strategy, shoe);
+            games[i].play();
         }
-        return null;
     }
 
     public Casino getCasino() {
