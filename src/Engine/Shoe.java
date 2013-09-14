@@ -16,6 +16,10 @@ public class Shoe {
         this.numberOfDecks = numberOfDecks;
         initDeck();
     }
+    
+    public int size() {
+    	return deck.size();
+    }
 
     public int getNumberOfDecks() {
         return numberOfDecks;
@@ -58,8 +62,6 @@ public class Shoe {
     }
 
     public Card removeTopCard() {
-        if (deck.size() == 1)
-            shuffle();
         return deck.remove(deck.size() - 1);
     }
 }
