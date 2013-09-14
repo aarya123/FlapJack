@@ -25,7 +25,7 @@ public class Shoe {
     }
 
     public int getHottness() {
-      return hottness;
+        return hottness;
     }
 
     public int getNumberOfDecks() {
@@ -73,7 +73,7 @@ public class Shoe {
     public Card removeTopCard() {
         if (deck.size() == 1)
             shuffle();
-        Card removedCard = deck.remove(deck.size()-1);
+        Card removedCard = deck.remove(deck.size() - 1);
         hottness += strategy.getHottnessForCard(removedCard);
         return removedCard;
     }

@@ -16,7 +16,7 @@ public class Session {
     public Session(Casino casino, Strategy strategy) {
         this.casino = casino;
         this.strategy = strategy;
-        this.shoe = new Shoe(7, strategy);
+        this.shoe = new Shoe(casino.getNumberOfDecks(), strategy);
 
         totalProfit = 0.0;
         totalWage = 0.0;
