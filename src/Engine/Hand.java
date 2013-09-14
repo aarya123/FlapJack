@@ -1,5 +1,3 @@
-package Engine;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,28 +21,24 @@ public class Hand {
         boolean hasAce = false;
         int[] cardValue;
 
-        for(int i=0; i<cards.size(); i++) {
-            cardValue = cards.get(i).getValues();
-
-            // If Ace
-            if(cardValue.length == 2) {
-                // If Ace already exists in hand, just add 1
-                if(hasAce) {
-                    val0 += cardValue[0]; // 1
-                    val1 += cardValue[0]; // 1
-                }
-                else {
-                    val0 += cardValue[0]; // 1
-                    val1 += cardValue[1]; // 11
-                    hasAce = true;
-                }
+        // If Ace
+        if(cardValue.length == 2) {
+            // If Ace already exists in hand, just add 1
+            if(hasAce) {
+                val0 += cardValue[0]; // 1
+                val1 += cardValue[0]; // 1
             }
-
-            // Otherwise single-value cards (2-10, J, Q, K)
             else {
-                val0 += cardValue[0];
-                val1 += cardValue[0];
+                val0 += cardValue[0]; // 1
+                val1 += cardValue[1]; // 11
+                hasAce = true;
             }
+        }
+
+        // Otherwise single-value cards (2-10, J, Q, K)
+        else {
+            val0 += cardValue[0];
+            val1 += cardValue[0];
         }
 
         if(val0 == val1) {
@@ -67,8 +61,5 @@ public class Hand {
 
 
         newHands[0] = new Hand();
-
-        
-
    }
 }
