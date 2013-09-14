@@ -64,7 +64,7 @@ public class MainWindow implements ItemListener, ActionListener {
 
     public void setLabels(String val) {
         for (Casino casino : casinos) {
-            if (val == casino.getName()) {
+            if (val.equals(casino.getName())) {
                 numDecks.setText(String.valueOf(casino.getNumberOfDecks()));
                 soft17s.setText(String.valueOf(casino.isHitOnSoft17s()));
                 doubleSplitting.setText(String.valueOf(casino.isDoubleAfterSplit()));
@@ -80,5 +80,9 @@ public class MainWindow implements ItemListener, ActionListener {
         for (Casino casino : casinos)
             if (casinoList.getSelectedItem() == casino.getName())
                 UIListener.setCasino(casino);
+    }
+
+    public static void addPoints(double[] points) {
+        //Add points to graph
     }
 }
