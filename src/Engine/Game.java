@@ -8,24 +8,30 @@ public class Game {
 	Strategy strategy;
 	Casino casino;
 	Shoe shoe;
-	double initialAmountWagered, actualAmountWagered, profit;
+	double initialAmountWagered, actualAmountWagered, totalProfit;
 	Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
 		this.strategy = strategy;
 		this.casino = casino;
 		this.shoe = shoe;
 		this.initialAmountWagered = initialAmountWagered;
 		this.actualAmountWagered = initialAmountWagered;
+		this.totalProfit = 0.0;
 	}
 	
 	void setActualAmountWagered(double value) {
 		actualAmountWagered = value;
 	}
 	
+	double getActualAmountWagered() {
+		return actualAmountWagered;
+	}
+	
 	double getInitialAmountWagered() {
 		return initialAmountWagered;
 	}
+	
 	double getProfit() {
-		return profit;
+		return totalProfit;
 	}
 	
 	/* Returns the dealer's hidden card after the initial deal*/
@@ -72,7 +78,8 @@ public class Game {
     }
 
 
-    private void calculateProfit(String won, Hand playerHand) {
+    private double calculateProfit(String won, Hand playerHand) {
+    	double profit;
         double blackjackMultiplier = casino.getBlackjackMultiplier();
         if (won.equals("true")) {
             if (playerHand.blackjack()) {
@@ -84,6 +91,8 @@ public class Game {
             //tie or loss
             profit = (-1) * actualAmountWagered;
         }
+        
+        return profit;
     }
 
 
@@ -122,16 +131,22 @@ public class Game {
         return reached;
     }
 
-    public void play() {
-        String won = "false";
-        Move move;
-        Hand dealerHand = new Hand(new ArrayList<Card>());
-        Hand playerHand = new Hand(new ArrayList<Card>());
-        Card dealerHiddenCard;
-
-        dealerHiddenCard = distributeCards(dealerHand, playerHand);
-        
-        while (true) {
+	// returns the number of hands that are not busted
+    int numberActiveHands(ArrayList<Hand> playerHands) {
+    	int count = 0;
+    	for (Hand hand : playerHands) {
+    		if (hand.active()) {
+    			++ count;
+    		}
+    	}
+    	return count;
+    }
+    
+    // returns a hand if it splits, returns null otherwise
+    public Hand playHand(Hand playerHand, Hand dealerHand) {
+    	Hand newHand = null;
+    	Move move;
+    	while (true) {
         	if (reachedN(playerHand, 22)) {
         		break;
         	}
@@ -140,12 +155,50 @@ public class Game {
                 break;
             } else if (move == Move.DOUBLE) {
             	setActualAmountWagered(actualAmountWagered*2);
+            	hit(playerHand);
+            	playerHand.freeze();
+            	continue;
+            } else if (move == Move.SPLIT) {
+            	Hand[] splitHands = playerHand.split();
+            	playerHand = splitHands[0];
+            	newHand = splitHands[1];
+            	hit(newHand);
+            	setActualAmountWagered(getActualAmountWagered() + getInitialAmountWagered());
             }
-            playerHand.addCard(shoe.removeTopCard());
+            hit(playerHand);
         }
+    	return newHand;
+    }
 
+    public void play() {
+        Hand dealerHand = new Hand(new ArrayList<Card>(), initialAmountWagered);
+        
+        ArrayList<Hand> playerHands;
+        playerHands = new ArrayList<Hand>();
+        playerHands.add(new Hand(new ArrayList<Card>(), initialAmountWagered));
+        
+        Card dealerHiddenCard;
+        dealerHiddenCard = distributeCards(dealerHand, playerHands.get(0));
+        
+        while (numberActiveHands(playerHands) > 0) {
+        	for (int i = 0; i < playerHands.size(); i++) {
+        		if (playerHands.get(i).active()) {
+        			Hand newHand = playHand(playerHands.get(i), dealerHand);
+        			if (newHand != null) {
+        				playerHands.add(i+1, newHand);
+        			}
+        		}
+        	
+        	}
+        }
         completeDealerHand(dealerHand, dealerHiddenCard);
-        won = won(playerHand, dealerHand);
-        calculateProfit(won, playerHand);
+        
+        
+        String won;
+        for (Hand playerHand : playerHands) {
+        	won = won(playerHand, dealerHand);
+            totalProfit += calculateProfit(won, playerHand);
+        }
+        
     }
 }
