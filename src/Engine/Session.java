@@ -6,13 +6,11 @@ public class Session {
     Strategy strategy;
     Shoe shoe;
     Game[] games;
-
     double totalProfit;
     double finalPnl;
     double totalWage;
     double averageProfit;
     double gameWonPercentage;
-
     int numberOfWonGame;
 
 
@@ -53,20 +51,20 @@ public class Session {
         return casino;
     }
 
-    public Strategy getStrategy() {
-        return strategy;
-    }
-
-    public Shoe getShoe() {
-        return shoe;
-    }
-
     public void setCasino(Casino casino) {
         this.casino = casino;
     }
 
+    public Strategy getStrategy() {
+        return strategy;
+    }
+
     public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
+    }
+
+    public Shoe getShoe() {
+        return shoe;
     }
 
     public void setShoe(Shoe shoe) {
@@ -97,7 +95,6 @@ public class Session {
     public double getTotalProfit() {
         return totalProfit;
     }
-
 
     public double getGameWonPercentage() {
         return numberOfWonGame * 100.0 / casino.getNumberOfGames();

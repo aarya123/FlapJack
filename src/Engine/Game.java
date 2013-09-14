@@ -5,34 +5,36 @@ import java.util.ArrayList;
 /* Skeleton code for the Game class*/
 
 public class Game {
-	Strategy strategy;
-	Casino casino;
-	Shoe shoe;
-	double initialAmountWagered, actualAmountWagered, profit;
-	Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
-		this.strategy = strategy;
-		this.casino = casino;
-		this.shoe = shoe;
-		this.initialAmountWagered = initialAmountWagered;
-		this.actualAmountWagered = initialAmountWagered;
-	}
-	
-	double getInitialAmountWagered() {
-		return initialAmountWagered;
-	}
-	double getProfit() {
-		return profit;
-	}
-	
-	/* Returns the dealer's hidden card after the initial deal*/
-	Card distributeCards(Hand dealerHand, Hand playerHand) {
-		Card hidden;
-		hit(playerHand);
-		hidden = hit(dealerHand);
-		hit(playerHand);
-		hit(dealerHand);
-		return hidden;
-	}
+    Strategy strategy;
+    Casino casino;
+    Shoe shoe;
+    double initialAmountWagered, actualAmountWagered, profit;
+
+    Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
+        this.strategy = strategy;
+        this.casino = casino;
+        this.shoe = shoe;
+        this.initialAmountWagered = initialAmountWagered;
+        this.actualAmountWagered = initialAmountWagered;
+    }
+
+    double getInitialAmountWagered() {
+        return initialAmountWagered;
+    }
+
+    double getProfit() {
+        return profit;
+    }
+
+    /* Returns the dealer's hidden card after the initial deal*/
+    Card distributeCards(Hand dealerHand, Hand playerHand) {
+        Card hidden;
+        hit(playerHand);
+        hidden = hit(dealerHand);
+        hit(playerHand);
+        hit(dealerHand);
+        return hidden;
+    }
 
     Card hit(Hand hand) {
         Card card = shoe.removeTopCard();
@@ -67,7 +69,6 @@ public class Game {
             return "tie";
     }
 
-
     private void calculateProfit(String won, Hand playerHand) {
         double blackjackMultiplier = casino.getBlackjackMultiplier();
         if (won.equals("true")) {
@@ -81,7 +82,6 @@ public class Game {
             profit = (-1) * actualAmountWagered;
         }
     }
-
 
     private int getBetterHand(int hand1, int hand2) {
         if (hand1 <= 21 && hand2 <= 21)

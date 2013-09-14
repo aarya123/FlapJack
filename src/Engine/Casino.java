@@ -6,16 +6,9 @@ package Engine;
  * Time: 3:21 PM
  */
 public class Casino {
-	boolean hitOnSoftSeventeen;
-	public boolean getHitOnSoftSeventeen() {
-		return hitOnSoftSeventeen;
-	}
-	public double getBlackjackMultiplier() {
-		return 1.5;
-	}
-
+    boolean hitOnSoftSeventeen;
     private double blackjackPayoutMultiple;
-    private int numberOfDecks,numberOfGames;
+    private int numberOfDecks, numberOfGames;
     private boolean hitOnSoft17s, doubleAfterSplit, resplitAfterAce;
     private String name;
 
@@ -26,6 +19,14 @@ public class Casino {
         this.doubleAfterSplit = doubleAfterSplit;
         this.resplitAfterAce = resplitAfterAce;
         this.blackjackPayoutMultiple = blackjackPayoutMultiple;
+    }
+
+    public boolean getHitOnSoftSeventeen() {
+        return hitOnSoftSeventeen;
+    }
+
+    public double getBlackjackMultiplier() {
+        return 1.5;
     }
 
     public int getNumberOfGames() {
@@ -55,7 +56,7 @@ public class Casino {
     public boolean isResplitAfterAce() {
         return resplitAfterAce;
     }
-    
+
     public double getBlackjackPayoutMultiple() {
         return blackjackPayoutMultiple;
     }
