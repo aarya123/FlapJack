@@ -149,8 +149,11 @@ public class Game {
                 break;
             } else if (move == Move.DOUBLE) {
             	setActualAmountWagered(actualAmountWagered*2);
+            } else if (move == Move.SPLIT) {
+                break;
+            else {
+                playerHand.addCard(shoe.removeTopCard());
             }
-            playerHand.addCard(shoe.removeTopCard());
         }
 
         completeDealerHand(dealerHand, dealerHiddenCard);
