@@ -7,7 +7,6 @@ public class Session {
     Shoe shoe;
     Game[] games;
     double totalProfit;
-    double finalPnl;
     double totalWage;
     double averageProfit;
     double gameWonPercentage;
@@ -20,22 +19,20 @@ public class Session {
         this.shoe = shoe;
 
         totalProfit = 0.0;
-        finalPnl = 0.0;
         totalWage = 0.0;
         averageProfit = 0.0;
         gameWonPercentage = 0.0;
         numberOfWonGame = 0;
 
         games = new Game[casino.getNumberOfGames()];
-        solve();
     }
 
     public void playGames() {
         for (int i = 0; i < casino.getNumberOfGames(); i++) {
             games[i] = new Game(strategy, casino, shoe, 10);
             games[i].play();
-            System.out.println(games[i].getProfit());
         }
+        solve();
     }
 
     public Casino getCasino() {
@@ -63,20 +60,12 @@ public class Session {
     }
 
     private void solve() {
-//        for (int i = 0; i < numberOfGames; i++) {
-//            finalPnl += games[i].getPnl(); //???
-//            totalProfit += games[i].getProfit(); //??
-//            totalWage += games[i].getWager();  //???
-//            numberOfWonGame += totalProfit > 0 ? 1 : 0;
-//        }
-    }
-
-    public double getAverageProfit() {
-        return finalPnl / totalWage;
-    }
-
-    public double getFinalPnl() {
-        return finalPnl;
+        for (int i = 0; i < casino.getNumberOfGames(); i++) {
+            totalProfit += games[i].getProfit();
+            totalWage += games[i].getActualAmountWagered();
+            numberOfWonGame += totalProfit > 0 ? 1 : 0;
+        }
+        Simulator.finished(this);
     }
 
     public double getTotalWage() {

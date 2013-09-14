@@ -29,6 +29,9 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JButton goButton;
     private JSpinner numGames;
     private JLabel bjMultiplier;
+    private JLabel numWon;
+    private JLabel totWage;
+    private JLabel profit;
 
     MainWindow() {
         frame = new JFrame("FlapJack");
@@ -51,8 +54,10 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         }
     }
 
-    public static void simulateSession(Session session) {
-        //TODO: Take session and display crap
+    public void simulateSession(Session session) {
+        profit.setText("$" + session.getTotalProfit());
+        numWon.setText(session.getGameWonPercentage() + "%");
+        totWage.setText("$" + session.getTotalWage());
     }
 
     private void initListeners() {
