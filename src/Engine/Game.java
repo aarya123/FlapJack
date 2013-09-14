@@ -48,6 +48,7 @@ public class Game {
         // call playerHand.getValue(), dealerVisibleHand.getValue()
         int playerValue;
         int dealerValue;
+        String results = "tie";
 
         // set best case player hand
         int[] playerValueArray = playerHand.getValues();
@@ -63,12 +64,16 @@ public class Game {
         else
             dealerValue = dealerValueArray[0];
 
-        if ((playerValue > dealerValue) || (dealerValue > 21))
-            return "true";
-        else if ((playerValue < dealerValue) || (playerValue > 21))
-            return "false";
-        else
-            return "tie";
+        if (playerHand.isBusted())
+            results = "false";
+        else if (dealerHand.isBusted())
+            results = "true";
+        else if (playerValue > dealerValue)
+            results = "true";
+        else if (playerValue < dealerValue)
+            results = "false";
+
+        return results;
     }
 
 
@@ -132,7 +137,7 @@ public class Game {
         dealerHiddenCard = distributeCards(dealerHand, playerHand);
         
         while (true) {
-        	if (reachedN(playerHand, 22)) {
+        	if (playerHand.isBusted()) {
         		break;
         	}
             move = strategy.getNextMove();
