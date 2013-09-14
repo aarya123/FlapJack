@@ -133,7 +133,7 @@ public class Game {
         dealerHiddenCard = distributeCards(dealerHand, playerHand);
         while (playing) {
             move = strategy.getNextMove();
-            if (move == Move.STAND) {
+            if (move == Move.S) {
                 break;
             }
             playerHand.addCard(shoe.removeTopCard());

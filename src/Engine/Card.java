@@ -12,7 +12,7 @@ public class Card {
         this.rank = rank;
     }
 
-    public string getRank() {
+    public String getRank() {
         return rank;
     }
 
