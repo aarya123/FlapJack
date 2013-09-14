@@ -30,17 +30,6 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JSpinner numGames;
     private JLabel bjMultiplier;
 
-    MainWindow() {
-        frame = new JFrame("FlapJack");
-        frame.setContentPane(mainWindow);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-        initListeners();
-        initCasinos();
-        numGames.setValue(1);
-    }
-
     public static void main(String[] args) {
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
@@ -51,8 +40,15 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         }
     }
 
-    public static void simulateSession(Session session) {
-        //TODO: Take session and display crap
+    MainWindow() {
+        frame = new JFrame("FlapJack");
+        frame.setContentPane(mainWindow);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        initListeners();
+        initCasinos();
+        numGames.setValue(1);
     }
 
     private void initListeners() {
@@ -104,5 +100,9 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
             if ((Integer) numGames.getValue() < 1)
                 numGames.setValue(1);
         frame.pack();
+    }
+
+    public static void simulateSession(Session session) {
+        //TODO: Take session and display crap
     }
 }
