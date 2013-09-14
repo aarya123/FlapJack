@@ -1,36 +1,49 @@
 package Engine;
-import java.util.Random;
 
-import java.util.HashMap;
+import java.util.Random;
 
 public class Strategy {
 
-    HashMap<String, Double> hotnessMap;
-    // bettingFunction is an array of length 5; 
+    double[] hotnessMap;
+
+    // Creates a random strategy
     public Strategy() {
-        hotnessMap = new HashMap<String, Double>();
-        for (int i = 1; i < 14; i++) {
-            if (i == 1)
-                hotnessMap.put("A", 1.0);
-            else if (i == 11)
-                hotnessMap.put("J", 1.0);
-            else if (i == 12)
-                hotnessMap.put("Q", 1.0);
-            else if (i == 13)
-                hotnessMap.put("K", 1.0);
-            else
-                hotnessMap.put(i + "", 1.0);
-        }
+      this.hotnessMap = randomHotnessMap();
+    }
+
+    public Strategy(double[] hotnessMap) {
+      this.hotnessMap = hotnessMap;
+    }
+
+    double[] getHotnessMap() {
+      return hotnessMap;
     }
 
     double getHottnessForCard(Card card) {
-        //return hotnessMap.get(card.getRank());
-    	return 0;
+        return hotnessMap[card.getValues()[0] - 1];
     }
 
-
-
     double getBetMultiplier(double hotness) {
-        return 1;
+    	if(hotness <= 0) {
+    		return Math.pow(10, hotness);
+    	}
+       return Math.log(hotness);
+    }
+
+    // Randomizer functions
+    
+    // Returns array mapping card values -> hotness values
+    // Indices are getValue()[0] - 1 (A -> 0, 2 -> 1, ... 10 -> 9)
+    double[] randomHotnessMap() {
+      Random r = new Random();
+      double[] randomHotnessMap = new double[10];
+
+      for(int i=0; i<randomHotnessMap.length; i++) {
+        int randomSign = (Math.round(r.nextDouble()) == 1) ? 1 : -1; // random number: -1 or 1
+        double randomDouble = r.nextDouble() * 5; // random double between 0 and 5
+        randomHotnessMap[i] = randomDouble * randomSign; // random double between -5 and 5
+      }
+
+      return randomHotnessMap;
     }
 }
