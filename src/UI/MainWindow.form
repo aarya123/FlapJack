@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="UI.MainWindow">
-  <grid id="27dc6" binding="mainWindow" layout-manager="GridLayoutManager" row-count="8" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainWindow" layout-manager="GridLayoutManager" row-count="7" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="341" height="203"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -21,7 +21,7 @@
       </hspacer>
       <vspacer id="88cb2">
         <constraints>
-          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="2ba41" class="javax.swing.JLabel">
@@ -30,11 +30,12 @@
         </constraints>
         <properties>
           <text value="Number of Decks"/>
+          <toolTipText value="The number of decks in the shoe"/>
         </properties>
       </component>
       <component id="72de1" class="javax.swing.JLabel" binding="numDecks">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Label"/>
@@ -46,14 +47,7 @@
         </constraints>
         <properties>
           <text value="Whether Dealer Hits on Soft 17s"/>
-        </properties>
-      </component>
-      <component id="6f978" class="javax.swing.JLabel" binding="soft17s">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Label"/>
+          <toolTipText value="Soft is when the hand has an Ace, which is worth 11 or 1. The dealer may choose to hit or stand on a soft 17."/>
         </properties>
       </component>
       <component id="34954" class="javax.swing.JLabel">
@@ -62,54 +56,51 @@
         </constraints>
         <properties>
           <text value="Double After Splitting"/>
-        </properties>
-      </component>
-      <component id="cfe91" class="javax.swing.JLabel" binding="doubleSplitting">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Label"/>
-        </properties>
-      </component>
-      <component id="fe78d" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Option to Surrender"/>
-        </properties>
-      </component>
-      <component id="e2890" class="javax.swing.JLabel" binding="optSurrender">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Label"/>
+          <toolTipText value="Double your bet after splitting a hand"/>
         </properties>
       </component>
       <component id="7ebba" class="javax.swing.JLabel">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Resplitting after Aces"/>
-        </properties>
-      </component>
-      <component id="14144" class="javax.swing.JLabel" binding="resplitAces">
-        <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Label"/>
+          <toolTipText value="After splitting 2 Aces on deal, player may split a hand again."/>
         </properties>
       </component>
       <component id="1b597" class="javax.swing.JButton" binding="goButton" default-binding="true">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Go!"/>
+        </properties>
+      </component>
+      <component id="f66f6" class="javax.swing.JCheckBox" binding="doubleSplitting">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="d23eb" class="javax.swing.JCheckBox" binding="resplitAces">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="9ae8f" class="javax.swing.JCheckBox" binding="soft17s">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value=""/>
         </properties>
       </component>
     </children>

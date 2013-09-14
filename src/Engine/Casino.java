@@ -8,15 +8,14 @@ package Engine;
 public class Casino {
 
     private int numberOfDecks;
-    private boolean hitOnSoft17s, doubleAfterSplit, surrenderOption, resplitAfterAce;
+    private boolean hitOnSoft17s, doubleAfterSplit, resplitAfterAce;
     private String name;
 
-    public Casino(String name, int numberOfDecks, boolean hitOnSoft17s, boolean doubleAfterSplit, boolean surrenderOption, boolean resplitAfterAce) {
+    public Casino(String name, int numberOfDecks, boolean hitOnSoft17s, boolean doubleAfterSplit, boolean resplitAfterAce) {
         this.name = name;
         this.numberOfDecks = numberOfDecks;
         this.hitOnSoft17s = hitOnSoft17s;
         this.doubleAfterSplit = doubleAfterSplit;
-        this.surrenderOption = surrenderOption;
         this.resplitAfterAce = resplitAfterAce;
     }
 
@@ -34,10 +33,6 @@ public class Casino {
 
     public boolean isDoubleAfterSplit() {
         return doubleAfterSplit;
-    }
-
-    public boolean isSurrenderOption() {
-        return surrenderOption;
     }
 
     public boolean isResplitAfterAce() {
