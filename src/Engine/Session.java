@@ -15,7 +15,8 @@ public class Session {
 
     public Session(Casino casino, Strategy strategy) {
         this.casino = casino;
-        this.strategy = new Strategy();
+        //this.strategy = new Strategy();
+        this.strategy = strategy; // added so we pass in strategy we want
         this.shoe = new Shoe(casino.getNumberOfDecks(), strategy);
 
         totalProfit = 0.0;

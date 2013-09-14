@@ -5,6 +5,8 @@ import Engine.Session;
 import Engine.Simulator;
 import Engine.Strategy;
 import Engine.TestStrategies;
+import Engine.Strategy; // TODO: get rid of this dependency
+import Engine.TestStrategies;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -50,6 +52,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     }
 
     public static void main(String[] args) {
+
     	if (geneticTest) {
     		Strategy[] strategies = new Strategy[100];
     		for ( int i=0; i<strategies.length; i++ ) {
