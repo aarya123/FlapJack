@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * Time: 3:05 PM
  */
 public class MainWindow implements ItemListener, ActionListener, ChangeListener {
-    static Boolean dev = true;
+    static Boolean dev = false;
     JFrame frame;
     ArrayList<Casino> casinos;
     private JPanel mainWindow;
@@ -29,6 +29,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JButton goButton;
     private JSpinner numGames;
     private JLabel bjMultiplier;
+    private Graph graph;
 
     public static void main(String[] args) {
         if (dev) {
@@ -104,5 +105,9 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
 
     public static void simulateSession(Session session) {
         //TODO: Take session and display crap
+	}
+
+    public void createUIComponents() {
+        graph = new Graph(new double[0]);
     }
 }
