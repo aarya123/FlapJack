@@ -16,7 +16,7 @@ public class Hand {
     public void addCard(Card card) {
         cards.add(card);
     }
-    
+
     public List<Card> getCards() {
         return cards;
     }
@@ -60,19 +60,19 @@ public class Hand {
 
     // returns true if hand is soft 17
     public boolean softSeventeen() {
-    	int[] softSeventeen = new int[] { 7, 17 };
-    	return Arrays.equals( getValues(), softSeventeen );
+        int[] softSeventeen = new int[]{7, 17};
+        return Arrays.equals(getValues(), softSeventeen);
     }
 
     // returns true if hand is A, 10/J/Q/K
     public boolean blackjack() {
-    	int[] blackjack = new int[] { 10, 11 };
-        return Arrays.equals( getValues(), blackjack );
+        int[] blackjack = new int[]{10, 11};
+        return Arrays.equals(getValues(), blackjack);
     }
 
-   public Hand[] split(Shoe shoe) {
+    public Hand[] split(Shoe shoe) {
         // Can split only if hand has 2 cards
-        if(cards.size() != 2)
+        if (cards.size() != 2)
             return null;
 
         Hand[] newHands = new Hand[2];
@@ -88,5 +88,5 @@ public class Hand {
         newHands[1].addCard(shoe.removeTopCard());
 
         return newHands;
-   }
+    }
 }

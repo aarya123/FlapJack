@@ -81,11 +81,11 @@ public class Game {
             } else {
                 profit = actualAmountWagered;
             }
-        // dealer won or tie but dealer got blackjack
+            // dealer won or tie but dealer got blackjack
         } else if (won.equals("false") || dealerHand.blackjack()) {
             profit = (-1) * actualAmountWagered;
         } else {
-        	profit = 0; // tie with dealer
+            profit = 0; // tie with dealer
         }
     }
 
