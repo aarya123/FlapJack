@@ -14,8 +14,26 @@ public class Shoe {
 
     public Shoe(int numberOfDecks) {
         this.numberOfDecks = numberOfDecks;
+        initDeck();
+        shuffle();
+    }
+
+    public int size() {
+        return deck.size();
+    }
+
+    public int getNumberOfDecks() {
+        return numberOfDecks;
+    }
+
+    public void shuffle() {
+        initDeck();
+        Collections.shuffle(deck);
+    }
+
+    private void initDeck() {
         deck = new ArrayList<Card>();
-        for (int j = 0; j < numberOfDecks * 4; j++)
+        for (int j = 0; j < numberOfDecks * 4; j++) {
             for (int i = 1; i < 14; i++) {
                 if (i == 1)
                     deck.add(new Card("A"));
@@ -28,15 +46,7 @@ public class Shoe {
                 else
                     deck.add(new Card(Integer.toString(i)));
             }
-        shuffle();
-    }
-
-    public int getNumberOfDecks() {
-        return numberOfDecks;
-    }
-
-    public void shuffle() {
-        Collections.shuffle(deck);
+        }
     }
 
     public ArrayList<Card> getHand(int size) {
@@ -54,8 +64,6 @@ public class Shoe {
     }
 
     public Card removeTopCard() {
-        if (deck.size() == 1)
-            shuffle();
         return deck.remove(deck.size() - 1);
     }
 }

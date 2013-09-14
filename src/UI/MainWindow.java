@@ -32,6 +32,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JLabel numWon;
     private JLabel totWage;
     private JLabel profit;
+    private Graph graph;
 
     MainWindow() {
         frame = new JFrame("FlapJack");
@@ -58,6 +59,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         profit.setText("$" + session.getTotalProfit());
         numWon.setText(session.getGameWonPercentage() + "%");
         totWage.setText("$" + session.getTotalWage());
+        frame.pack();
     }
 
     private void initListeners() {
@@ -100,7 +102,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
             for (Casino casino : casinos)
                 if (casinoList.getSelectedItem().equals(casino.getName())) {
                     casino.setNumberOfGames((Integer) numGames.getValue());
-                    new Simulator(casino);
+                    new Simulator(casino, this);
                 }
     }
 
@@ -109,5 +111,9 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
             if ((Integer) numGames.getValue() < 1)
                 numGames.setValue(1);
         frame.pack();
+    }
+
+    public void createUIComponents() {
+        graph = new Graph(new double[0]);
     }
 }

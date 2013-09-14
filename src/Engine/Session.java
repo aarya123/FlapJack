@@ -28,9 +28,16 @@ public class Session {
     }
 
     public void playGames() {
+        int shoeMax = shoe.size(); // full shoe size
+
         for (int i = 0; i < casino.getNumberOfGames(); i++) {
             games[i] = new Game(strategy, casino, shoe, 10);
             games[i].play();
+
+            // shuffle deck when less than 25% remaining
+            if ((double) shoe.size() / (double) shoeMax <= .25) {
+                shoe.shuffle();
+            }
         }
         solve();
     }
