@@ -40,19 +40,19 @@ public class Strategy {
             hotnessMap.put("Q", -1.0);
             hotnessMap.put("K", -1.0);
         } else {
-            hotnessMap.put("A", -2.1756303249843305);
-            hotnessMap.put("2", 1.471905289907332);
-            hotnessMap.put("3", 2.493300707741514);
-            hotnessMap.put("4", 1.047077213721035);
-            hotnessMap.put("5", 1.3295495093771246);
-            hotnessMap.put("6", 0.6128952100955669);
-            hotnessMap.put("7", 1.5146489202223947);
-            hotnessMap.put("8", -1.4334882339141861);
-            hotnessMap.put("9", 0.99583494590328);
-            hotnessMap.put("10", -2.8206387996600006);
-            hotnessMap.put("J", -0.20367587058540937);
-            hotnessMap.put("Q", -0.49090966940460135);
-            hotnessMap.put("K", -1.2287144995422192);
+            hotnessMap.put("A", -0.9726303732021138);
+            hotnessMap.put("2", -0.004706292605272333);
+            hotnessMap.put("3", -0.08435610144119576);
+            hotnessMap.put("4", 1.8449808372042817);
+            hotnessMap.put("5", 3.354715514790913);
+            hotnessMap.put("6", 0.5427470530533602);
+            hotnessMap.put("7", 2.741140155063029);
+            hotnessMap.put("8", -0.6172078062524431);
+            hotnessMap.put("9", -0.77773512061723);
+            hotnessMap.put("10", -1.007584934520013);
+            hotnessMap.put("J", -0.011820494223825584);
+            hotnessMap.put("Q", -1.5230327260255503);
+            hotnessMap.put("K", 1.4175083816178076);
         }
 
         /*
@@ -105,14 +105,19 @@ public class Strategy {
     }
 
     double getBetMultiplier(double hotness) {    	
-      if (hotness <= 0)
+      if (hotness <= 1)
         return 1;
       else
       {
           //if (hotness != 1)
             //  System.out.println("Hotness not 1 bitch " + hotness);
 
-          return hotness;
+          double multip = Math.pow(hotness,1.3) - 2;
+          if (multip <= 1)
+              multip = 1;
+
+          return multip;
+
       }
     }
 }

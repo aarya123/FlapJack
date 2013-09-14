@@ -56,7 +56,7 @@ public class StrategyTester {
 		if (remainingChildren == 0)
 			return new TestResult(startingAdvantage, startingMap);
 		
-		Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
+		Casino casino = new Casino("Bellagio", 1.4, 6, true, true, true);
         casino.setNumberOfGames((int) (Math.random() * 100000));
         
         //generate 10,000 random combinations with Wong Halves as mean

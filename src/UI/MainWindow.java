@@ -100,9 +100,9 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
 
     private void initCasinos() {
         casinos = new ArrayList<Casino>();
-        casinos.add(new Casino("Bellagio", 1.0, 6, true, true, true));
+        casinos.add(new Casino("Bellagio", 1.4, 6, true, true, true));
         casinos.add(new Casino("Caesar's Palace", 1.5, 2, true, false, false));
-        casinos.add(new Casino("MGM Grand", 1, 6, false, true, true));
+        casinos.add(new Casino("MGM Grand", 1.3, 6, false, true, true));
         for (Casino casino : casinos)
             casinoList.addItem(casino.getName());
         strategyList.addItem("Basic Strategy");
