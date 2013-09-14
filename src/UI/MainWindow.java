@@ -43,6 +43,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JLabel nineValue;
     private JLabel faceValue;
     private JLabel profitPerWaged;
+    private JComboBox strategyList;
 
     MainWindow() {
         frame = new JFrame("FlapJack");
@@ -59,7 +60,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
             casino.setNumberOfGames(1000000);
-            new Simulator(casino);
+            new Simulator(casino,"Basic Strategy");
         } else {
             new MainWindow();
         }
@@ -71,7 +72,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         totWage.setText("$" + session.getTotalWage());
         numGamesCount.setText(String.valueOf(session.getCasino().getNumberOfGames()));
         graph.setPoints(session.getCumProfit());
-        profitPerWaged.setText("$"+String.format("%.2f",session.getTotalProfit()/session.getTotalWage()));
+        profitPerWaged.setText("$"+String.format("%.4f",session.getTotalProfit()/session.getTotalWage()));
         Strategy s = session.getStrategy();
         aceValue.setText("A: "+s.getHottnessForCard(new Card("A")));
         twoValue.setText("2: "+s.getHottnessForCard(new Card("2")));
@@ -89,6 +90,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private void initListeners() {
         goButton.addActionListener(this);
         casinoList.addItemListener(this);
+        strategyList.addItemListener(this);
         numGames.addChangeListener(this);
     }
 
@@ -96,9 +98,12 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         casinos = new ArrayList<Casino>();
         casinos.add(new Casino("Bellagio", 1.5, 6, true, true, true));
         casinos.add(new Casino("Caesar's Palace", 1.5, 2, true, false, false));
-        casinos.add(new Casino("MGM Grand", 1.5, 6, false, true, true));
+        casinos.add(new Casino("MGM Grand", 1, 6, false, true, true));
         for (Casino casino : casinos)
             casinoList.addItem(casino.getName());
+        strategyList.addItem("Basic Strategy");
+        strategyList.addItem("Counting Strategy");
+        strategyList.addItem("Optimized Counting");
         setLabels((String) casinoList.getSelectedItem());
     }
 
@@ -126,7 +131,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
             for (Casino casino : casinos)
                 if (casinoList.getSelectedItem().equals(casino.getName())) {
                     casino.setNumberOfGames((Integer) numGames.getValue());
-                    new Simulator(casino, this);
+                    new Simulator(casino, this, (String)(strategyList.getSelectedItem()));
                 }
     }
 
