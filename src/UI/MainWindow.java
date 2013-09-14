@@ -33,6 +33,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JLabel totWage;
     private JLabel profit;
     private Graph graph;
+    private JLabel numGamesCount;
 
     MainWindow() {
         frame = new JFrame("FlapJack");
@@ -48,7 +49,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     public static void main(String[] args) {
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
-            casino.setNumberOfGames(10);
+            casino.setNumberOfGames((int) (Math.random() * 1000));
             new Simulator(casino);
         } else {
             new MainWindow();
@@ -59,9 +60,8 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         profit.setText("$" + session.getTotalProfit());
         numWon.setText(session.getGameWonPercentage() + "%");
         totWage.setText("$" + session.getTotalWage());
+        numGamesCount.setText(String.valueOf(session.getCasino().getNumberOfGames()));
         double cacat[] = session.getCumProfit();
-        for (int i = 0; i < cacat.length; i++)
-            System.out.println(cacat[i]);
         graph.setPoints(session.getCumProfit());
         frame.pack();
     }
