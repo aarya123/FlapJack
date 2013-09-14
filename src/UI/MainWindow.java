@@ -56,6 +56,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         numGames.setValue(1);
     }
 
+
     public static void main(String[] args) {
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
@@ -84,6 +85,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         eightValue.setText("8: "+s.getHottnessForCard(new Card("8")));
         nineValue.setText("9: "+s.getHottnessForCard(new Card("9")));
         faceValue.setText("F: "+s.getHottnessForCard(new Card("J")));
+        System.out.println(session.getExpectedValue());
         frame.pack();
     }
 
