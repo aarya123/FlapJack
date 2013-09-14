@@ -1,14 +1,17 @@
 package Engine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * User: AnubhawArya
  * Date: 9/13/13
  * Time: 3:00 PM
  */
 public class Hand {
-    private ArrayList<Card> cards = new ArrayList<Card>();
+    private List<Card> cards = new ArrayList<Card>();
 
-    // Constructur
+    // Constructor
     public Hand(ArrayList<Card> cards) {
         this.cards = cards;
     }
@@ -19,13 +22,14 @@ public class Hand {
     }
 
     // Returns an array of length 1 or 2 containing possible values of the hand
-    public array getValues() {
+    public int[] getValues() {
         int val0 = 0; // Hand value assuming first ace is valued at 1
         int val1 = 0; // Hand value assuming first ace is valued at 11
         boolean hasAce = false;
+        int[] cardValue;
 
         for(int i=0; i<cards.size(); i++) {
-            cardValue = cards[i].getValues();
+            cardValue = cards.get(i).getValues();
 
             // If Ace
             if(cardValue.length == 2) {
@@ -36,7 +40,7 @@ public class Hand {
                 }
                 else {
                     val0 += cardValue[0]; // 1
-                    val2 += cardValue[1]; // 11
+                    val1 += cardValue[1]; // 11
                     hasAce = true;
                 }
             }
@@ -49,16 +53,17 @@ public class Hand {
         }
 
         if(val0 == val1) {
-            return [val0]
+            return new int[] { val0 };
         }
         else {
-            return [val0, val1]
+            return new int[] {val0, val1};
         }
     }
 
     // TODO
    public Hand split() {
-        return Null unless cards.size() == 2;
+	   return null;
+       // return Null unless cards.size() == 2;
 
    }
 }

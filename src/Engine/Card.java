@@ -13,20 +13,17 @@ public class Card {
     }
 
     public int[] getValues() {
-    	int[] value = {10};
     	switch (rank) {
     		case "A":
-    			int[] ace = {1, 11};
-    			return ace;
+    			return new int[] { 1, 11 };
     		case "J":
-    			return value;
+    			return new int[] { 10 };
     		case "Q":
-    			return value;
+    			return new int[] { 10 };
     		case "K":
-    			return value;
+    			return new int[] { 10 };
     		default:
-    			value[0] = Integer.parseInt(rank);
-    			return value;
+    			return new int[] { Integer.parseInt(rank) };
     	}
     }
 
