@@ -63,7 +63,7 @@ public class BasicStrategy {
       else
     	return 0;
     } else {
-    	return Math.max(playerHand.getValues()[0], 17) - 5;
+    	return Math.min(playerHand.getValues()[0], 17) - 5;
     }
   }
 

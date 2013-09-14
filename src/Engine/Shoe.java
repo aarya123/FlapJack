@@ -13,14 +13,21 @@ public class Shoe {
     private int numberOfDecks;
     private double hotness;
     private Strategy strategy;
-
+    
     public Shoe(int numberOfDecks, Strategy strategy) {
         this.numberOfDecks = numberOfDecks;
         this.strategy = strategy;
         shuffle();
     }
 
-    public int size() {
+    public Shoe(Strategy strategy) {
+		this.numberOfDecks = 1;
+		this.strategy = strategy;
+		this.hotness = 0;
+	}
+    public void setDeck(ArrayList<Card> deck) {this.deck = deck; }
+
+	public int size() {
         return deck.size();
     }
 

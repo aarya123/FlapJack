@@ -28,8 +28,10 @@ public class Strategy {
     	return 0;
     }
 
-
-
+    String nextMove() {
+    	return "S";
+    }
+    
     double getBetMultiplier(double hotness) {
         return 1;
     }
