@@ -45,12 +45,13 @@ public class Shoe {
                 else
                     deck.add(new Card(Integer.toString(i)));
             }
+        shuffle();
     }
 
     public ArrayList<Card> getHand(int size) {
         ArrayList<Card> hand = new ArrayList<Card>();
         for (int i = 0; i < size; i++)
-            hand.add(deck.remove((int) (Math.random() * deck.size())));
+            hand.add(deck.remove(0));
         return hand;
     }
 

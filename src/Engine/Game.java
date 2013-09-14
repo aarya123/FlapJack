@@ -5,36 +5,34 @@ import java.util.ArrayList;
 /* Skeleton code for the Game class*/
 
 public class Game {
-    Strategy strategy;
-    Casino casino;
-    Shoe shoe;
-    double initialAmountWagered, actualAmountWagered, profit;
-
-    Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
-        this.strategy = strategy;
-        this.casino = casino;
-        this.shoe = shoe;
-        this.initialAmountWagered = initialAmountWagered;
-        this.actualAmountWagered = initialAmountWagered;
-    }
-
-    double getActualAmountWagered() {
-        return actualAmountWagered;
-    }
-
-    double getProfit() {
-        return profit;
-    }
-
-    /* Returns the dealer's hidden card after the initial deal*/
-    Card distributeCards(Hand dealerHand, Hand playerHand) {
-        Card hidden;
-        hit(playerHand);
-        hidden = hit(dealerHand);
-        hit(playerHand);
-        hit(dealerHand);
-        return hidden;
-    }
+	Strategy strategy;
+	Casino casino;
+	Shoe shoe;
+	double initialAmountWagered, actualAmountWagered, profit;
+	Game(Strategy strategy, Casino casino, Shoe shoe, double initialAmountWagered) {
+		this.strategy = strategy;
+		this.casino = casino;
+		this.shoe = shoe;
+		this.initialAmountWagered = initialAmountWagered;
+		this.actualAmountWagered = initialAmountWagered;
+	}
+	
+	double getInitialAmountWagered() {
+		return initialAmountWagered;
+	}
+	double getProfit() {
+		return profit;
+	}
+	
+	/* Returns the dealer's hidden card after the initial deal*/
+	Card distributeCards(Hand dealerHand, Hand playerHand) {
+		Card hidden;
+		hit(playerHand);
+		hidden = hit(dealerHand);
+		hit(playerHand);
+		hit(dealerHand);
+		return hidden;
+	}
 
     Card hit(Hand hand) {
         Card card = shoe.removeTopCard();
@@ -100,13 +98,12 @@ public class Game {
         return cards;
     }
 
-    void completeDealerHand(Hand dealerVisibleHand, Card dealerHiddenCard) {
-        dealerVisibleHand.addCard(dealerHiddenCard); // The dealer's hidden card becomes known.
-        while (!reachedN(dealerVisibleHand, 17)) {
-            hit(dealerVisibleHand);
+    void completeDealerHand(Hand dealerHand, Card dealerHiddenCard) {
+        while (!reachedN(dealerHand, 17)) {
+            hit(dealerHand);
         }
-        if (dealerVisibleHand.softSeventeen()) {
-            hit(dealerVisibleHand);
+        if (dealerHand.softSeventeen()) {
+            hit(dealerHand);
         }
     }
 
