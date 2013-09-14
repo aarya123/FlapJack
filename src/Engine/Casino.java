@@ -7,16 +7,18 @@ package Engine;
  */
 public class Casino {
 
+    private double blackjackPayoutMultiple;
     private int numberOfDecks;
     private boolean hitOnSoft17s, doubleAfterSplit, resplitAfterAce;
     private String name;
 
-    public Casino(String name, int numberOfDecks, boolean hitOnSoft17s, boolean doubleAfterSplit, boolean resplitAfterAce) {
+    public Casino(String name, double blackjackPayoutMultiple, int numberOfDecks, boolean hitOnSoft17s, boolean doubleAfterSplit, boolean resplitAfterAce) {
         this.name = name;
         this.numberOfDecks = numberOfDecks;
         this.hitOnSoft17s = hitOnSoft17s;
         this.doubleAfterSplit = doubleAfterSplit;
         this.resplitAfterAce = resplitAfterAce;
+        this.blackjackPayoutMultiple = blackjackPayoutMultiple;
     }
 
     public String getName() {
@@ -37,5 +39,9 @@ public class Casino {
 
     public boolean isResplitAfterAce() {
         return resplitAfterAce;
+    }
+    
+    public double getBlackjackPayoutMultiple() {
+        return blackjackPayoutMultiple;
     }
 }
