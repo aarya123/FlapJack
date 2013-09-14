@@ -1,23 +1,77 @@
 package Engine;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /* Skeleton code for the Game class*/
 
 public class BasicStrategy {
 
-  public static Move nextMove(Hand playerHand, Card dealerCard) {
+  public static String nextMove(Hand playerHand, Card dealerCard) {
     int playerIndex = BasicStrategy.getPlayerIndex(playerHand);
     int dealerIndex = BasicStrategy.getDealerIndex(dealerCard);
     return BasicStrategy.moveInTable(playerIndex, dealerIndex);
   }
 
   public static int getPlayerIndex(Hand playerHand) {
-	  
+    // A, A
+	List<Card> cards = playerHand.getCards();
+    if(cards.size() == 2 && cards.get(0).getRank().equals("A") && cards.get(1).getRank().equals("A")) {
+      return 30;
+
+    // T, T
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {20})) {
+      return 29;
+
+
+    // A + something
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {3, 13})) { // A, 2
+      return 13;    
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {4, 14})) { // A, 3
+      return 14;
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {5, 15})) { // A, 4
+      return 15;
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {6, 16})) { // A, 5
+      return 16;
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {7, 17})) { // A, 6
+      return 17;
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {8, 18})) { // A, 7
+      return 18;
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {9, 19})) { // A, 8
+      return 19;
+  	} else if(Arrays.equals(playerHand.getValues(), new int[] {10, 20})) { // A, 9
+      return 20;
+    
+    // Doubles
+  	} else if(cards.size() == 2 && cards.get(0).getRank() == cards.get(1).getRank()) {
+      if(Arrays.equals(playerHand.getValues(), new int[] {4}))
+        return 21;
+      else if(Arrays.equals(playerHand.getValues(), new int[] {6}))
+        return 22;
+      else if(Arrays.equals(playerHand.getValues(), new int[] {8}))
+        return 23;
+      else if(Arrays.equals(playerHand.getValues(), new int[] {10}))
+        return 24;
+      else if(Arrays.equals(playerHand.getValues(), new int[] {12}))
+        return 25;
+      else if(Arrays.equals(playerHand.getValues(), new int[] {14}))
+        return 26;
+      else if(Arrays.equals(playerHand.getValues(), new int[] {16}))
+        return 27;
+      else if(Arrays.equals(playerHand.getValues(), new int[] {18}))
+        return 28;
+      else
+    	return 0;
+    } else {
+    	return Math.max(playerHand.getValues()[0], 17) - 5;
+    }
   }
 
   public static int getDealerIndex(Card dealerCard) {
-    
+    if(dealerCard.getRank() == "A")
+      return 9;
+    else
+      return Integer.parseInt(dealerCard.getRank()) - 2;
   }
 
   public static String moveInTable(int playerIndex, int dealerIndex) {
@@ -40,7 +94,7 @@ public class BasicStrategy {
         {"H", "H", "D", "D", "D", "H", "H", "H", "H", "H"}, // A,4
         {"H", "H", "D", "D", "D", "H", "H", "H", "H", "H"}, // A,5
         {"H", "D", "D", "D", "D", "H", "H", "H", "H", "H"}, // A,6
-        {"S", "DS", "DS", "DS", "DS", "S", "S", "H", "H", "H"}, // A,7
+        {"S", "D", "D", "D", "D", "S", "S", "H", "H", "H"}, // A,7
         {"S", "S", "S", "S", "S", "S", "S", "S", "S", "S"}, // A,8
         {"S", "S", "S", "S", "S", "S", "S", "S", "S", "S"}, // A,9
         {"P", "P", "P", "P", "P", "P", "H", "H", "H", "H"}, // 2,2
@@ -55,9 +109,10 @@ public class BasicStrategy {
         {"P", "P", "P", "P", "P", "P", "P", "P", "P", "P"} // A,A
       };
     
-    
       return table[playerIndex][dealerIndex];
   }
+
+
 //2 3 4 5 6 7 8 9 10  A
 //5 H H H H H H H H H H
 //6 H H H H H H H H H H
@@ -77,7 +132,7 @@ public class BasicStrategy {
 //A,4 H H D D D H H H H H
 //A,5 H H D D D H H H H H
 //A,6 H D D D D H H H H H
-//A,7 S DS  DS  DS  DS  S S H H H
+//A,7 S D  D  D  D  S S H H H
 //A,8 S S S S S S S S S S
 //A,9 S S S S S S S S S S
 //2,2 P P P P P P H H H H

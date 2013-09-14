@@ -125,15 +125,15 @@ public class Game {
     public void play() {
         boolean playing = true;
         String won;
-        Move move;
+        String move;
         Hand dealerHand = new Hand(new ArrayList<Card>());
         Hand playerHand = new Hand(new ArrayList<Card>());
         Card dealerHiddenCard;
 
         dealerHiddenCard = distributeCards(dealerHand, playerHand);
         while (playing) {
-            move = BasicStrategy.getNextMove();
-            if (move == "S") {
+            move = BasicStrategy.nextMove(playerHand, dealerHiddenCard);
+            if (move.equals("S")) {
                 break;
             }
             playerHand.addCard(shoe.removeTopCard());
