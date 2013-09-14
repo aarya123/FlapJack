@@ -28,6 +28,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
     private JCheckBox soft17s, doubleSplitting, resplitAces;
     private JButton goButton;
     private JSpinner numGames;
+    private JLabel bjMultiplier;
 
     public static void main(String[] args) {
         frame = new JFrame("FlapJack");
@@ -53,9 +54,9 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
 
     private void initCasinos() {
         casinos = new ArrayList<Casino>();
-        casinos.add(new Casino("Bellagio", 6, true, true, true));
-        casinos.add(new Casino("Caesar's Palace", 2, true, false, false));
-        casinos.add(new Casino("MGM Grand", 6, false, true, true));
+        casinos.add(new Casino("Bellagio", 1.5, 6, true, true, true));
+        casinos.add(new Casino("Caesar's Palace", 1.5, 2, true, false, false));
+        casinos.add(new Casino("MGM Grand", 1.5, 6, false, true, true));
         for (Casino casino : casinos)
             casinoList.addItem(casino.getName());
         setLabels((String) casinoList.getSelectedItem());
@@ -70,6 +71,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         for (Casino casino : casinos) {
             if (val.equals(casino.getName())) {
                 numDecks.setText(String.valueOf(casino.getNumberOfDecks()));
+                bjMultiplier.setText(String.valueOf(casino.getBlackjackPayoutMultiple()));
                 soft17s.setSelected(casino.isHitOnSoft17s());
                 doubleSplitting.setSelected(casino.isDoubleAfterSplit());
                 resplitAces.setSelected(casino.isResplitAfterAce());
@@ -94,7 +96,8 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
                 numGames.setValue(1);
         frame.pack();
     }
-    public static void simulateSession(Session session){
+
+    public static void simulateSession(Session session) {
         //TODO: Take session and display crap
     }
 }
