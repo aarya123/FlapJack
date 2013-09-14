@@ -47,7 +47,6 @@ public class Game {
     }
 
     public String won(Hand playerHand, Hand dealerHand) {
-        // call playerHand.getValue(), dealerVisibleHand.getValue()
         int playerValue;
         int dealerValue;
 
@@ -74,10 +73,9 @@ public class Game {
     }
 
     private void calculateProfit(String won, Hand playerHand, Hand dealerHand) {
-        double blackjackMultiplier = casino.getBlackjackMultiplier();
         if (won.equals("true")) {
             if (playerHand.blackjack()) {
-                profit = actualAmountWagered * blackjackMultiplier;
+                profit = actualAmountWagered * casino.getBlackjackMultiplier();
             } else {
                 profit = actualAmountWagered;
             }
@@ -108,25 +106,25 @@ public class Game {
         while (!reachedN(dealerHand, 17)) {
             hit(dealerHand);
         }
-        if (dealerHand.softSeventeen()) {
+        if (dealerHand.softSeventeen() && casino.getHitOnSoftSeventeen()) {
             hit(dealerHand);
         }
     }
 
     boolean reachedN(Hand hand, int n) {
-        boolean reached = false;
         int[] values = hand.getValues();
+        int total = 0;
+        
         for (int x : values) {
-            if (x >= n) {
-                reached = true;
-            }
+        	total += x;
         }
-        return reached;
+        
+        return total >= n;
     }
 
     public void play() {
         boolean playing = true;
-        String won = "false";
+        String won;
         Move move;
         Hand dealerHand = new Hand(new ArrayList<Card>());
         Hand playerHand = new Hand(new ArrayList<Card>());
