@@ -32,18 +32,39 @@ public class Game {
 		return hidden;
 	}
 	
-	Card hit(Hand hand) {
+    Card hit(Hand hand) {
 		Card card = shoe.removeTopCard();
 		hand.addCard(card);
 		return card;
 	}
 	
-	String won(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
-		//TODO call playerHand.getValue(), dealerVisibleHand.getValue()
-		return "true";
+	public String won(Hand playerHand, Hand dealerHand, Card dealerHiddenCard) {
+		// call playerHand.getValue(), dealerVisibleHand.getValue()
+		int playerValue;
+		int dealerValue;
+		
+		// set best case player hand
+		int[] playerValueArray = playerHand.getValues();
+		if ( playerValueArray.length == 2 )
+			playerValue = getBetterHand( playerValueArray[0], playerValueArray[1] );
+		else
+			playerValue = playerValueArray[0];
+		
+		// set best case dealer hand
+		int[] dealerValueArray = dealerHand.getValues();
+		if ( dealerValueArray.length == 2 )
+			dealerValue = getBetterHand( playerValueArray[0], playerValueArray[1] );
+		else
+			dealerValue = dealerValueArray[0];
+		
+		if ( playerValue > dealerValue )
+			return "true";
+		else if ( playerValue < dealerValue )
+			return "false";
+		else
+			return "tie";
 	}
-	
-	private void calculateProfit(String won, Hand playerHand) {
+    private void calculateProfit(String won, Hand playerHand) {
 		double blackjackMultiplier = casino.getBlackjackMultiplier();
 		if (won.equals("true")) {
 			if (playerHand.blackjack()) {
@@ -55,6 +76,13 @@ public class Game {
 			//tie or loss
 			profit = (-1) * amountWagered;
 		}
+
+	
+	private int getBetterHand( int hand1, int hand2 ) {
+		if ( hand1 <= 21 && hand2 <= 21 ) 
+			return hand1 > hand2 ? hand1 : hand2;
+		else
+			return hand1 > hand2 ? hand2 : hand1;
 	}
 	
 	ArrayList<Card> removeTopNCards(int numberCards) {
@@ -85,7 +113,7 @@ public class Game {
 		return reached;
 	}
 	
-	public void play(Casino casino) {
+	public String play() {
 		boolean playing = true;
 		String won = "false";
 		Move move;
@@ -106,5 +134,4 @@ public class Game {
 		won = won(strategy.getHand(), dealerVisibleHand, dealerHiddenCard); //check hand.handValues
 		calculateProfit(won, playerHand);
 	}
-	
 }
