@@ -26,6 +26,8 @@ public class TestStrategies {
 		for(int i=0; i<10; i++) {
 			System.out.println("EV: " + best10pairs[i].ev);
 		}
+		
+		System.out.println("Hotness map: " + Arrays.toString(best10pairs[0].strategy.getHotnessMap()));
 	}
 	
 	// N times, runs simulation for strategies, gets best sqrt(strategies), crossbreeds them and 
