@@ -13,19 +13,18 @@ public class Strategy {
     }
 
     public Strategy(HashMap<String, Double> hotnessMap, HashMap<String, Double> bettingMap) {
-    	this.hotnessMap = hotnessMap;
-    	this.bettingMap = bettingMap;
-      }
+        this.hotnessMap = hotnessMap;
+        this.bettingMap = bettingMap;
+    }
 
     public Strategy(String strategy_type) {
 
         //System.out.println(strategy_type);
         hotnessMap = new HashMap<String, Double>();
 
-        if(strategy_type.equalsIgnoreCase("Basic Strategy"))
+        if (strategy_type.equalsIgnoreCase("Basic Strategy"))
             hotnessMap = null;
-        else if(strategy_type.equalsIgnoreCase("Counting Strategy"))
-        {
+        else if (strategy_type.equalsIgnoreCase("Counting Strategy")) {
             hotnessMap.put("A", -1.0);
             hotnessMap.put("2", 1.0);
             hotnessMap.put("3", 1.0);
@@ -94,30 +93,29 @@ public class Strategy {
 
 
         //hotnessMap = null;
-    	bettingMap = null;
+        bettingMap = null;
     }
 
     public double getHottnessForCard(Card card) {
-    	if (hotnessMap == null)
-    		return 0;
-    	else
-    		return hotnessMap.get(card.getRank());
+        if (hotnessMap == null)
+            return 0;
+        else
+            return hotnessMap.get(card.getRank());
     }
 
-    double getBetMultiplier(double hotness) {    	
-      if (hotness <= 1)
-        return 1;
-      else
-      {
-          //if (hotness != 1)
+    double getBetMultiplier(double hotness) {
+        if (hotness <= 1)
+            return 1;
+        else {
+            //if (hotness != 1)
             //  System.out.println("Hotness not 1 bitch " + hotness);
 
-          double multip = Math.pow(hotness,1.3) - 2;
-          if (multip <= 1)
-              multip = 1;
+            double multip = Math.pow(hotness, 1.3) - 2;
+            if (multip <= 1)
+                multip = 1;
 
-          return multip;
+            return multip;
 
-      }
+        }
     }
 }

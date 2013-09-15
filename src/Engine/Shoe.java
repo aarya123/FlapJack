@@ -13,7 +13,7 @@ public class Shoe {
     private int numberOfDecks;
     private double hotness;
     private Strategy strategy;
-    
+
     public Shoe(int numberOfDecks, Strategy strategy) {
         this.numberOfDecks = numberOfDecks;
         this.strategy = strategy;
@@ -21,13 +21,16 @@ public class Shoe {
     }
 
     public Shoe(Strategy strategy) {
-		this.numberOfDecks = 1;
-		this.strategy = strategy;
-		this.hotness = 0;
-	}
-    public void setDeck(ArrayList<Card> deck) {this.deck = deck; }
+        this.numberOfDecks = 1;
+        this.strategy = strategy;
+        this.hotness = 0;
+    }
 
-	public int size() {
+    public void setDeck(ArrayList<Card> deck) {
+        this.deck = deck;
+    }
+
+    public int size() {
         return deck.size();
     }
 
@@ -79,7 +82,7 @@ public class Shoe {
 
     public Card removeTopCard() {
         //if (deck.size() == 1)
-            //shuffle();
+        //shuffle();
         Card removedCard = deck.remove(deck.size() - 1);
         hotness += strategy.getHottnessForCard(removedCard);
         return removedCard;

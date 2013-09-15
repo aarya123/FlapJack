@@ -11,9 +11,10 @@ public class Simulator {
     static Casino casino;
     static MainWindow ui;
     String strategy_type;
+
     public Simulator(Casino casino, String strategy_type) {
         this.casino = casino;
-       new Session(casino, new Strategy(strategy_type)).playGames();
+        new Session(casino, new Strategy(strategy_type)).playGames();
     }
 
     public Simulator(Casino casino, MainWindow ui, String strategy_type) {

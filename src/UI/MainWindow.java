@@ -5,7 +5,6 @@ import Engine.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -62,7 +61,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         if (dev) {
             Casino casino = new Casino("Bellagio", 1.5, 6, true, true, true);
             casino.setNumberOfGames(1000000);
-            new Simulator(casino,"Basic Strategy");
+            new Simulator(casino, "Basic Strategy");
         } else {
             new MainWindow();
         }
@@ -74,18 +73,18 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
         totWage.setText("$" + String.format("%.0f", session.getTotalWage()));
         numGamesCount.setText(String.valueOf(session.getCasino().getNumberOfGames()));
         graph.setPoints(session.getCumProfit());
-        profitPerWaged.setText("$"+String.format("%.4f",session.getTotalProfit()/session.getTotalWage()));
+        profitPerWaged.setText("$" + String.format("%.4f", session.getTotalProfit() / session.getTotalWage()));
         Strategy s = session.getStrategy();
-        aceValue.setText("A: "+s.getHottnessForCard(new Card("A")));
-        twoValue.setText("2: "+s.getHottnessForCard(new Card("2")));
-        threeValue.setText("3: "+s.getHottnessForCard(new Card("3")));
-        fourValue.setText("4: "+s.getHottnessForCard(new Card("4")));
-        fiveValue.setText("5: "+s.getHottnessForCard(new Card("5")));
-        sixValue.setText("6: "+s.getHottnessForCard(new Card("6")));
-        sevenValue.setText("7: "+s.getHottnessForCard(new Card("7")));
-        eightValue.setText("8: "+s.getHottnessForCard(new Card("8")));
-        nineValue.setText("9: "+s.getHottnessForCard(new Card("9")));
-        faceValue.setText("F: "+s.getHottnessForCard(new Card("J")));
+        aceValue.setText("A: " + s.getHottnessForCard(new Card("A")));
+        twoValue.setText("2: " + s.getHottnessForCard(new Card("2")));
+        threeValue.setText("3: " + s.getHottnessForCard(new Card("3")));
+        fourValue.setText("4: " + s.getHottnessForCard(new Card("4")));
+        fiveValue.setText("5: " + s.getHottnessForCard(new Card("5")));
+        sixValue.setText("6: " + s.getHottnessForCard(new Card("6")));
+        sevenValue.setText("7: " + s.getHottnessForCard(new Card("7")));
+        eightValue.setText("8: " + s.getHottnessForCard(new Card("8")));
+        nineValue.setText("9: " + s.getHottnessForCard(new Card("9")));
+        faceValue.setText("F: " + s.getHottnessForCard(new Card("J")));
         System.out.println(session.getExpectedValue());
         //System.out.println(session.)
         frame.pack();
@@ -135,7 +134,7 @@ public class MainWindow implements ItemListener, ActionListener, ChangeListener 
             for (Casino casino : casinos)
                 if (casinoList.getSelectedItem().equals(casino.getName())) {
                     casino.setNumberOfGames((Integer) numGames.getValue());
-                    new Simulator(casino, this, (String)(strategyList.getSelectedItem()));
+                    new Simulator(casino, this, (String) (strategyList.getSelectedItem()));
                 }
     }
 
